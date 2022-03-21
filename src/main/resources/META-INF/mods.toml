@@ -1,0 +1,29 @@
+
+modLoader="javafml"
+loaderVersion="[40,)"
+license="All rights reserved"
+
+[[mods]]
+modId="caerula"
+version="${file.jarVersion}"
+displayName="Caerula"
+logoFile="caerula.png"
+credits="Mod created by Ricy40"
+authors="Ricy40"
+description='''
+Caerula mod made by Ricy40
+'''
+
+[[dependencies.caerula]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.caerula]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"
