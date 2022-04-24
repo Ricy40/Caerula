@@ -1,4 +1,4 @@
-package com.ricy40.caerula.data.client;
+package com.ricy40.caerula.datagen.client;
 
 import com.google.common.collect.ImmutableList;
 import com.ricy40.caerula.Caerula;

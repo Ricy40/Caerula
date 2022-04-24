@@ -1,4 +1,4 @@
-package com.ricy40.caerula.data;
+package com.ricy40.caerula.datagen;
 
 import com.ricy40.caerula.Caerula;
 import net.minecraft.data.DataGenerator;

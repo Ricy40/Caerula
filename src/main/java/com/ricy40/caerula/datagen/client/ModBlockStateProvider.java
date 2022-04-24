@@ -1,4 +1,4 @@
-package com.ricy40.caerula.data.client;
+package com.ricy40.caerula.datagen.client;
 
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.block.ModBlocks;
@@ -21,8 +21,8 @@ public class ModBlockStateProvider<T extends ModelBuilder<T>> extends BlockState
         simpleBlock(ModBlocks.RAW_NIXIUM_BLOCK.get());
         simpleBlock(ModBlocks.NIXIUM_ORE.get());
         simpleBlock(ModBlocks.DEEPSLATE_NIXIUM_ORE.get());
-        slabBlock(ModBlocks.NIXIUM_SLAB.get(), caerula("block/nixium_block"), caerula("block/nixium_block"));
-        stairsBlock(ModBlocks.NIXIUM_STAIRS.get(), "block/nixium_block", caerula("block/nixium_block"));
+        slabBlock(ModBlocks.NIXIUM_SLAB.get(), caerula("block/nixium_block"), caerula("block/nixium/nixium_block"));
+        stairsBlock(ModBlocks.NIXIUM_STAIRS.get(), "block/nixium_block", caerula("block/nixium/nixium_block"));
     }
 
     private static ResourceLocation caerula(String path) {

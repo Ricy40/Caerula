@@ -1,4 +1,4 @@
-package com.ricy40.caerula.data.client;
+package com.ricy40.caerula.datagen.client;
 
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.item.ModItems;
@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class ModItemModelProvider extends ItemModelProvider {

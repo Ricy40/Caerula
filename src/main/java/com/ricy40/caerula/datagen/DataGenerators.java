@@ -1,10 +1,10 @@
-package com.ricy40.caerula.data;
+package com.ricy40.caerula.datagen;
 
 import com.ricy40.caerula.Caerula;
-import com.ricy40.caerula.data.client.ModBlockStateProvider;
-import com.ricy40.caerula.data.client.ModItemModelProvider;
-import com.ricy40.caerula.data.client.ModLootTableProvider;
-import com.ricy40.caerula.data.client.ModRecipeProvider;
+import com.ricy40.caerula.datagen.client.ModBlockStateProvider;
+import com.ricy40.caerula.datagen.client.ModItemModelProvider;
+import com.ricy40.caerula.datagen.client.ModLootTableProvider;
+import com.ricy40.caerula.datagen.client.ModRecipeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
