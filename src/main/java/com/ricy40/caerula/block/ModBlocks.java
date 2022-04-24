@@ -5,13 +5,11 @@ import com.ricy40.caerula.block.flora.RedSeagrassBlock;
 import com.ricy40.caerula.block.flora.TallRedSeagrassBlock;
 import com.ricy40.caerula.item.ModCreativeModeTab;
 import com.ricy40.caerula.item.ModItems;
+import com.ricy40.caerula.tags.ModTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.BaseCoralPlantBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CoralPlantBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -37,6 +35,20 @@ public class ModBlocks {
     public static final RegistryObject<Block> BUSH_CORAL = registerBlock("bush_coral",
             () -> new CoralPlantBlock(DEAD_BUSH_CORAL.get(), BlockBehaviour.Properties.of(Material.WATER_PLANT, MaterialColor.COLOR_PURPLE)
                     .noCollission().instabreak().sound(SoundType.WET_GRASS)), ModCreativeModeTab.CAERULA);
+
+    public static final RegistryObject<Block> NIXIUM_BLOCK = registerBlock("nixium_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<Block> RAW_NIXIUM_BLOCK = registerBlock("raw_nixium_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)), ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<SlabBlock> NIXIUM_SLAB = registerBlock("nixium_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<StairBlock> NIXIUM_STAIRS = registerBlock("nixium_stairs",
+            () -> new StairBlock(NIXIUM_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<Block> NIXIUM_ORE = registerBlock("nixium_ore",
+            () -> new OreBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<Block> DEEPSLATE_NIXIUM_ORE = registerBlock("deepslate_nixium_ore",
+            () -> new OreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), ModCreativeModeTab.CAERULA);
+
 
 
     // Methods

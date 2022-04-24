@@ -14,6 +14,13 @@ public class ModItems {
     public static final RegistryObject<Item> CAERULA = ITEMS.register("caerula",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.CAERULA)));
 
+    public static final RegistryObject<Item> NIXIUM_INGOT = ITEMS.register("nixium_ingot",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.CAERULA)));
+    public static final RegistryObject<Item> NIXIUM_NUGGET = ITEMS.register("nixium_nugget",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.CAERULA)));
+    public static final RegistryObject<Item> RAW_NIXIUM = ITEMS.register("raw_nixium",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.CAERULA)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
