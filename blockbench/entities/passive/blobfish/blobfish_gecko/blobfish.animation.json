@@ -1,0 +1,70 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.blobfish.idle": {
+			"loop": true,
+			"animation_length": 2.41667,
+			"bones": {
+				"head": {
+					"position": {
+						"vector": [0, "Math.sin(query.anim_time * 150) * 0.3", 0]
+					}
+				},
+				"tail1": {
+					"rotation": {
+						"vector": [0, "Math.sin(query.anim_time * 150) * 4", 0]
+					}
+				},
+				"tail2": {
+					"rotation": {
+						"vector": [0, " Math.sin((query.anim_time * 150) - 20) * 5", 0]
+					}
+				},
+				"tail3": {
+					"rotation": {
+						"vector": [0, " Math.sin((query.anim_time * 150) - 40) * 5", 0]
+					}
+				},
+				"tail3fin": {
+					"rotation": {
+						"vector": [0, " Math.sin((query.anim_time * 150) - 60) * 5", 0]
+					}
+				},
+				"tail2fintop": {
+					"rotation": {
+						"vector": [0, "Math.sin((query.anim_time * 150) - 20) * 5 ", 0]
+					}
+				},
+				"tail2finbottom": {
+					"rotation": {
+						"vector": [0, " Math.sin((query.anim_time * 150) - 20) * 5", 0]
+					}
+				},
+				"tail1fintop": {
+					"rotation": {
+						"vector": [0, "Math.sin(query.anim_time * 150) * 5", 0]
+					}
+				},
+				"tail1finbottom": {
+					"rotation": {
+						"vector": [0, " Math.sin((query.anim_time * 150)) * 5", 0]
+					}
+				},
+				"mainfinleft": {
+					"rotation": {
+						"vector": [0, "-Math.cos((query.anim_time * 150) + 20) * 15 + 7 ", 0]
+					}
+				},
+				"mainfinright": {
+					"rotation": {
+						"vector": [0, "Math.cos(query.anim_time * 150) * 15 - 7 ", 0]
+					}
+				}
+			}
+		},
+		"animation.blobfish.swim": {
+			"loop": true
+		}
+	},
+	"geckolib_format_version": 2
+}
