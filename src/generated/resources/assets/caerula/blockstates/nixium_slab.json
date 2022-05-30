@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "caerula:block/nixium_slab_top"
+    },
+    "type=bottom": {
+      "model": "caerula:block/nixium_slab"
+    },
+    "type=double": {
+      "model": "caerula:block/nixium_block"
+    }
+  }
+}

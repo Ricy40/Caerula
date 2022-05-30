@@ -18,12 +18,12 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-        withExistingParent("nixium_block", modLoc("block/nixium/nixium_block"));
-        withExistingParent("raw_nixium_block", modLoc("block/nixium/raw_nixium_block"));
-        withExistingParent("nixium_ore", modLoc("block/nixium/nixium_ore"));
-        withExistingParent("deepslate_nixium_ore", modLoc("block/nixium/deepslate_nixium_ore"));
-        withExistingParent("nixium_slab", modLoc("block/nixium/nixium_slab"));
-        withExistingParent("nixium_stairs", modLoc("block/nixium/nixium_stairs"));
+        withExistingParent("nixium_block", modLoc("block/nixium_block"));
+        withExistingParent("raw_nixium_block", modLoc("block/raw_nixium_block"));
+        withExistingParent("nixium_ore", modLoc("block/nixium_ore"));
+        withExistingParent("deepslate_nixium_ore", modLoc("block/deepslate_nixium_ore"));
+        withExistingParent("nixium_slab", modLoc("block/nixium_slab"));
+        withExistingParent("nixium_stairs", modLoc("block/nixium_stairs"));
 
         simpleItem(ModItems.NIXIUM_INGOT.get());
         simpleItem(ModItems.NIXIUM_NUGGET.get());

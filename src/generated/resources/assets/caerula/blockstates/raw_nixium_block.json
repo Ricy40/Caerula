@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "caerula:block/raw_nixium_block"
+    }
+  }
+}
