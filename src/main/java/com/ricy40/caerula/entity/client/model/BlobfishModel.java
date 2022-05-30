@@ -8,11 +8,13 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 public class BlobfishModel<T extends Entity> extends EntityModel<T> {
 	
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "blobfish"), "main");
+	private final ModelPart root;
 	private final ModelPart head;
 	private final ModelPart tail1;
 	private final ModelPart tail2;
@@ -26,6 +28,7 @@ public class BlobfishModel<T extends Entity> extends EntityModel<T> {
 	private final ModelPart leftFin;
 
 	public BlobfishModel(ModelPart root) {
+		this.root = root;
 		this.head = root.getChild("head");
 		this.tail1 = root.getChild("tail1");
 		this.tail2 = root.getChild("tail2");
@@ -54,16 +57,36 @@ public class BlobfishModel<T extends Entity> extends EntityModel<T> {
 		PartDefinition tail1finbottom = tail1.addOrReplaceChild("tail1finbottom", CubeListBuilder.create().texOffs(0, 13).addBox(0.0F, 0.0F, -1.0F, 0.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.5F, 0.0F));
 		PartDefinition mainfinleft = head.addOrReplaceChild("mainfinleft", CubeListBuilder.create().texOffs(10, 17).addBox(0.0F, -1.0F, 0.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(2.5F, -2.0F, 0.0F));
 		PartDefinition mainfinright = head.addOrReplaceChild("mainfinright", CubeListBuilder.create().texOffs(6, 17).addBox(0.0F, -1.0F, 0.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.5F, -2.0F, 0.0F));
+
 		return LayerDefinition.create(meshdefinition, 32, 32);
+	}
+
+	public ModelPart root() {
+		return this.root;
 	}
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		float f = 1.0F;
+		if (!entity.isInWater()) {
+			f = 1.5F;
+		}
 
+		this.tailFin.yRot = -f * 0.45F * Mth.sin(0.6F * ageInTicks);
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		head.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		tail1.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		tail2.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		tail3.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		rightFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		leftFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		frontTopFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		frontBottomFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		backTopFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		backBottomFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		tailFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
 	}
 }

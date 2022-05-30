@@ -3,9 +3,12 @@
 	"itemGroup.caerula" : "Caerula",
 
     "item.caerula.red_seagrass" : "Red Seagrass",
+    "item.caerula.blobfish_bucket" : "Bucket of Blobfish",
 
     "block.caerula.red_seagrass" : "Red Seagrass",
     "block.caerula.tall_red_seagrass" : "Tall Red Seagrass",
     "block.caerula.bush_coral" : "Bush Coral",
-    "block.caerula.dead_bush_coral" : "Dead Bush Coral"
+    "block.caerula.dead_bush_coral" : "Dead Bush Coral",
+
+    "entity.caerula.blobfish" : "Blobfish"
 }
