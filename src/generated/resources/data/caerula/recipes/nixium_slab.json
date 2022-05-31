@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "caerula:nixium_block"
+    }
+  },
+  "result": {
+    "item": "caerula:nixium_slab",
+    "count": 6
+  }
+}

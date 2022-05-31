@@ -27,10 +27,8 @@ public class ModRecipeProvider extends RecipeProvider {
     private static final ImmutableList<ItemLike> NIXIUM_SMELTABLES = ImmutableList.of(ModBlocks.NIXIUM_ORE.get(), ModBlocks.DEEPSLATE_NIXIUM_ORE.get(), ModItems.RAW_NIXIUM.get());
 
 
-    protected void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
+    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
 
-        //ShapelessRecipeBuilder.shapeless(ModItems.NIXIUM_INGOT.get(), 9).requires(ModBlocks.NIXIUM_BLOCK.get()).unlockedBy("has_nixium_ingot", has(ModItems.NIXIUM_INGOT.get())).save(consumer);
-        //ShapelessRecipeBuilder.shapeless(ModItems.NIXIUM_NUGGET.get(), 9).requires(ModItems.NIXIUM_INGOT.get()).unlockedBy("has_nixium_nugget", has(ModItems.NIXIUM_NUGGET.get())).save(consumer);
         oreSmelting(consumer, NIXIUM_SMELTABLES, ModItems.NIXIUM_INGOT.get(), 0.7F, 200, "nixium_ingot");
         oreBlasting(consumer, NIXIUM_SMELTABLES, ModItems.NIXIUM_INGOT.get(), 0.7F, 100, "nixium_ingot");
         nineBlockStorageRecipes(consumer, ModItems.RAW_NIXIUM.get(), ModBlocks.RAW_NIXIUM_BLOCK.get());

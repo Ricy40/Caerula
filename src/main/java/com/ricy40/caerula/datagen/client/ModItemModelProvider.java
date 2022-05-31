@@ -31,6 +31,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.BLOBFISH_BUCKET.get());
         simpleItem(ModItems.BLOBFISH.get());
         simpleItem(ModItems.COOKED_BLOBFISH.get());
+        basicSpawnEggItem(ModItems.BLOBFISH_SPAWN_EGG.get());
+
 
     }
 
@@ -44,5 +46,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getRegistryName().getPath(),
                 new ResourceLocation("item/handheld")).texture("layer0",
                 new ResourceLocation(Caerula.MOD_ID,"item/" + item.getRegistryName().getPath()));
+    }
+
+    private void basicSpawnEggItem(Item item) {
+        withExistingParent(item.getRegistryName().getPath(), "item/template_spawn_egg");
     }
 }

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:nixium_ingot_from_smelting_nixium_ore"
+    ]
+  },
+  "criteria": {
+    "has_nixium_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "caerula:nixium_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:nixium_ingot_from_smelting_nixium_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nixium_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

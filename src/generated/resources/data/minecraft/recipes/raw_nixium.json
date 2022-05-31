@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "caerula:raw_nixium_block"
+    }
+  ],
+  "result": {
+    "item": "caerula:raw_nixium",
+    "count": 9
+  }
+}

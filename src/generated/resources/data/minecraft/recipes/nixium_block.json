@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "caerula:nixium_ingot"
+    }
+  },
+  "result": {
+    "item": "caerula:nixium_block"
+  }
+}

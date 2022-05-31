@@ -6,11 +6,9 @@ import com.ricy40.caerula.item.misc.CaerulaItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MobBucketItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -37,6 +35,8 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.CAERULA).food(ModFoods.BLOBFISH)));
     public static final RegistryObject<Item> COOKED_BLOBFISH = ITEMS.register("cooked_blobfish",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.CAERULA).food(ModFoods.COOKED_BLOBFISH)));
+    public static final RegistryObject<Item> BLOBFISH_SPAWN_EGG = ITEMS.register("blobfish_spawn_egg",
+            () -> new ForgeSpawnEggItem(() -> ModEntityTypes.BLOBFISH.get(), 14202297, 7356750, (new Item.Properties()).tab(ModCreativeModeTab.CAERULA)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

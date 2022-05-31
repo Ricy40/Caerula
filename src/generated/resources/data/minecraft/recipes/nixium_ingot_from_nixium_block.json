@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "nixium_ingot",
+  "ingredients": [
+    {
+      "item": "caerula:nixium_block"
+    }
+  ],
+  "result": {
+    "item": "caerula:nixium_ingot",
+    "count": 9
+  }
+}
