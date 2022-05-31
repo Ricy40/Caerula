@@ -80,8 +80,6 @@ public class ModLootTableProvider extends LootTableProvider {
 
     public class ModEntityLoot extends EntityLoot {
 
-        private final Map<ResourceLocation, LootTable.Builder> map = Maps.newHashMap();
-
         @Override
         protected void addTables() {
 
@@ -101,16 +99,6 @@ public class ModLootTableProvider extends LootTableProvider {
             return ModEntityTypes.ENTITY_TYPES.getEntries().stream()
                     .map(RegistryObject::get)
                     .collect(Collectors.toList());
-        }
-
-        @Override
-        protected void add(EntityType<?> pEntityType, LootTable.Builder pLootTableBuilder) {
-            this.add(pEntityType.getDefaultLootTable(), pLootTableBuilder);
-        }
-
-        @Override
-        protected void add(ResourceLocation pLootTableId, LootTable.Builder pLootTableBuilder) {
-            this.map.put(pLootTableId, pLootTableBuilder);
         }
     }
 }

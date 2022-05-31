@@ -35,6 +35,7 @@ db3b3662070cf0cdc35b0d7ef631e04db84e2d72 data/caerula/loot_tables/blocks/dead_bu
 9487e26e88a7c7f77aa912a9aad99e0251709b56 data/caerula/loot_tables/blocks/raw_nixium_block.json
 67627d923d609a8ae04967203d62a2120101598b data/caerula/loot_tables/blocks/red_seagrass.json
 67627d923d609a8ae04967203d62a2120101598b data/caerula/loot_tables/blocks/tall_red_seagrass.json
+97bd3ea87caef263cd7fed087eff4092f851113e data/caerula/loot_tables/entities/blobfish.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/caerula/tags/items/fence_gates.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/caerula/tags/items/fences.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/caerula/tags/items/walls.json
