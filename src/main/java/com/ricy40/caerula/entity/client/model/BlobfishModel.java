@@ -2,6 +2,7 @@ package com.ricy40.caerula.entity.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.ricy40.caerula.Caerula;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -13,7 +14,7 @@ import net.minecraft.world.entity.Entity;
 
 public class BlobfishModel<T extends Entity> extends EntityModel<T> {
 	
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "blobfish"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Caerula.MOD_ID, "blobfish"), "main");
 	private final ModelPart root;
 	private final ModelPart head;
 	private final ModelPart tail1;
@@ -30,16 +31,16 @@ public class BlobfishModel<T extends Entity> extends EntityModel<T> {
 	public BlobfishModel(ModelPart root) {
 		this.root = root;
 		this.head = root.getChild("head");
-		this.tail1 = root.getChild("tail1");
-		this.tail2 = root.getChild("tail2");
-		this.tail3 = root.getChild("tail3");
-		this.frontTopFin = root.getChild("tail1fintop");
-		this.frontBottomFin = root.getChild("tail1finbottom");
-		this.backTopFin = root.getChild("tail2fintop");
-		this.backBottomFin = root.getChild("tail2finbottom");
-		this.tailFin = root.getChild("tail3fin");
-		this.rightFin = root.getChild("mainfinright");
-		this.leftFin = root.getChild("mainfinleft");
+		this.tail1 = head.getChild("tail1");
+		this.tail2 = tail1.getChild("tail2");
+		this.tail3 = tail2.getChild("tail3");
+		this.frontTopFin = tail1.getChild("tail1fintop");
+		this.frontBottomFin = tail1.getChild("tail1finbottom");
+		this.backTopFin = tail2.getChild("tail2fintop");
+		this.backBottomFin = tail2.getChild("tail2finbottom");
+		this.tailFin = tail3.getChild("tail3fin");
+		this.rightFin = head.getChild("mainfinright");
+		this.leftFin = head.getChild("mainfinleft");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -68,16 +69,31 @@ public class BlobfishModel<T extends Entity> extends EntityModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float f = 1.0F;
+		float g = 1.0F;
 		if (!entity.isInWater()) {
 			f = 1.5F;
+			g = 0.5F;
 		}
 
-		this.tailFin.yRot = -f * 0.45F * Mth.sin(0.6F * ageInTicks);
+		this.tail1.yRot = f * 0.1F * Mth.sin(0.5F * ageInTicks);
+		this.frontTopFin.yRot = g * 0.05F * Mth.sin(0.5F * ageInTicks);
+		this.frontBottomFin.yRot = g * 00.5F * Mth.sin(0.5F * ageInTicks);
+
+		this.tail2.yRot = f * 0.2F * Mth.sin(0.5F * ageInTicks - 1F);
+		this.backTopFin.yRot = g * 0.F * Mth.sin(0.5F * ageInTicks - 1F);
+		this.backBottomFin.yRot = g * 0.1F * Mth.sin(0.5F * ageInTicks - 1F);
+
+		this.tail3.yRot = f * 0.2F * Mth.sin(0.5F * ageInTicks - 1.5F);
+		this.tailFin.yRot = f * 0.1F * Mth.sin(0.F * ageInTicks - 2F);
+
+		this.rightFin.yRot = f * 0.3F * Mth.sin(0.5F * ageInTicks - 0.2F) - 0.1F;
+		this.leftFin.yRot = f * 0.3F * Mth.sin(0.5F * ageInTicks - 0.2F) + 0.1F;
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		head.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		/*
 		tail1.render(poseStack, vertexConsumer, packedLight, packedOverlay);
 		tail2.render(poseStack, vertexConsumer, packedLight, packedOverlay);
 		tail3.render(poseStack, vertexConsumer, packedLight, packedOverlay);
@@ -88,5 +104,6 @@ public class BlobfishModel<T extends Entity> extends EntityModel<T> {
 		backTopFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
 		backBottomFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
 		tailFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+		*/
 	}
 }

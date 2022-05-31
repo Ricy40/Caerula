@@ -16,10 +16,10 @@ public class RendererRegistry {
     public static void registerEntityRenderer(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntityTypes.BLOBFISH.get(), BlobfishRenderer::new);
     }
-    /*
+
     @SubscribeEvent
     public static void registerLayerLocation(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(BlobfishModel.LAYER_LOCATION, BlobfishModel::createBodyLayer);
     }
-    */
+
 }

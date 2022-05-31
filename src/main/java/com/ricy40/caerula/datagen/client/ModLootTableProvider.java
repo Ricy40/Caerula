@@ -1,19 +1,28 @@
 package com.ricy40.caerula.datagen.client;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
 import com.ricy40.caerula.block.ModBlocks;
+import com.ricy40.caerula.entity.ModEntityTypes;
 import com.ricy40.caerula.item.ModItems;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.EntityLoot;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
-import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.*;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
@@ -32,7 +41,8 @@ public class ModLootTableProvider extends LootTableProvider {
     @Override
     protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
         return ImmutableList.of(
-                Pair.of(ModBlockLoot::new, LootContextParamSets.BLOCK)
+                Pair.of(ModBlockLoot::new, LootContextParamSets.BLOCK),
+                Pair.of(ModEntityLoot::new, LootContextParamSets.ENTITY)
         );
     }
 
@@ -57,6 +67,7 @@ public class ModLootTableProvider extends LootTableProvider {
             add(ModBlocks.NIXIUM_ORE.get(), createOreDrop(ModBlocks.NIXIUM_ORE.get(), ModItems.RAW_NIXIUM.get()));
             add(ModBlocks.DEEPSLATE_NIXIUM_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_NIXIUM_ORE.get(), ModItems.RAW_NIXIUM.get()));
 
+
         }
 
         @Override
@@ -64,6 +75,42 @@ public class ModLootTableProvider extends LootTableProvider {
             return ModBlocks.BLOCKS.getEntries().stream()
                     .map(RegistryObject::get)
                     .collect(Collectors.toList());
+        }
+    }
+
+    public class ModEntityLoot extends EntityLoot {
+
+        private final Map<ResourceLocation, LootTable.Builder> map = Maps.newHashMap();
+
+        @Override
+        protected void addTables() {
+
+            add(ModEntityTypes.BLOBFISH.get(), LootTable.lootTable().withPool(
+                    LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .add(LootItem.lootTableItem(ModItems.BLOBFISH.get())
+                            .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))))
+                    .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                            .add(LootItem.lootTableItem(Items.BONE_MEAL))
+                            .when(LootItemRandomChanceCondition.randomChance(0.05F))));
+
+        }
+
+        @Override
+        protected Iterable<EntityType<?>> getKnownEntities() {
+            return ModEntityTypes.ENTITY_TYPES.getEntries().stream()
+                    .map(RegistryObject::get)
+                    .collect(Collectors.toList());
+        }
+
+        @Override
+        protected void add(EntityType<?> pEntityType, LootTable.Builder pLootTableBuilder) {
+            this.add(pEntityType.getDefaultLootTable(), pLootTableBuilder);
+        }
+
+        @Override
+        protected void add(ResourceLocation pLootTableId, LootTable.Builder pLootTableBuilder) {
+            this.map.put(pLootTableId, pLootTableBuilder);
         }
     }
 }

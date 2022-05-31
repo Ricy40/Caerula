@@ -29,6 +29,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.NIXIUM_NUGGET.get());
         simpleItem(ModItems.RAW_NIXIUM.get());
         simpleItem(ModItems.BLOBFISH_BUCKET.get());
+        simpleItem(ModItems.BLOBFISH.get());
+        simpleItem(ModItems.COOKED_BLOBFISH.get());
 
     }
 

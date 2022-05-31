@@ -16,7 +16,7 @@ public class ModEntityTypes {
 
     public static final RegistryObject<EntityType<BlobfishEntity>> BLOBFISH = ENTITY_TYPES.register("blobfish",
             () -> EntityType.Builder.of(BlobfishEntity::new, MobCategory.WATER_CREATURE)
-                    .sized(0.8f, 0.4f)
+                    .sized(0.5f, 0.3f)
                     .build(new ResourceLocation(Caerula.MOD_ID, "blobfish").toString()));
 
     public static void register(IEventBus bus) {

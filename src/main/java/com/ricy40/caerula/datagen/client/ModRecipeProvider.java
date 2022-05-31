@@ -8,6 +8,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
@@ -38,12 +39,25 @@ public class ModRecipeProvider extends RecipeProvider {
         slabBuilder(ModBlocks.NIXIUM_SLAB.get(), Ingredient.of(ModBlocks.NIXIUM_BLOCK.get())).unlockedBy("has_nixium_block", has(ModBlocks.NIXIUM_BLOCK.get())).save(consumer);
         stairBuilder(ModBlocks.NIXIUM_STAIRS.get(), Ingredient.of(ModBlocks.NIXIUM_BLOCK.get())).unlockedBy("has_nixium_block", has(ModBlocks.NIXIUM_BLOCK.get())).save(consumer);
 
+        cookRecipes(consumer, "smoking", RecipeSerializer.SMOKING_RECIPE, 100);
+        cookRecipes(consumer, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 600);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.BLOBFISH.get()), ModItems.COOKED_BLOBFISH.get(), 0.35F, 200).unlockedBy("has_blobfish", has(ModItems.BLOBFISH.get())).save(consumer);
+
         //Check RecipeProvider
 
     }
 
     private ResourceLocation modId(String path) {
         return new ResourceLocation(Caerula.MOD_ID, path);
+    }
+
+
+    private static void cookRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String pCookingMethod, SimpleCookingSerializer<?> pCookingSerializer, int pCookingTime) {
+        simpleCookingRecipe(pFinishedRecipeConsumer, pCookingMethod, pCookingSerializer, pCookingTime, ModItems.BLOBFISH.get(), ModItems.COOKED_BLOBFISH.get(), 0.35F);
+    }
+
+    private static void simpleCookingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String pCookingMethod, SimpleCookingSerializer<?> pCookingSerializer, int pCookingTime, ItemLike pIngredient, ItemLike pResult, float pExperience) {
+        SimpleCookingRecipeBuilder.cooking(Ingredient.of(pIngredient), pResult, pExperience, pCookingTime, pCookingSerializer).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getItemName(pResult) + "_from_" + pCookingMethod);
     }
 
     private static void oneToOneConversionRecipe(Consumer<FinishedRecipe> consumer, ItemLike pResult, ItemLike pIngredient, @Nullable String pGroup) {

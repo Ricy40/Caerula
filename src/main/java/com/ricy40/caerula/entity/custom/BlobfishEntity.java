@@ -23,12 +23,10 @@ public class BlobfishEntity extends AbstractFish {
                 .add(Attributes.MAX_HEALTH, 3.0D);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
     }
 
-    @Override
     public ItemStack getBucketItemStack() {
         return new ItemStack(ModItems.BLOBFISH_BUCKET.get());
     }

@@ -15,12 +15,12 @@ public class BlobfishRenderer extends MobRenderer<BlobfishEntity, BlobfishModel<
     protected static final ResourceLocation TEXTURE = new ResourceLocation(Caerula.MOD_ID, "textures/entity/blobfish/blobfish.png");
 
     public BlobfishRenderer(EntityRendererProvider.Context context) {
-        super(context, new BlobfishModel<>(context.bakeLayer(BlobfishModel.LAYER_LOCATION)), 0.4f);
+        super(context, new BlobfishModel<>(context.bakeLayer(BlobfishModel.LAYER_LOCATION)), 0.3f);
     }
 
     protected void setupRotations(BlobfishEntity pEntityLiving, PoseStack pMatrixStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pMatrixStack, pAgeInTicks, pRotationYaw, pPartialTicks);
-        float f = 4.3F * Mth.sin(0.6F * pAgeInTicks);
+        float f = 4.3F * Mth.sin(0.5F * pAgeInTicks);
         pMatrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
         if (!pEntityLiving.isInWater()) {
             pMatrixStack.translate((double) 0.1F, (double) 0.1F, (double) -0.1F);
