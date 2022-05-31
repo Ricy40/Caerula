@@ -86,14 +86,35 @@ public class LulaModel<T extends Entity> extends EntityModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
-		float f = (float) (ageInTicks <= 60 ? ageInTicks : ageInTicks - (Math.floor(ageInTicks / 60) * 60));
-		float t = f / 20 - 0.6f;
-		float x = t - 0.2f < 0 ? 0 : t - 0.2f;
-		float rot = t < 0.561f ? calculateSCurve(t) : calculateExpCurve(t);
-		float rotDel = t < 0.561f ? calculateSCurve(f) : calculateExpCurve(f);
+		float animationLength = 50f;
+		float phaseDifference = 0.1f;
+		float tick = (float) (ageInTicks <= animationLength ? ageInTicks : ageInTicks - (Math.floor(ageInTicks / animationLength) * animationLength));
+		float sec1 = tick / 20;
+		float sec2 = sec1 - phaseDifference < 0 ? 0 : sec1 - phaseDifference;
+		float sec1Delay = sec1 - 0.2f < 0 ? 0 : sec1 - 0.2f;
+		float sec2Delay = sec2 - 0.2f < 0 ? 0 : sec2 - 0.2f;
+		float rot1 = sec1 < 0.5855f ? calculateSCurve(sec1) : calculateExpCurve(sec1 - 0.556f);
+		float rot2 = sec2 < 0.5855f ? calculateSCurve(sec2) : calculateExpCurve(sec2 - 0.556f);
+		float rot1Delay = sec1Delay < 0.5855f ? calculateOuterSCurve(sec1Delay) : calculateExpCurve(sec1Delay - 0.556f);
+		float rot2Delay = sec2Delay < 0.5855f ? calculateOuterSCurve(sec2Delay) : calculateExpCurve(sec2Delay - 0.556f);
 
-		this.tentacle1.yRot = -rot * 0.6f;
-		this.secondary1.yRot = -rotDel * 0.5f;
+		this.tentacle1.yRot = -rot1 * 0.7f;
+		this.secondary1.yRot = -rot1Delay * 0.7f;
+		this.tentacle2.yRot = -rot2 * 0.7f;
+		this.secondary2.yRot = -rot2Delay * 0.7f;
+		this.tentacle3.yRot = rot2 * 0.7f;
+		this.secondary3.yRot = rot2Delay * 0.7f;
+		this.tentacle4.yRot = rot1 * 0.7f;
+		this.secondary4.yRot = rot1Delay * 0.7f;
+		this.tentacle5.xRot = rot1 * 0.7f;
+		this.secondary5.xRot = rot1Delay * 0.7f;
+		this.tentacle6.xRot = rot2 * 0.7f;
+		this.secondary6.xRot = rot2Delay * 0.7f;
+		this.tentacle7.xRot = -rot1 * 0.7f;
+		this.secondary7.xRot = -rot1Delay * 0.7f;
+		this.tentacle8.xRot = -rot2 * 0.7f;
+		this.secondary8.xRot = -rot2Delay * 0.7f;
+		this.fin.yRot = (float) (Math.sin(2.513 * sec1) * 0.05f);
 
 	}
 
@@ -103,10 +124,14 @@ public class LulaModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	private float calculateExpCurve(float time) {
-		return (float) (Math.pow(Math.E, -1.8 * time) * (Mth.cos(3.6F * time) + 0.3 * Mth.sin(3.6F * time)));
+		return (float) (Math.pow(Math.E, -2.9 * time) * (Mth.cos(6.8F * time) + 0.5 * Mth.sin(6.8F * time)));
 	}
 
 	private float calculateSCurve(float time) {
 		return (float) ((-0.109 * time) + (10.116 * Math.pow(time, 2)) - (12.022 * Math.pow(time, 3)));
+	}
+
+	private float calculateOuterSCurve(float time) {
+		return (float) (-0.34 +(-0.109 * time) + (11.116 * Math.pow(time, 2)) - (12.022 * Math.pow(time, 3)));
 	}
 }
