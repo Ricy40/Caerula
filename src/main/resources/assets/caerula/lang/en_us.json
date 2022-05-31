@@ -4,6 +4,8 @@
 
     "item.caerula.red_seagrass" : "Red Seagrass",
     "item.caerula.blobfish_bucket" : "Bucket of Blobfish",
+    "item.caerula.blobfish" : "Raw Blobfish",
+    "item.caerula.cooked_blobfish" : "Cooked Blobfish",
 
     "block.caerula.red_seagrass" : "Red Seagrass",
     "block.caerula.tall_red_seagrass" : "Tall Red Seagrass",
