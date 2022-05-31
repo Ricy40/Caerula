@@ -93,17 +93,5 @@ public class BlobfishModel<T extends Entity> extends EntityModel<T> {
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		head.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		/*
-		tail1.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		tail2.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		tail3.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		rightFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		leftFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		frontTopFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		frontBottomFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		backTopFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		backBottomFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		tailFin.render(poseStack, vertexConsumer, packedLight, packedOverlay);
-		*/
 	}
 }

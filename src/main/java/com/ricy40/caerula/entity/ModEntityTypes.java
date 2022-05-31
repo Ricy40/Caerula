@@ -2,6 +2,7 @@ package com.ricy40.caerula.entity;
 
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.custom.BlobfishEntity;
+import com.ricy40.caerula.entity.custom.LulaEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -18,6 +19,10 @@ public class ModEntityTypes {
             () -> EntityType.Builder.of(BlobfishEntity::new, MobCategory.WATER_CREATURE)
                     .sized(0.5f, 0.3f)
                     .build(new ResourceLocation(Caerula.MOD_ID, "blobfish").toString()));
+    public static final RegistryObject<EntityType<LulaEntity>> LULA = ENTITY_TYPES.register("lula",
+            () -> EntityType.Builder.of(LulaEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.3f, 0.1f)
+                    .build(new ResourceLocation(Caerula.MOD_ID, "lula").toString()));
 
     public static void register(IEventBus bus) {
         ENTITY_TYPES.register(bus);

@@ -1,0 +1,112 @@
+package com.ricy40.caerula.entity.client.model;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.ricy40.caerula.Caerula;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+
+public class LulaModel<T extends Entity> extends EntityModel<T> {
+
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Caerula.MOD_ID, "lula_entity"), "main");
+	private final ModelPart root;
+	private final ModelPart main_body;
+	private final ModelPart fin;
+	private final ModelPart tentacle1;
+	private final ModelPart tentacle2;
+	private final ModelPart tentacle3;
+	private final ModelPart tentacle4;
+	private final ModelPart tentacle5;
+	private final ModelPart tentacle6;
+	private final ModelPart tentacle7;
+	private final ModelPart tentacle8;
+	private final ModelPart secondary1;
+	private final ModelPart secondary2;
+	private final ModelPart secondary3;
+	private final ModelPart secondary4;
+	private final ModelPart secondary5;
+	private final ModelPart secondary6;
+	private final ModelPart secondary7;
+	private final ModelPart secondary8;
+
+	public LulaModel(ModelPart root) {
+		this.root = root;
+		this.main_body = root.getChild("main_body");
+		this.fin = main_body.getChild("fin");
+		this.tentacle1 = main_body.getChild("tentacle1");
+		this.tentacle2 = main_body.getChild("tentacle2");
+		this.tentacle3 = main_body.getChild("tentacle3");
+		this.tentacle4 = main_body.getChild("tentacle4");
+		this.tentacle5 = main_body.getChild("tentacle5");
+		this.tentacle6 = main_body.getChild("tentacle6");
+		this.tentacle7 = main_body.getChild("tentacle7");
+		this.tentacle8 = main_body.getChild("tentacle8");
+		this.secondary1 = tentacle1.getChild("secondary1");
+		this.secondary2 = tentacle2.getChild("secondary2");
+		this.secondary3 = tentacle3.getChild("secondary3");
+		this.secondary4 = tentacle4.getChild("secondary4");
+		this.secondary5 = tentacle5.getChild("secondary5");
+		this.secondary6 = tentacle6.getChild("secondary6");
+		this.secondary7 = tentacle7.getChild("secondary7");
+		this.secondary8 = tentacle8.getChild("secondary8");
+	}
+
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
+
+		PartDefinition main_body = partdefinition.addOrReplaceChild("main_body", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -1.0F, -2.0F, 2.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 23.0F, 0.0F, 0.0F, 3.1416F, 0.0F));
+		PartDefinition fin = main_body.addOrReplaceChild("fin", CubeListBuilder.create().texOffs(0, 6).addBox(-2.0F, -1.5F, 0.0F, 4.0F, 1.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.0F, 0.0F));
+		PartDefinition tentacle1 = main_body.addOrReplaceChild("tentacle1", CubeListBuilder.create().texOffs(8, 0).addBox(0.0F, -0.5F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.0F, 0.5F, -2.0F));
+		PartDefinition secondary1 = tentacle1.addOrReplaceChild("secondary1", CubeListBuilder.create().texOffs(12, 0).addBox(0.0F, -0.5F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -2.0F));
+		PartDefinition tentacle2 = main_body.addOrReplaceChild("tentacle2", CubeListBuilder.create().texOffs(8, 1).addBox(0.0F, -0.5F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.0F, -0.5F, -2.0F));
+		PartDefinition secondary2 = tentacle2.addOrReplaceChild("secondary2", CubeListBuilder.create().texOffs(12, 1).addBox(0.0F, -0.5F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -2.0F));
+		PartDefinition tentacle3 = main_body.addOrReplaceChild("tentacle3", CubeListBuilder.create().texOffs(8, -1).addBox(0.0F, -0.5F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 0.5F, -2.0F));
+		PartDefinition secondary3 = tentacle3.addOrReplaceChild("secondary3", CubeListBuilder.create().texOffs(12, -1).addBox(0.0F, -0.5F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -2.0F));
+		PartDefinition tentacle4 = main_body.addOrReplaceChild("tentacle4", CubeListBuilder.create().texOffs(8, -2).addBox(0.0F, -0.5F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, -0.5F, -2.0F));
+		PartDefinition secondary4 = tentacle4.addOrReplaceChild("secondary4", CubeListBuilder.create().texOffs(12, -2).addBox(0.0F, -0.5F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -2.0F));
+		PartDefinition tentacle5 = main_body.addOrReplaceChild("tentacle5", CubeListBuilder.create().texOffs(12, 6).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.5F, 1.0F, -2.0F));
+		PartDefinition secondary5 = tentacle5.addOrReplaceChild("secondary5", CubeListBuilder.create().texOffs(12, 9).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -2.0F));
+		PartDefinition tentacle6 = main_body.addOrReplaceChild("tentacle6", CubeListBuilder.create().texOffs(12, 4).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 1.0F, -2.0F));
+		PartDefinition secondary6 = tentacle6.addOrReplaceChild("secondary6", CubeListBuilder.create().texOffs(10, 4).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -2.0F));
+		PartDefinition tentacle7 = main_body.addOrReplaceChild("tentacle7", CubeListBuilder.create().texOffs(0, 9).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, -1.0F, -2.0F));
+		PartDefinition secondary7 = tentacle7.addOrReplaceChild("secondary7", CubeListBuilder.create().texOffs(0, 6).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -2.0F));
+		PartDefinition tentacle8 = main_body.addOrReplaceChild("tentacle8", CubeListBuilder.create().texOffs(-2, 9).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.5F, -1.0F, -2.0F));
+		PartDefinition secondary8 = tentacle8.addOrReplaceChild("secondary8", CubeListBuilder.create().texOffs(-2, 6).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -2.0F));
+
+		return LayerDefinition.create(meshdefinition, 16, 16);
+	}
+
+	@Override
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
+		float f = (float) (ageInTicks <= 60 ? ageInTicks : ageInTicks - (Math.floor(ageInTicks / 60) * 60));
+		float t = f / 20 - 0.6f;
+		float x = t - 0.2f < 0 ? 0 : t - 0.2f;
+		float rot = t < 0.561f ? calculateSCurve(t) : calculateExpCurve(t);
+		float rotDel = t < 0.561f ? calculateSCurve(f) : calculateExpCurve(f);
+
+		this.tentacle1.yRot = -rot * 0.6f;
+		this.secondary1.yRot = -rotDel * 0.5f;
+
+	}
+
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		main_body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	private float calculateExpCurve(float time) {
+		return (float) (Math.pow(Math.E, -1.8 * time) * (Mth.cos(3.6F * time) + 0.3 * Mth.sin(3.6F * time)));
+	}
+
+	private float calculateSCurve(float time) {
+		return (float) ((-0.109 * time) + (10.116 * Math.pow(time, 2)) - (12.022 * Math.pow(time, 3)));
+	}
+}

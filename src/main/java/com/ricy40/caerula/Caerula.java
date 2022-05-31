@@ -3,7 +3,7 @@ package com.ricy40.caerula;
 import com.mojang.logging.LogUtils;
 import com.ricy40.caerula.block.ModBlocks;
 import com.ricy40.caerula.entity.ModEntityTypes;
-import com.ricy40.caerula.entity.client.render.BlobfishRenderer;
+import com.ricy40.caerula.entity.client.render.*;
 import com.ricy40.caerula.item.ModItems;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -47,5 +47,6 @@ public class Caerula {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.DEAD_BUSH_CORAL.get(), RenderType.cutout());
 
         EntityRenderers.register(ModEntityTypes.BLOBFISH.get(), BlobfishRenderer::new);
+        EntityRenderers.register(ModEntityTypes.LULA.get(), LulaRenderer::new);
     }
 }
