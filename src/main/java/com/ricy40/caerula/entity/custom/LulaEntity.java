@@ -74,8 +74,10 @@ public class LulaEntity extends WaterAnimal {
             }
             this.lastTime = this.swimAnimTime;
 
-            Vec3 swimMovement = new Vec3(this.tx * this.speedMultiplier, this.ty * this.speedMultiplier, this.tz * this.speedMultiplier);
-            this.setDeltaMovement(swimMovement.scale(3f));
+            if (!this.level.isClientSide) {
+                Vec3 swimMovement = new Vec3(this.tx * this.speedMultiplier, this.ty * this.speedMultiplier, this.tz * this.speedMultiplier);
+                this.setDeltaMovement(swimMovement.scale(3f));
+            }
         }
 
     }
