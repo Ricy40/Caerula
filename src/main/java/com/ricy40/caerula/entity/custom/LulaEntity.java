@@ -34,31 +34,33 @@ public class LulaEntity extends WaterAnimal {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 3.0D);
+                .add(Attributes.MAX_HEALTH, 5.0D);
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new LulaRandomMovementGoal(this));
+        this.goalSelector.addGoal(1, new LulaEntity.LulaRandomMovementGoal(this));
+
     }
 
     public void tick() {
-        float swimAnimLength = 50f;
+        super.tick();
+        if (!this.isFleeing) {
+            float swimAnimLength = 50f;
 
-        if (this.swimAnimTick <= swimAnimLength) {
-            this.swimAnimTick++;
-        } else {
-            this.swimAnimTick = 0;
+            if (this.swimAnimTick <= swimAnimLength) {
+                this.swimAnimTick++;
+            } else {
+                this.swimAnimTick = 0;
+            }
+            this.swimAnimTime = this.swimAnimTick / 20;
         }
-        this.swimAnimTime = this.swimAnimTick / 20;
-        //System.out.println(this.swimAnimTick);
-        //System.out.println(this.swimAnimTime);
     }
 
     public void aiStep() {
+
+        System.out.println(this.tx + " , " + this.ty + " , " + this.tz);
+
         if (!this.isFleeing) {
-
-            System.out.println(this.tx + " , " + this.ty + " , " + this.tz);
-
             if (0.6 <= this.swimAnimTime && this.swimAnimTime < 0.7184f) {
                 if (this.lastTime != swimAnimTime) {
                     this.speedMultiplier = swimPolynomial(this.swimAnimTime);
@@ -75,6 +77,7 @@ public class LulaEntity extends WaterAnimal {
             Vec3 swimMovement = new Vec3(this.tx * this.speedMultiplier, this.ty * this.speedMultiplier, this.tz * this.speedMultiplier);
             this.setDeltaMovement(swimMovement.scale(3f));
         }
+
     }
 
     protected SoundEvent getAmbientSound() {
@@ -132,6 +135,7 @@ public class LulaEntity extends WaterAnimal {
         }
         
         public void tick() {
+            System.out.println("We reached here");
             float swimTime = this.lula.swimAnimTime;
             if (swimTime == 0) {
                 this.lula.setMovementVector(0.0F, 0.0F, 0.0F);
