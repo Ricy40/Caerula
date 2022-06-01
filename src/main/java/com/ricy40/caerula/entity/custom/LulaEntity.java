@@ -131,11 +131,23 @@ public class LulaEntity extends WaterAnimal {
         public LulaRandomMovementGoal(LulaEntity lula) {
             this.lula = lula;
         }
-        
+
+        @Override
         public boolean canUse() {
             return true;
         }
-        
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return true;
+        }
+
+        @Override
         public void tick() {
             System.out.println("We reached here");
             float swimTime = this.lula.swimAnimTime;
