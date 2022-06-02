@@ -8,6 +8,7 @@ import com.ricy40.caerula.entity.custom.LulaEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 public class LulaRenderer extends MobRenderer<LulaEntity, LulaModel<LulaEntity>> {
 
@@ -19,8 +20,8 @@ public class LulaRenderer extends MobRenderer<LulaEntity, LulaModel<LulaEntity>>
 
     protected void setupRotations(LulaEntity pEntityLiving, PoseStack pMatrixStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pMatrixStack, pAgeInTicks, pRotationYaw, pPartialTicks);
-        //float f = 4.3F * Mth.sin(0.5F * pAgeInTicks);
-        //pMatrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
+        float f = 4.3F * Mth.sin(0.5F * pAgeInTicks);
+        pMatrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
         if (!pEntityLiving.isInWater()) {
             pMatrixStack.translate((double) 0.1F, (double) 0.1F, (double) -0.1F);
             pMatrixStack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));

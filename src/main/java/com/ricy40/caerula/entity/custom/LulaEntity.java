@@ -57,15 +57,17 @@ public class LulaEntity extends WaterAnimal {
     }
 
     public void aiStep() {
+        super.aiStep();
 
         System.out.println(this.tx + " , " + this.ty + " , " + this.tz);
 
         if (!this.isFleeing) {
+            //float delay = this.swimAnimTime - 0.5f < 0 ? 0f : this.swimAnimTime - 0.5f;
             if (0.6 <= this.swimAnimTime && this.swimAnimTime < 0.7184f) {
                 if (this.lastTime != swimAnimTime) {
                     this.speedMultiplier = swimPolynomial(this.swimAnimTime);
                 }
-            } else if (this.swimAnimTime<= 2.5f) {
+            } else if (0.7184 <= this.swimAnimTime && this.swimAnimTime <= 2.5f) {
                 if (this.lastTime != swimAnimTime) {
                     this.speedMultiplier = swimHyperbola(this.swimAnimTime);
                 }
@@ -76,7 +78,7 @@ public class LulaEntity extends WaterAnimal {
 
             if (!this.level.isClientSide) {
                 Vec3 swimMovement = new Vec3(this.tx * this.speedMultiplier, this.ty * this.speedMultiplier, this.tz * this.speedMultiplier);
-                this.setDeltaMovement(swimMovement.scale(3f));
+                this.setDeltaMovement(swimMovement.scale(0.4f));
             }
         }
 
@@ -138,27 +140,17 @@ public class LulaEntity extends WaterAnimal {
         }
 
         @Override
-        public boolean requiresUpdateEveryTick() {
-            return true;
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return true;
-        }
-
-        @Override
         public void tick() {
-            System.out.println("We reached here");
             float swimTime = this.lula.swimAnimTime;
-            if (swimTime == 0) {
+            if (swimTime == 2.5) {
                 this.lula.setMovementVector(0.0F, 0.0F, 0.0F);
-            } else if (!this.lula.hasMovementVector()) {
+            } else if (!this.lula.hasMovementVector() || !this.lula.wasTouchingWater) {
                 float f = this.lula.getRandom().nextFloat() * ((float)Math.PI * 2F);
                 float f1 = Mth.cos(f) * 0.2F;
                 float f2 = -0.1F + this.lula.getRandom().nextFloat() * 0.2F;
                 float f3 = Mth.sin(f) * 0.2F;
                 this.lula.setMovementVector(f1, f2, f3);
+
             }
         }
     }
