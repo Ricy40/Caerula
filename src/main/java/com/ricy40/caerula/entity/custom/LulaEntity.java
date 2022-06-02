@@ -44,7 +44,7 @@ public class LulaEntity extends WaterAnimal {
 
     public void tick() {
         super.tick();
-        if (!this.isFleeing) {
+        if (!this.isFleeing) {s
             float swimAnimLength = 50f;
 
             if (this.swimAnimTick <= swimAnimLength) {
@@ -59,7 +59,7 @@ public class LulaEntity extends WaterAnimal {
     public void aiStep() {
         super.aiStep();
 
-        System.out.println(this.tx + " , " + this.ty + " , " + this.tz);
+        //System.out.println(this.tx + " , " + this.ty + " , " + this.tz);
 
         if (!this.isFleeing) {
             //float delay = this.swimAnimTime - 0.5f < 0 ? 0f : this.swimAnimTime - 0.5f;
