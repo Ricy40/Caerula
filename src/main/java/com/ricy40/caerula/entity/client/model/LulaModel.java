@@ -2,6 +2,8 @@ package com.ricy40.caerula.entity.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.custom.LulaEntity;
 import net.minecraft.client.model.EntityModel;
@@ -101,13 +103,13 @@ public class LulaModel<T extends LulaEntity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(T lula, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
-		if (!entity.isFleeing) {
+		if (!lula.isFleeing()) {
 			float phaseDifference = 0.1f;
 
-			float sec1 = entity.getSwimAnimTime();
-			float lastSec1 = entity.getLastTime();
+			float sec1 = lula.getSwimAnimTimeSync();
+			float lastSec1 = lula.getLastTime();
 
 			float sec2 = sec1 - phaseDifference < 0 ? 0 : sec1 - phaseDifference;
 			float sec1Delay = sec1 - 0.2f < 0 ? 0 : sec1 - 0.2f;
@@ -145,6 +147,15 @@ public class LulaModel<T extends LulaEntity> extends EntityModel<T> {
 			this.tentacle8.xRot = -rot2 * 0.7f;
 			this.secondary8.xRot = -rot2Delay * 0.7f;
 			this.fin.yRot = (float) (Math.sin(2.513 * sec1) * 0.05f);
+
+			if (2.05f < lula.getSwimAnimTimeSync() && lula.getSwimAnimTimeSync() <= 2.5f) {
+				float f = ((lula.getxRot() / 9) * (180 / Mth.PI));
+				float f1 = ((lula.getyRot() / 9) * (180 / Mth.PI));
+				PoseStack stack = new PoseStack();
+				stack.mulPose(Quaternion.fromXYZDegrees(new Vector3f(f, f1, 0)));
+				this.main_body.translateAndRotate(stack);
+			}
+
 		}
 
 	}
