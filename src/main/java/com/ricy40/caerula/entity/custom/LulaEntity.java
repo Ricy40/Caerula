@@ -70,12 +70,13 @@ public class LulaEntity extends WaterAnimal {
 
             if (this.swimAnimTick > 1 && this.swimAnimTick < 10) {
                 //this.lookAtPos(this.target);
-                //System.out.println(this.target.scale(10));
-                //System.out.println("rot X: " + (rotateX(this.getTargetDirection()) * Mth.RAD_TO_DEG));
-                //System.out.println("rot Y: " + (rotateY(this.getTargetDirection()) * Mth.RAD_TO_DEG));
 
-                //this.setXRot(rotateX(this.getTargetDirection()) * Mth.RAD_TO_DEG);
-                this.setYRot(this.getYRot() + 45f);
+                System.out.println(this.target.scale(10));
+                System.out.println("rot X: " + (rotateX(this.getTargetDirection()) * Mth.RAD_TO_DEG));
+                System.out.println("rot Y: " + (rotateY(this.getTargetDirection()) * Mth.RAD_TO_DEG));
+
+                this.setXRot(rotateX(this.getTargetDirection()) * Mth.RAD_TO_DEG);
+                this.setYRot(rotateY(this.getTargetDirection()) * Mth.RAD_TO_DEG);
             }
         }
     }
