@@ -53,6 +53,9 @@ public class LulaEntity extends WaterAnimal {
 
     public void tick() {
         super.tick();
+
+        // Internal Clock
+
         if (!this.level.isClientSide()) {
             if (!this.isFleeing) {
                 float swimAnimLength = 50f;
@@ -67,6 +70,9 @@ public class LulaEntity extends WaterAnimal {
                 this.swimAnimTime = this.swimAnimTick / 20;
                 this.setSwimAnimTimeSync(this.swimAnimTime);
             }
+
+
+            // Should theoretically cause lula to instantly face its target vector set by the goal.
 
             if (this.swimAnimTick > 1 && this.swimAnimTick < 10) {
                 //this.lookAtPos(this.target);
@@ -83,6 +89,8 @@ public class LulaEntity extends WaterAnimal {
 
     public void aiStep() {
         super.aiStep();
+
+        // MOve Control
 
         if (!this.level.isClientSide() && this.isInWaterOrBubble()) {
 
@@ -109,6 +117,8 @@ public class LulaEntity extends WaterAnimal {
 
     }
 
+    // Get amount to rotate along y-axis based off of the direction of intended travel from negative x (entity facing forward position)
+
     private float rotateY(Vec3ex direction) {
 
         float amount = Vec2ex.calculateAngle(
@@ -121,6 +131,8 @@ public class LulaEntity extends WaterAnimal {
 
         return amount;
     }
+
+    // Same for X rotation (Completely broken, entity doesn't rotate at all
 
     private float rotateX(Vec3ex direction) {
 
@@ -135,6 +147,8 @@ public class LulaEntity extends WaterAnimal {
         return amount;
     }
 
+    // Discarded method based on lookAt in mob
+
     private void lookAtPos(Vec3ex position) {
         double d0 = position.x - this.xo;
         double d2 = position.z;
@@ -146,10 +160,14 @@ public class LulaEntity extends WaterAnimal {
         this.setYRot(this.getYRot() + f);
     }
 
+    // Curve for movement
+
     private float swimPolynomial(float time) {
         float o = 10 * time - 7.35f;
         return (float) (0.207 * (2 * Math.pow(o, 4) + 3.5 * Math.pow(0, 3) + -0.47 * Math.pow(0, 2) + -0.7 * o + 1.8824));
     }
+
+    // Curve for movement
 
     private float swimHyperbola(float time) {
         return (float) (0.1 * Math.cosh(1.7 * time - 3.5297) - 0.1);
@@ -207,8 +225,14 @@ public class LulaEntity extends WaterAnimal {
         public void tick() {
 
             if (!this.lula.level.isClientSide()) {
+
+                // Reset Vector
+
                 if (this.lula.getSwimAnimTimeSync() == 0f || this.lula.getSwimAnimTimeSync() == 0.05f) {
                     this.lula.target = new Vec3ex(0, 0, 0);
+
+                // If no Vector, set a new one
+
                 } else if (this.lula.target.isZero() || !this.lula.wasTouchingWater) {
 
                     float f = this.lula.getRandom().nextFloat() * ((float) Math.PI * 2F);
