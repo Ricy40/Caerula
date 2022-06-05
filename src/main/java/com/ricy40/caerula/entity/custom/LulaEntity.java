@@ -20,8 +20,6 @@ import net.minecraft.world.level.Level;
 public class LulaEntity extends WaterAnimal {
 
     private static final EntityDataAccessor<Float> SWIM_ANIM_TIME_SYNC = SynchedEntityData.defineId(LulaEntity.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Float> X_ROT = SynchedEntityData.defineId(LulaEntity.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Float> Y_ROT = SynchedEntityData.defineId(LulaEntity.class, EntityDataSerializers.FLOAT);
     private float swimAnimTime;
     private float lastTime;
     private float swimAnimTick;
@@ -51,8 +49,6 @@ public class LulaEntity extends WaterAnimal {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(SWIM_ANIM_TIME_SYNC, 0f);
-        this.entityData.define(X_ROT, 0f);
-        this.entityData.define(Y_ROT, 0f);
     }
 
     public void tick() {
@@ -66,9 +62,13 @@ public class LulaEntity extends WaterAnimal {
                 } else {
                     this.swimAnimTick = 0;
                 }
-                //System.out.println("tick: " + this.swimAnimTick + " time: " + this.swimAnimTime);
+                System.out.println("tick: " + this.swimAnimTick + " time: " + this.swimAnimTime);
                 this.swimAnimTime = this.swimAnimTick / 20;
                 this.setSwimAnimTimeSync(this.swimAnimTime);
+            }
+
+            if (this.swimAnimTick > 39.5 && this.swimAnimTick < 41) {
+                this.lookAtPos(this.target);
             }
         }
     }
@@ -76,13 +76,9 @@ public class LulaEntity extends WaterAnimal {
     public void aiStep() {
         super.aiStep();
 
-
-        if (!this.level.isClientSide()) {
-            //System.out.println(this.target);
-            //System.out.println("Target: " + this.target.x + " " + this.target.y + " " + this.target.z);
+        if (!this.level.isClientSide() && this.isInWaterOrBubble()) {
 
             if (!this.isFleeing) {
-                //float delay = this.swimAnimTime - 0.5f < 0 ? 0f : this.swimAnimTime - 0.5f;
 
                 if (0.6 <= this.swimAnimTime && this.swimAnimTime < 2.1f) {
                     if (0.6 <= this.swimAnimTime && this.swimAnimTime < 0.7184f) {
@@ -99,19 +95,30 @@ public class LulaEntity extends WaterAnimal {
                     this.lastTime = this.swimAnimTime;
 
                     Vec3ex swimMovement = this.target;
-                    this.setDeltaMovement(swimMovement.scale(speedMultiplier * 1.1f));
+                    this.setDeltaMovement(swimMovement.scale(speedMultiplier * 2.1f));
                 }
             }
         }
     }
 
+    public void lookAtPos(Vec3ex position) {
+        double d0 = position.x -this.xo;
+        double d2 = position.z;
+        double d1 = position.y;
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        float f = (float)(Mth.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
+        float f1 = (float)(-(Mth.atan2(d1, d3) * (double)(180F / (float)Math.PI)));
+        this.setXRot(this.getXRot() + f1);
+        this.setYRot(this.getYRot() + f);
+    }
+
     private float swimPolynomial(float time) {
         float o = 10 * time - 7.35f;
-        return (float) (0.5 * (2 * Math.pow(o, 4) + 3.5 * Math.pow(0, 3) + -0.47 * Math.pow(0, 2) + -0.7 * o +1.8824));
+        return (float) (0.207 * (2 * Math.pow(o, 4) + 3.5 * Math.pow(0, 3) + -0.47 * Math.pow(0, 2) + -0.7 * o + 1.8824));
     }
 
     private float swimHyperbola(float time) {
-        return (float) (0.1 * Math.cosh(1.7 * time - 4.297) - 0.1);
+        return (float) (0.1 * Math.cosh(1.7 * time - 3.5297) - 0.1);
     }
 
     protected SoundEvent getAmbientSound() {
@@ -134,22 +141,6 @@ public class LulaEntity extends WaterAnimal {
         return this.lastTime;
     }
 
-    public void setxRot(Float value) {
-        this.entityData.set(X_ROT, value);
-    }
-
-    public float getxRot() {
-        return this.entityData.get(X_ROT);
-    }
-
-    public void setyRot(Float value) {
-        this.entityData.set(Y_ROT, value);
-    }
-
-    public float getyRot() {
-        return this.entityData.get(Y_ROT);
-    }
-
     public void setSwimAnimTimeSync(Float time) {
         this.entityData.set(SWIM_ANIM_TIME_SYNC, time);
     }
@@ -160,6 +151,10 @@ public class LulaEntity extends WaterAnimal {
 
     public boolean isFleeing() {
         return this.isFleeing;
+    }
+
+    public Vec3ex getTargetDirection() {
+        return this.target;
     }
 
     class LulaRandomMovementGoal extends Goal {
@@ -178,25 +173,15 @@ public class LulaEntity extends WaterAnimal {
         public void tick() {
 
             if (!this.lula.level.isClientSide()) {
-                if (this.lula.getSwimAnimTimeSync() >= 2.0f) {
+                if (this.lula.getSwimAnimTimeSync() == 2.0f || this.lula.getSwimAnimTimeSync() == 2.05f) {
                     this.lula.target = new Vec3ex(0, 0, 0);
-                    //System.out.println("Direction reset!");
                 } else if (this.lula.target.isZero() || !this.lula.wasTouchingWater) {
-                    //System.out.println("nice!");
 
                     float f = this.lula.getRandom().nextFloat() * ((float) Math.PI * 2F);
                     float f1 = Mth.cos(f) * 0.2F;
-                    float f2 = -0.1F + this.lula.getRandom().nextFloat() * 0.2F;
+                    float f2 = -0.1F + this.lula.getRandom().nextFloat() * 0.25F;
                     float f3 = Mth.sin(f) * 0.2F;
 
-
-                    this.lula.setxRot(Vec2ex.calculateAngle(new Vec2ex((float) this.lula.getLookAngle().y, new Vec2ex((float) this.lula.getLookAngle().x, (float) this.lula.getLookAngle().z).mag), new Vec2ex(f2, new Vec2ex(f1, f3).mag)));
-                    this.lula.setyRot(Vec2ex.calculateAngle(new Vec2ex((float) this.lula.getLookAngle().x, (float) this.lula.getLookAngle().z), new Vec2ex(f1, f2)));
-
-                    //System.out.println("f1:" + f1 + " f2: " + f2 + " f3: " + f3);
-                    //System.out.println("x: " + this.lula.getLookAngle().x + " y: " + this.lula.getLookAngle().y + " z: " + this.lula.getLookAngle().z);
-                    //System.out.println("xRot = " + this.lula.getxRot() + " yRot = " + this.lula.getyRot());
-                    
                     this.lula.target = new Vec3ex(f1, f2, f3);
                 }
             }

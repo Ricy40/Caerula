@@ -26,7 +26,7 @@ public class Vec2ex extends Vec2 {
             rot = 1f;
         }
 
-        return (float) Math.acos(v1.normalized().dot(v2.normalized())) * rot;
+        return (float) Math.acos(v1.normalized().dot(v2.normalized()));
     }
 
     public Vec2 getVec2() {

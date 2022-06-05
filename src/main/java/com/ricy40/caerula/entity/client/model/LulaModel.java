@@ -147,15 +147,6 @@ public class LulaModel<T extends LulaEntity> extends EntityModel<T> {
 			this.tentacle8.xRot = -rot2 * 0.7f;
 			this.secondary8.xRot = -rot2Delay * 0.7f;
 			this.fin.yRot = (float) (Math.sin(2.513 * sec1) * 0.05f);
-
-			if (2.05f < lula.getSwimAnimTimeSync() && lula.getSwimAnimTimeSync() <= 2.5f) {
-				float f = ((lula.getxRot() / 9) * (180 / Mth.PI));
-				float f1 = ((lula.getyRot() / 9) * (180 / Mth.PI));
-				PoseStack stack = new PoseStack();
-				stack.mulPose(Quaternion.fromXYZDegrees(new Vector3f(f, f1, 0)));
-				this.main_body.translateAndRotate(stack);
-			}
-
 		}
 
 	}

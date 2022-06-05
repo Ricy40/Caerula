@@ -26,6 +26,5 @@ public class RedSeagrassBlock extends SeagrassBlock {
             worldIn.setBlock(pos, blockstate, 2);
             worldIn.setBlock(blockpos, blockstate1, 2);
         }
-
     }
 }
