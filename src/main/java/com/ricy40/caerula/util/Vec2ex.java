@@ -16,16 +16,6 @@ public class Vec2ex extends Vec2 {
     }
 
     public static float calculateAngle(Vec2ex v1, Vec2ex v2) {
-        float rot;
-
-        if ((-1 * v1.x) > v2.x && (-1 * v1.y) > v2.y) {
-            rot = -1f;
-        } else if (v1.x < v2.x && v1.y > v2.y) {
-            rot = -1f;
-        } else {
-            rot = 1f;
-        }
-
         return (float) Math.acos(v1.normalized().dot(v2.normalized()));
     }
 

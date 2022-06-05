@@ -108,8 +108,8 @@ public class LulaModel<T extends LulaEntity> extends EntityModel<T> {
 		if (!lula.isFleeing()) {
 			float phaseDifference = 0.1f;
 
-			float sec1 = lula.getSwimAnimTimeSync();
-			float lastSec1 = lula.getLastTime();
+			float sec1 = lula.getSwimAnimTimeSync() - 0.5f;
+			float lastSec1 = lula.getLastTime() - 0.5f;
 
 			float sec2 = sec1 - phaseDifference < 0 ? 0 : sec1 - phaseDifference;
 			float sec1Delay = sec1 - 0.2f < 0 ? 0 : sec1 - 0.2f;

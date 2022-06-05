@@ -62,13 +62,20 @@ public class LulaEntity extends WaterAnimal {
                 } else {
                     this.swimAnimTick = 0;
                 }
-                System.out.println("tick: " + this.swimAnimTick + " time: " + this.swimAnimTime);
+                //System.out.println("tick: " + this.swimAnimTick + " time: " + this.swimAnimTime);
+
                 this.swimAnimTime = this.swimAnimTick / 20;
                 this.setSwimAnimTimeSync(this.swimAnimTime);
             }
 
-            if (this.swimAnimTick > 39.5 && this.swimAnimTick < 41) {
-                this.lookAtPos(this.target);
+            if (this.swimAnimTick > 1 && this.swimAnimTick < 10) {
+                //this.lookAtPos(this.target);
+                //System.out.println(this.target.scale(10));
+                //System.out.println("rot X: " + (rotateX(this.getTargetDirection()) * Mth.RAD_TO_DEG));
+                //System.out.println("rot Y: " + (rotateY(this.getTargetDirection()) * Mth.RAD_TO_DEG));
+
+                //this.setXRot(rotateX(this.getTargetDirection()) * Mth.RAD_TO_DEG);
+                this.setYRot(this.getYRot() + 45f);
             }
         }
     }
@@ -79,15 +86,14 @@ public class LulaEntity extends WaterAnimal {
         if (!this.level.isClientSide() && this.isInWaterOrBubble()) {
 
             if (!this.isFleeing) {
-
-                if (0.6 <= this.swimAnimTime && this.swimAnimTime < 2.1f) {
-                    if (0.6 <= this.swimAnimTime && this.swimAnimTime < 0.7184f) {
-                        if (this.lastTime != swimAnimTime) {
-                            this.speedMultiplier = swimPolynomial(this.swimAnimTime);
+                if (1.1 <= this.swimAnimTime && this.swimAnimTime < 2.6f) {
+                    if (1.1 <= this.swimAnimTime && this.swimAnimTime < 1.2184f) {
+                        if (this.lastTime != this.swimAnimTime) {
+                            this.speedMultiplier = swimPolynomial(this.swimAnimTime - 0.5f);
                         }
-                    } else if (0.7184 <= this.swimAnimTime && this.swimAnimTime <= 2f) {
+                    } else if (1.2184 <= this.swimAnimTime && this.swimAnimTime <= 2.5f) {
                         if (this.lastTime != swimAnimTime) {
-                            this.speedMultiplier = swimHyperbola(this.swimAnimTime);
+                            this.speedMultiplier = swimHyperbola(this.swimAnimTime - 0.5f);
                         }
                     } else {
                         this.speedMultiplier = 0f;
@@ -95,14 +101,41 @@ public class LulaEntity extends WaterAnimal {
                     this.lastTime = this.swimAnimTime;
 
                     Vec3ex swimMovement = this.target;
-                    this.setDeltaMovement(swimMovement.scale(speedMultiplier * 2.1f));
+                    this.setDeltaMovement(swimMovement.scale(speedMultiplier * 1.1f));
                 }
             }
         }
+
     }
 
-    public void lookAtPos(Vec3ex position) {
-        double d0 = position.x -this.xo;
+    private float rotateY(Vec3ex direction) {
+
+        float amount = Vec2ex.calculateAngle(
+                new Vec2ex(0, 1),
+                new Vec2ex((float) direction.z * -1, (float) direction.x * -1));
+
+        if (direction.z > 0) {
+            amount = amount * -1;
+        }
+
+        return amount;
+    }
+
+    private float rotateX(Vec3ex direction) {
+
+        float amount = Vec2ex.calculateAngle(
+                new Vec2ex(1, 0),
+                new Vec2ex( (new Vec2ex((float) direction.x, (float) direction.z)).mag , (float) direction.y));
+
+        if (direction.y < 0) {
+            amount = Mth.TWO_PI - amount;
+        }
+
+        return amount;
+    }
+
+    private void lookAtPos(Vec3ex position) {
+        double d0 = position.x - this.xo;
         double d2 = position.z;
         double d1 = position.y;
         double d3 = Math.sqrt(d0 * d0 + d2 * d2);
@@ -173,7 +206,7 @@ public class LulaEntity extends WaterAnimal {
         public void tick() {
 
             if (!this.lula.level.isClientSide()) {
-                if (this.lula.getSwimAnimTimeSync() == 2.0f || this.lula.getSwimAnimTimeSync() == 2.05f) {
+                if (this.lula.getSwimAnimTimeSync() == 0f || this.lula.getSwimAnimTimeSync() == 0.05f) {
                     this.lula.target = new Vec3ex(0, 0, 0);
                 } else if (this.lula.target.isZero() || !this.lula.wasTouchingWater) {
 
@@ -182,7 +215,7 @@ public class LulaEntity extends WaterAnimal {
                     float f2 = -0.1F + this.lula.getRandom().nextFloat() * 0.25F;
                     float f3 = Mth.sin(f) * 0.2F;
 
-                    this.lula.target = new Vec3ex(f1, f2, f3);
+                    this.lula.target = new Vec3ex(f1, f2, f3).normalizeEx();
                 }
             }
         }
