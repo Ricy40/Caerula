@@ -2,10 +2,8 @@ package com.ricy40.caerula.entity.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import com.ricy40.caerula.Caerula;
-import com.ricy40.caerula.entity.custom.LulaEntity;
+import com.ricy40.caerula.entity.custom.Lula;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,7 +12,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class LulaModel<T extends LulaEntity> extends EntityModel<T> {
+public class LulaModel<T extends Lula> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Caerula.MOD_ID, "lula_entity"), "main");
 	private final ModelPart root;
@@ -104,51 +102,51 @@ public class LulaModel<T extends LulaEntity> extends EntityModel<T> {
 
 	@Override
 	public void setupAnim(T lula, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
 		if (!lula.isFleeing()) {
 			float phaseDifference = 0.1f;
 
 			float sec1 = lula.getSwimAnimTimeSync() - 0.5f;
-			float lastSec1 = lula.getLastTime() - 0.5f;
+			float lastSec1 = lula.getLastTimeSync() - 0.5f;
 
-			float sec2 = sec1 - phaseDifference < 0 ? 0 : sec1 - phaseDifference;
-			float sec1Delay = sec1 - 0.2f < 0 ? 0 : sec1 - 0.2f;
-			float sec2Delay = sec2 - 0.2f < 0 ? 0 : sec2 - 0.2f;
-			if (sec1 != lastSec1) {
-				this.rot1 = sec1 < 0.5855f ? calculateSCurve(sec1) : calculateExpCurve(sec1 - 0.556f);
-				this.rot2 = sec2 < 0.5855f ? calculateSCurve(sec2) : calculateExpCurve(sec2 - 0.556f);
-				this.rot1Delay = sec1Delay < 0.6161f ? calculateOuterSCurve(sec1Delay) : calculateExpCurve(sec1Delay - 0.6f);
-				this.rot2Delay = sec2Delay < 0.6161f ? calculateOuterSCurve(sec2Delay) : calculateExpCurve(sec2Delay - 0.6f);
-				this.lastRot1 = this.rot1;
-				this.lastRot1Delay = this.rot1Delay;
-				this.lastRot2 = this.rot2;
-				this.lastRot2Delay = this.rot2Delay;
-			} else {
-				this.rot1 = this.lastRot1;
-				this.rot1Delay = this.lastRot1Delay;
-				this.rot2 = this.lastRot2;
-				this.rot2Delay = this.lastRot2Delay;
+			if (sec1 >= 0) {
+				float sec2 = sec1 - phaseDifference < 0 ? 0 : sec1 - phaseDifference;
+				float sec1Delay = sec1 - 0.2f < 0 ? 0 : sec1 - 0.2f;
+				float sec2Delay = sec2 - 0.2f < 0 ? 0 : sec2 - 0.2f;
+				if (sec1 != lastSec1) {
+					this.rot1 = sec1 < 0.5855f ? calculateSCurve(sec1) : calculateExpCurve(sec1 - 0.556f);
+					this.rot2 = sec2 < 0.5855f ? calculateSCurve(sec2) : calculateExpCurve(sec2 - 0.556f);
+					this.rot1Delay = sec1Delay < 0.6161f ? calculateOuterSCurve(sec1Delay) : calculateExpCurve(sec1Delay - 0.6f);
+					this.rot2Delay = sec2Delay < 0.6161f ? calculateOuterSCurve(sec2Delay) : calculateExpCurve(sec2Delay - 0.6f);
+					this.lastRot1 = this.rot1;
+					this.lastRot1Delay = this.rot1Delay;
+					this.lastRot2 = this.rot2;
+					this.lastRot2Delay = this.rot2Delay;
+				} else {
+					this.rot1 = this.lastRot1;
+					this.rot1Delay = this.lastRot1Delay;
+					this.rot2 = this.lastRot2;
+					this.rot2Delay = this.lastRot2Delay;
+				}
+
+				this.tentacle1.yRot = -rot1 * 0.7f;
+				this.secondary1.yRot = -rot1Delay * 0.7f;
+				this.tentacle2.yRot = -rot2 * 0.7f;
+				this.secondary2.yRot = -rot2Delay * 0.7f;
+				this.tentacle3.yRot = rot2 * 0.7f;
+				this.secondary3.yRot = rot2Delay * 0.7f;
+				this.tentacle4.yRot = rot1 * 0.7f;
+				this.secondary4.yRot = rot1Delay * 0.7f;
+				this.tentacle5.xRot = rot1 * 0.7f;
+				this.secondary5.xRot = rot1Delay * 0.7f;
+				this.tentacle6.xRot = rot2 * 0.7f;
+				this.secondary6.xRot = rot2Delay * 0.7f;
+				this.tentacle7.xRot = -rot1 * 0.7f;
+				this.secondary7.xRot = -rot1Delay * 0.7f;
+				this.tentacle8.xRot = -rot2 * 0.7f;
+				this.secondary8.xRot = -rot2Delay * 0.7f;
+				this.fin.yRot = (float) (Math.sin(2.513 * sec1) * 0.05f);
 			}
-
-			this.tentacle1.yRot = -rot1 * 0.7f;
-			this.secondary1.yRot = -rot1Delay * 0.7f;
-			this.tentacle2.yRot = -rot2 * 0.7f;
-			this.secondary2.yRot = -rot2Delay * 0.7f;
-			this.tentacle3.yRot = rot2 * 0.7f;
-			this.secondary3.yRot = rot2Delay * 0.7f;
-			this.tentacle4.yRot = rot1 * 0.7f;
-			this.secondary4.yRot = rot1Delay * 0.7f;
-			this.tentacle5.xRot = rot1 * 0.7f;
-			this.secondary5.xRot = rot1Delay * 0.7f;
-			this.tentacle6.xRot = rot2 * 0.7f;
-			this.secondary6.xRot = rot2Delay * 0.7f;
-			this.tentacle7.xRot = -rot1 * 0.7f;
-			this.secondary7.xRot = -rot1Delay * 0.7f;
-			this.tentacle8.xRot = -rot2 * 0.7f;
-			this.secondary8.xRot = -rot2Delay * 0.7f;
-			this.fin.yRot = (float) (Math.sin(2.513 * sec1) * 0.05f);
 		}
-
 	}
 
 	@Override

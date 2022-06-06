@@ -1,13 +1,16 @@
 package com.ricy40.caerula.entity.custom;
 
 import com.ricy40.caerula.item.ModItems;
+import com.ricy40.caerula.util.Vec3ex;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -25,6 +28,7 @@ public class BlobfishEntity extends AbstractFish {
 
     protected void registerGoals() {
         super.registerGoals();
+
     }
 
     public ItemStack getBucketItemStack() {
