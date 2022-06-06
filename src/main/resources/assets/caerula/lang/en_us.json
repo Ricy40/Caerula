@@ -13,5 +13,6 @@
     "block.caerula.bush_coral" : "Bush Coral",
     "block.caerula.dead_bush_coral" : "Dead Bush Coral",
 
-    "entity.caerula.blobfish" : "Blobfish"
+    "entity.caerula.blobfish" : "Blobfish",
+    "entity.caerula.lula" : "Lula"
 }
