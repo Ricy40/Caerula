@@ -32,12 +32,16 @@ public class Lula extends WaterAnimal {
     private float lerpTicks;
     private float xRotStep;
     private float yRotStep;
+    public float xBodyRot;
+    public float xBodyRotO;
 
     public Lula(EntityType<? extends WaterAnimal> type, Level worldIn) {
         super(type, worldIn);
         this.isFleeing = false;
         this.clockTick = 0f;
         this.speedMultiplier = 0f;
+        this.xBodyRot = 0f;
+        this.xBodyRotO = 0f;
         this.tDirection = new Vec3ex(0f, 0f, 0f);
     }
 
@@ -63,26 +67,23 @@ public class Lula extends WaterAnimal {
         this.lerpingTicks();
         
         if (!this.level.isClientSide()) {
-            if (!this.level.isClientSide) {
-                this.setLastTimeSync(this.getSwimAnimTimeSync());
-                if (this.clockTick > 49) {
-                    this.clockTick = 0;
-                } else {
-                    this.clockTick++;
-                }
-                this.setClockTickSync(this.clockTick);
-                this.setSwimAnimTimeSync(this.clockTick / 20);
+            this.setLastTimeSync(this.getSwimAnimTimeSync());
+            if (this.clockTick > 49) {
+                this.clockTick = 0;
+            } else {
+                this.clockTick++;
             }
+            this.setClockTickSync(this.clockTick);
+            this.setSwimAnimTimeSync(this.clockTick / 20);
         }
     }
 
     private void lerpingTicks() {
 
-
         if (this.getClockTickSync() > 1 && this.lerpTicks > 0 && !this.tDirection.isZero()) {
-
+            this.xBodyRotO = this.xBodyRot;
             this.setRot(this.getYRot() + this.yRotStep, this.getXRot() + this.xRotStep);
-            System.out.println("Step " + this.lerpTicks + ": " + this.getYRot());
+            this.xBodyRot = this.getYRot();
             this.lerpTicks--;
         }
 
@@ -93,11 +94,6 @@ public class Lula extends WaterAnimal {
         this.yRotStep = (yaw - this.getYRot()) / ticks;
         this.xRotStep = (pitch - this.getXRot()) / ticks;
         this.lerpTicks = ticks;
-
-        System.out.println("Current Rot: " + this.getYRot());
-        System.out.println("Target Rot: " + this.tYRot);
-        System.out.println("yRotStep: " + this.yRotStep);
-
     }
 
     public void aiStep() {
@@ -215,18 +211,15 @@ public class Lula extends WaterAnimal {
                 this.lula.tYRot = Mth.wrapDegrees(rotateY(this.lula.tDirection));
 
                 rotateLerp(this.lula.tYRot, this.lula.tXRot, 10);
-                System.out.println("target: " + this.lula.tDirection.scale(10));
             }
         }
 
         private float rotateY(Vec3ex direction) {
             float amount = Vec2ex.calculateAngle(
-                    new Vec2ex(-1, 0    ),
+                    new Vec2ex(1, 0    ),
                     new Vec2ex((float) direction.x, (float) direction.z));
 
-            System.out.println("rotate y callculated (RAD): " +  amount);
-
-            if ((float) direction.z == Mth.abs((float) direction.z)) {
+            if ((float) direction.z != Mth.abs((float) direction.z)) {
                 amount = amount * -1;
             }
 
@@ -237,6 +230,10 @@ public class Lula extends WaterAnimal {
             float amount = Vec2ex.calculateAngle(
                     new Vec2ex(1, 0),
                     new Vec2ex( (new Vec2ex((float) direction.x, (float) direction.z)).mag , (float) direction.y));
+
+            if ((float) direction.y != Mth.abs((float) direction.y)) {
+                amount = amount * -1;
+            }
 
             return amount * Mth.RAD_TO_DEG;
         }
