@@ -20,11 +20,9 @@ import net.minecraft.world.level.Level;
 public class Lula extends WaterAnimal {
 
     private static final EntityDataAccessor<Float> SWIM_ANIM_TIME_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Float> LAST_TIME_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> CLOCK_TICK_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Float> XROT_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Float> YROT_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
-    private float lastTime;
+    public static final EntityDataAccessor<Float> XROT_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> YROT_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
     private float clockTick;
     private float speedMultiplier;
     private Vec3ex tDirection;
@@ -56,7 +54,6 @@ public class Lula extends WaterAnimal {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(SWIM_ANIM_TIME_SYNC, 0f);
-        this.entityData.define(LAST_TIME_SYNC, 0f);
         this.entityData.define(CLOCK_TICK_SYNC, 0f);
         this.entityData.define(XROT_SYNC, 0f);
         this.entityData.define(YROT_SYNC, 0f);
@@ -68,8 +65,7 @@ public class Lula extends WaterAnimal {
         this.lerpingTicks();
         
         if (!this.level.isClientSide()) {
-            
-            this.setLastTimeSync(this.getSwimAnimTimeSync());
+
             if (this.clockTick > 49) {
                 this.clockTick = 0;
             } else {
@@ -86,14 +82,7 @@ public class Lula extends WaterAnimal {
             if (this.getClockTickSync() > 1 && this.lerpTicks > 0 && !this.tDirection.isZero()) {
                 this.setRot(this.getYRot() + this.yRotStep, this.getXRot() + this.xRotStep);
                 this.lerpTicks--;
-                this.setSync(XROT_SYNC, this.getXRot() + this.xRotStep);
-                this.setSync(YROT_SYNC, this.getYRot() + this.yRotStep);
             }
-        }
-
-        if (this.level.isClientSide()) {
-            this.setRot(this.getSync(YROT_SYNC), this.getSync(XROT_SYNC));
-            System.out.println("Setting Sync! -- sYRot: " + this.getYRot() + " XRot: " + this.getXRot());
         }
     }
 
@@ -110,13 +99,9 @@ public class Lula extends WaterAnimal {
             if (!this.isFleeing) {
                 if (1.1 <= this.getSwimAnimTimeSync() && this.getSwimAnimTimeSync() < 2.6f) {
                     if (1.1 <= this.getSwimAnimTimeSync() && this.getSwimAnimTimeSync() < 1.2184f) {
-                        if (this.getLastTimeSync() != this.getSwimAnimTimeSync()) {
-                            this.speedMultiplier = swimPolynomial(this.getSwimAnimTimeSync() - 0.5f);
-                        }
+                        this.speedMultiplier = swimPolynomial(this.getSwimAnimTimeSync() - 0.5f);
                     } else if (1.2184 <= this.getSwimAnimTimeSync() && this.getSwimAnimTimeSync() <= 2.5f) {
-                        if (this.getLastTimeSync() != this.getSwimAnimTimeSync()) {
-                            this.speedMultiplier = swimHyperbola(this.getSwimAnimTimeSync() - 0.5f);
-                        }
+                        this.speedMultiplier = swimHyperbola(this.getSwimAnimTimeSync() - 0.5f);
                     } else {
                         this.speedMultiplier = 0f;
                     }
@@ -153,14 +138,6 @@ public class Lula extends WaterAnimal {
 
     protected SoundEvent getSquirtSound() {
         return SoundEvents.SQUID_SQUIRT;
-    }
-
-    public float getLastTimeSync() {
-        return this.entityData.get(LAST_TIME_SYNC);
-    }
-
-    public void setLastTimeSync(float time) {
-        this.entityData.set(LAST_TIME_SYNC, time);
     }
 
     public void setSwimAnimTimeSync(Float time) {

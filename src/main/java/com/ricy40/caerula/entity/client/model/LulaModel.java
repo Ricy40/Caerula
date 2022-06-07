@@ -35,15 +35,6 @@ public class LulaModel<T extends Lula> extends EntityModel<T> {
 	private final ModelPart secondary7;
 	private final ModelPart secondary8;
 
-	private float lastRot1;
-	private float lastRot1Delay;
-	private float lastRot2;
-	private float lastRot2Delay;
-	private float rot1;
-	private float rot1Delay;
-	private float rot2;
-	private float rot2Delay;
-
 	public LulaModel(ModelPart root) {
 		this.root = root;
 		this.main_body = root.getChild("main_body");
@@ -64,14 +55,6 @@ public class LulaModel<T extends Lula> extends EntityModel<T> {
 		this.secondary6 = tentacle6.getChild("secondary6");
 		this.secondary7 = tentacle7.getChild("secondary7");
 		this.secondary8 = tentacle8.getChild("secondary8");
-		this.lastRot1 = 0f;
-		this.lastRot1Delay = 0f;
-		this.lastRot2 = 0f;
-		this.lastRot2Delay = 0f;
-		this.rot1 = 0f;
-		this.rot1Delay = 0f;
-		this.rot2 = 0f;
-		this.rot2Delay = 0f;
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -104,29 +87,22 @@ public class LulaModel<T extends Lula> extends EntityModel<T> {
 	public void setupAnim(T lula, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		if (!lula.isFleeing()) {
 			float phaseDifference = 0.1f;
+			float rot1;
+			float rot1Delay;
+			float rot2;
+			float rot2Delay;
 
 			float sec1 = lula.getSwimAnimTimeSync() - 0.5f;
-			float lastSec1 = lula.getLastTimeSync() - 0.5f;
 
 			if (sec1 >= 0) {
 				float sec2 = sec1 - phaseDifference < 0 ? 0 : sec1 - phaseDifference;
 				float sec1Delay = sec1 - 0.2f < 0 ? 0 : sec1 - 0.2f;
 				float sec2Delay = sec2 - 0.2f < 0 ? 0 : sec2 - 0.2f;
-				if (sec1 != lastSec1) {
-					this.rot1 = sec1 < 0.5855f ? calculateSCurve(sec1) : calculateExpCurve(sec1 - 0.556f);
-					this.rot2 = sec2 < 0.5855f ? calculateSCurve(sec2) : calculateExpCurve(sec2 - 0.556f);
-					this.rot1Delay = sec1Delay < 0.6161f ? calculateOuterSCurve(sec1Delay) : calculateExpCurve(sec1Delay - 0.6f);
-					this.rot2Delay = sec2Delay < 0.6161f ? calculateOuterSCurve(sec2Delay) : calculateExpCurve(sec2Delay - 0.6f);
-					this.lastRot1 = this.rot1;
-					this.lastRot1Delay = this.rot1Delay;
-					this.lastRot2 = this.rot2;
-					this.lastRot2Delay = this.rot2Delay;
-				} else {
-					this.rot1 = this.lastRot1;
-					this.rot1Delay = this.lastRot1Delay;
-					this.rot2 = this.lastRot2;
-					this.rot2Delay = this.lastRot2Delay;
-				}
+
+				rot1 = sec1 < 0.5855f ? calculateSCurve(sec1) : calculateExpCurve(sec1 - 0.556f);
+				rot2 = sec2 < 0.5855f ? calculateSCurve(sec2) : calculateExpCurve(sec2 - 0.556f);
+				rot1Delay = sec1Delay < 0.6161f ? calculateOuterSCurve(sec1Delay) : calculateExpCurve(sec1Delay - 0.6f);
+				rot2Delay = sec2Delay < 0.6161f ? calculateOuterSCurve(sec2Delay) : calculateExpCurve(sec2Delay - 0.6f);
 
 				this.tentacle1.yRot = -rot1 * 0.7f;
 				this.secondary1.yRot = -rot1Delay * 0.7f;
