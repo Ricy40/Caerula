@@ -32,16 +32,12 @@ public class Lula extends WaterAnimal {
     private float lerpTicks;
     private float xRotStep;
     private float yRotStep;
-    public float xBodyRot;
-    public float xBodyRotO;
 
     public Lula(EntityType<? extends WaterAnimal> type, Level worldIn) {
         super(type, worldIn);
         this.isFleeing = false;
         this.clockTick = 0f;
         this.speedMultiplier = 0f;
-        this.xBodyRot = 0f;
-        this.xBodyRotO = 0f;
         this.tDirection = new Vec3ex(0f, 0f, 0f);
     }
 
@@ -79,18 +75,13 @@ public class Lula extends WaterAnimal {
     }
 
     private void lerpingTicks() {
-
         if (this.getClockTickSync() > 1 && this.lerpTicks > 0 && !this.tDirection.isZero()) {
-            this.xBodyRotO = this.xBodyRot;
             this.setRot(this.getYRot() + this.yRotStep, this.getXRot() + this.xRotStep);
-            this.xBodyRot = this.getYRot();
             this.lerpTicks--;
         }
-
     }
 
     private void rotateLerp(float yaw, float pitch, float ticks) {
-
         this.yRotStep = (yaw - this.getYRot()) / ticks;
         this.xRotStep = (pitch - this.getXRot()) / ticks;
         this.lerpTicks = ticks;
@@ -100,7 +91,6 @@ public class Lula extends WaterAnimal {
         super.aiStep();
 
         if (this.isInWaterOrBubble()) {
-
             if (!this.isFleeing) {
                 if (1.1 <= this.getSwimAnimTimeSync() && this.getSwimAnimTimeSync() < 2.6f) {
                     if (1.1 <= this.getSwimAnimTimeSync() && this.getSwimAnimTimeSync() < 1.2184f) {
@@ -117,7 +107,7 @@ public class Lula extends WaterAnimal {
 
                     if (!this.level.isClientSide()) {
                         Vec3ex swimMovement = this.tDirection;
-                        this.setDeltaMovement(swimMovement.scale(speedMultiplier * 1.1f));
+                        this.setDeltaMovement(swimMovement.scale(speedMultiplier * 1.3f));
                     }
                 }
             }
