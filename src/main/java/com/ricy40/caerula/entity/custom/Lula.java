@@ -22,6 +22,8 @@ public class Lula extends WaterAnimal {
     private static final EntityDataAccessor<Float> SWIM_ANIM_TIME_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> LAST_TIME_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> CLOCK_TICK_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> XROT_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> YROT_SYNC = SynchedEntityData.defineId(Lula.class, EntityDataSerializers.FLOAT);
     private float lastTime;
     private float clockTick;
     private float speedMultiplier;
@@ -56,6 +58,9 @@ public class Lula extends WaterAnimal {
         this.entityData.define(SWIM_ANIM_TIME_SYNC, 0f);
         this.entityData.define(LAST_TIME_SYNC, 0f);
         this.entityData.define(CLOCK_TICK_SYNC, 0f);
+        this.entityData.define(XROT_SYNC, 0f);
+        this.entityData.define(YROT_SYNC, 0f);
+        
     }
 
     public void tick() {
@@ -63,6 +68,7 @@ public class Lula extends WaterAnimal {
         this.lerpingTicks();
         
         if (!this.level.isClientSide()) {
+            
             this.setLastTimeSync(this.getSwimAnimTimeSync());
             if (this.clockTick > 49) {
                 this.clockTick = 0;
@@ -75,9 +81,19 @@ public class Lula extends WaterAnimal {
     }
 
     private void lerpingTicks() {
-        if (this.getClockTickSync() > 1 && this.lerpTicks > 0 && !this.tDirection.isZero()) {
-            this.setRot(this.getYRot() + this.yRotStep, this.getXRot() + this.xRotStep);
-            this.lerpTicks--;
+        
+        if (!this.level.isClientSide()) {
+            if (this.getClockTickSync() > 1 && this.lerpTicks > 0 && !this.tDirection.isZero()) {
+                this.setRot(this.getYRot() + this.yRotStep, this.getXRot() + this.xRotStep);
+                this.lerpTicks--;
+                this.setSync(XROT_SYNC, this.getXRot() + this.xRotStep);
+                this.setSync(YROT_SYNC, this.getYRot() + this.yRotStep);
+            }
+        }
+
+        if (this.level.isClientSide()) {
+            this.setRot(this.getSync(YROT_SYNC), this.getSync(XROT_SYNC));
+            System.out.println("Setting Sync! -- sYRot: " + this.getYRot() + " XRot: " + this.getXRot());
         }
     }
 
@@ -162,6 +178,15 @@ public class Lula extends WaterAnimal {
     public float getClockTickSync() {
         return this.entityData.get(CLOCK_TICK_SYNC);
     }
+
+    public void setSync(EntityDataAccessor<Float> sync, Float value) {
+        this.entityData.set(sync, value);
+    }
+
+    public float getSync(EntityDataAccessor<Float> sync) {
+        return this.entityData.get(sync);
+    }
+
 
     public boolean isFleeing() {
         return this.isFleeing;
