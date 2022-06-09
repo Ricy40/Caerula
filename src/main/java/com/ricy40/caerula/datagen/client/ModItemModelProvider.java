@@ -28,10 +28,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.NIXIUM_INGOT.get());
         simpleItem(ModItems.NIXIUM_NUGGET.get());
         simpleItem(ModItems.RAW_NIXIUM.get());
+        
         simpleItem(ModItems.BLOBFISH_BUCKET.get());
         simpleItem(ModItems.BLOBFISH.get());
         simpleItem(ModItems.COOKED_BLOBFISH.get());
         basicSpawnEggItem(ModItems.BLOBFISH_SPAWN_EGG.get());
+
+        simpleItem(ModItems.LULA_BUCKET.get());
+        simpleItem(ModItems.LULA.get());
+        simpleItem(ModItems.COOKED_LULA.get());
+        basicSpawnEggItem(ModItems.LULA_SPAWN_EGG.get());
 
 
     }

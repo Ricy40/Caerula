@@ -7,6 +7,10 @@
     "item.caerula.blobfish" : "Raw Blobfish",
     "item.caerula.cooked_blobfish" : "Cooked Blobfish",
     "item.caerula.blobfish_spawn_egg" : "Blobfish Spawn Egg",
+    "item.caerula.lula_bucket" : "Bucket of Lula",
+    "item.caerula.lula" : "Raw Lula",
+    "item.caerula.cooked_lula" : "Calamari",
+    "item.caerula.lula_spawn_egg" : "Lula Spawn Egg",
 
     "block.caerula.red_seagrass" : "Red Seagrass",
     "block.caerula.tall_red_seagrass" : "Tall Red Seagrass",

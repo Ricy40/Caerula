@@ -38,8 +38,11 @@ public class ModRecipeProvider extends RecipeProvider {
         stairBuilder(ModBlocks.NIXIUM_STAIRS.get(), Ingredient.of(ModBlocks.NIXIUM_BLOCK.get())).unlockedBy("has_nixium_block", has(ModBlocks.NIXIUM_BLOCK.get())).save(consumer);
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.BLOBFISH.get()), ModItems.COOKED_BLOBFISH.get(), 0.35F, 200).unlockedBy("has_blobfish", has(ModItems.BLOBFISH.get())).save(consumer);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.LULA.get()), ModItems.COOKED_LULA.get(), 0.35F, 200).unlockedBy("has_blobfish", has(ModItems.LULA.get())).save(consumer);
+
         cookRecipes(consumer, "smoking", RecipeSerializer.SMOKING_RECIPE, 100);
         cookRecipes(consumer, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 600);
+
 
         //Check RecipeProvider
 
@@ -52,6 +55,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
     private static void cookRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String pCookingMethod, SimpleCookingSerializer<?> pCookingSerializer, int pCookingTime) {
         simpleCookingRecipe(pFinishedRecipeConsumer, pCookingMethod, pCookingSerializer, pCookingTime, ModItems.BLOBFISH.get(), ModItems.COOKED_BLOBFISH.get(), 0.35F);
+        simpleCookingRecipe(pFinishedRecipeConsumer, pCookingMethod, pCookingSerializer, pCookingTime, ModItems.LULA.get(), ModItems.COOKED_LULA.get(), 0.35F);
     }
 
     private static void simpleCookingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String pCookingMethod, SimpleCookingSerializer<?> pCookingSerializer, int pCookingTime, ItemLike pIngredient, ItemLike pResult, float pExperience) {

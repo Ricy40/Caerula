@@ -83,7 +83,8 @@ public class ModLootTableProvider extends LootTableProvider {
         @Override
         protected void addTables() {
 
-            add(ModEntityTypes.BLOBFISH.get(), LootTable.lootTable().withPool(
+            add(ModEntityTypes.BLOBFISH.get(),
+                    LootTable.lootTable().withPool(
                     LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1.0F))
                             .add(LootItem.lootTableItem(ModItems.BLOBFISH.get())
@@ -91,6 +92,13 @@ public class ModLootTableProvider extends LootTableProvider {
                     .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
                             .add(LootItem.lootTableItem(Items.BONE_MEAL))
                             .when(LootItemRandomChanceCondition.randomChance(0.05F))));
+
+            add(ModEntityTypes.LULA.get(),
+                    LootTable.lootTable().withPool(
+                            LootPool.lootPool()
+                                    .setRolls(ConstantValue.exactly(1.0F))
+                                    .add(LootItem.lootTableItem(ModItems.LULA.get())
+                                            .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))))));
 
         }
 

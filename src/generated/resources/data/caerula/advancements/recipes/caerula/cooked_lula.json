@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "caerula:cooked_lula"
+    ]
+  },
+  "criteria": {
+    "has_blobfish": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "caerula:lula"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "caerula:cooked_lula"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blobfish",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -26,8 +26,9 @@ public class LulaRenderer extends MobRenderer<Lula, LulaModel<Lula>> {
             pMatrixStack.translate((double)0.0F, (double)f, -0.05F);
             pMatrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
         }
-        //float f1 = pEntityLiving.getXRot() * -3;
-        //pMatrixStack.mulPose(Vector3f.ZP.rotationDegrees(f1));
+
+        float f1 = pEntityLiving.getXRot() * -3;
+        pMatrixStack.mulPose(Vector3f.ZP.rotationDegrees(f1));
     }
 
     @Override

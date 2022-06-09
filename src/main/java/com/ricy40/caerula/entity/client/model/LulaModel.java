@@ -92,7 +92,9 @@ public class LulaModel<T extends Lula> extends EntityModel<T> {
 			float rot2;
 			float rot2Delay;
 
-			float sec1 = lula.getSwimAnimTimeSync() - 0.5f;
+			float correctedTick = ageInTicks - lula.getIntSync(lula.TICK_OFFSET);
+			float tick = correctedTick < 0 ? 0f : (correctedTick > 50 ? correctedTick % 50 : correctedTick);
+			float sec1 = tick / 20 - 0.5f;
 
 			if (sec1 >= 0) {
 				float sec2 = sec1 - phaseDifference < 0 ? 0 : sec1 - phaseDifference;
@@ -103,25 +105,30 @@ public class LulaModel<T extends Lula> extends EntityModel<T> {
 				rot2 = sec2 < 0.5855f ? calculateSCurve(sec2) : calculateExpCurve(sec2 - 0.556f);
 				rot1Delay = sec1Delay < 0.6161f ? calculateOuterSCurve(sec1Delay) : calculateExpCurve(sec1Delay - 0.6f);
 				rot2Delay = sec2Delay < 0.6161f ? calculateOuterSCurve(sec2Delay) : calculateExpCurve(sec2Delay - 0.6f);
-
-				this.tentacle1.yRot = -rot1 * 0.7f;
-				this.secondary1.yRot = -rot1Delay * 0.7f;
-				this.tentacle2.yRot = -rot2 * 0.7f;
-				this.secondary2.yRot = -rot2Delay * 0.7f;
-				this.tentacle3.yRot = rot2 * 0.7f;
-				this.secondary3.yRot = rot2Delay * 0.7f;
-				this.tentacle4.yRot = rot1 * 0.7f;
-				this.secondary4.yRot = rot1Delay * 0.7f;
-				this.tentacle5.xRot = rot1 * 0.7f;
-				this.secondary5.xRot = rot1Delay * 0.7f;
-				this.tentacle6.xRot = rot2 * 0.7f;
-				this.secondary6.xRot = rot2Delay * 0.7f;
-				this.tentacle7.xRot = -rot1 * 0.7f;
-				this.secondary7.xRot = -rot1Delay * 0.7f;
-				this.tentacle8.xRot = -rot2 * 0.7f;
-				this.secondary8.xRot = -rot2Delay * 0.7f;
-				this.fin.yRot = (float) (Math.sin(2.513 * sec1) * 0.05f);
+			} else {
+				rot1 = 0;
+				rot1Delay = 0;
+				rot2 = 0;
+				rot2Delay = 0;
 			}
+
+			this.tentacle1.yRot = -rot1 * 0.7f;
+			this.secondary1.yRot = -rot1Delay * 0.7f;
+			this.tentacle2.yRot = -rot2 * 0.7f;
+			this.secondary2.yRot = -rot2Delay * 0.7f;
+			this.tentacle3.yRot = rot2 * 0.7f;
+			this.secondary3.yRot = rot2Delay * 0.7f;
+			this.tentacle4.yRot = rot1 * 0.7f;
+			this.secondary4.yRot = rot1Delay * 0.7f;
+			this.tentacle5.xRot = rot1 * 0.7f;
+			this.secondary5.xRot = rot1Delay * 0.7f;
+			this.tentacle6.xRot = rot2 * 0.7f;
+			this.secondary6.xRot = rot2Delay * 0.7f;
+			this.tentacle7.xRot = -rot1 * 0.7f;
+			this.secondary7.xRot = -rot1Delay * 0.7f;
+			this.tentacle8.xRot = -rot2 * 0.7f;
+			this.secondary8.xRot = -rot2Delay * 0.7f;
+			this.fin.yRot = (float) (Math.sin(2.513 * sec1) * 0.05f);
 		}
 	}
 
