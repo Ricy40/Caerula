@@ -43,13 +43,11 @@ public class ModBlocks {
     public static final RegistryObject<SlabBlock> NIXIUM_SLAB = registerBlock("nixium_slab",
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), ModCreativeModeTab.CAERULA);
     public static final RegistryObject<StairBlock> NIXIUM_STAIRS = registerBlock("nixium_stairs",
-            () -> new StairBlock(NIXIUM_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), ModCreativeModeTab.CAERULA);
+            () -> new StairBlock(() -> NIXIUM_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), ModCreativeModeTab.CAERULA);
     public static final RegistryObject<Block> NIXIUM_ORE = registerBlock("nixium_ore",
-            () -> new OreBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModCreativeModeTab.CAERULA);
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModCreativeModeTab.CAERULA);
     public static final RegistryObject<Block> DEEPSLATE_NIXIUM_ORE = registerBlock("deepslate_nixium_ore",
-            () -> new OreBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), ModCreativeModeTab.CAERULA);
-
-
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), ModCreativeModeTab.CAERULA);
 
     // Methods
 

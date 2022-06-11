@@ -1,10 +1,10 @@
 {
   "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.7,
   "group": "nixium_ingot",
   "ingredient": {
     "item": "caerula:raw_nixium"
   },
-  "result": "caerula:nixium_ingot",
-  "experience": 0.7,
-  "cookingtime": 100
+  "result": "caerula:nixium_ingot"
 }

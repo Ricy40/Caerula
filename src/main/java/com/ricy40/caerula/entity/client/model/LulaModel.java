@@ -92,8 +92,7 @@ public class LulaModel<T extends Lula> extends EntityModel<T> {
 			float rot2;
 			float rot2Delay;
 
-			float correctedTick = ageInTicks - lula.getIntSync(lula.TICK_OFFSET);
-			float tick = correctedTick < 0 ? 0f : (correctedTick > 50 ? correctedTick % 50 : correctedTick);
+			float tick = lula.getClockTickSync();
 			float sec1 = tick / 20 - 0.5f;
 
 			if (sec1 >= 0) {

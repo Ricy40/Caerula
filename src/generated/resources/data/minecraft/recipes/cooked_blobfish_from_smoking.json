@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "caerula:blobfish"
-  },
-  "result": "caerula:cooked_blobfish",
-  "experience": 0.35,
-  "cookingtime": 100
-}

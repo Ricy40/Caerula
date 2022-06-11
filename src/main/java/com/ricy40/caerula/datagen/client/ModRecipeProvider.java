@@ -52,7 +52,7 @@ public class ModRecipeProvider extends RecipeProvider {
         return new ResourceLocation(Caerula.MOD_ID, path);
     }
 
-
+    /*
     private static void cookRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String pCookingMethod, SimpleCookingSerializer<?> pCookingSerializer, int pCookingTime) {
         simpleCookingRecipe(pFinishedRecipeConsumer, pCookingMethod, pCookingSerializer, pCookingTime, ModItems.BLOBFISH.get(), ModItems.COOKED_BLOBFISH.get(), 0.35F);
         simpleCookingRecipe(pFinishedRecipeConsumer, pCookingMethod, pCookingSerializer, pCookingTime, ModItems.LULA.get(), ModItems.COOKED_LULA.get(), 0.35F);
@@ -125,4 +125,6 @@ public class ModRecipeProvider extends RecipeProvider {
     private static RecipeBuilder stairBuilder(ItemLike pStairs, Ingredient pMaterial) {
         return ShapedRecipeBuilder.shaped(pStairs, 4).define('#', pMaterial).pattern("#  ").pattern("## ").pattern("###");
     }
+
+     */
 }

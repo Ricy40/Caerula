@@ -3,6 +3,9 @@
 	"itemGroup.caerula" : "Caerula",
 
     "item.caerula.red_seagrass" : "Red Seagrass",
+    "item.caerula.raw_nixium" : "Raw Nixium",
+    "item.caerula.nixium_ingot" : "Nixium Ingot",
+    "item.caerula.nixium_nugget" : "Nixium Nugget",
     "item.caerula.blobfish_bucket" : "Bucket of Blobfish",
     "item.caerula.blobfish" : "Raw Blobfish",
     "item.caerula.cooked_blobfish" : "Cooked Blobfish",
@@ -16,6 +19,12 @@
     "block.caerula.tall_red_seagrass" : "Tall Red Seagrass",
     "block.caerula.bush_coral" : "Bush Coral",
     "block.caerula.dead_bush_coral" : "Dead Bush Coral",
+    "block.caerula.nixium_block" : "Block of Nixium",
+    "block.caerula.raw_nixium_block" : "Block of Raw Nixium",
+    "block.caerula.nixium_slab" : "Nixium Slab",
+    "block.caerula.nixium_stairs" : "Nixium Stairs",
+    "block.caerula.nixium_ore" : "Nixium Ore",
+    "block.caerula.deepslate_nixium_ore" : "Deepslate Nixium Ore",
 
     "entity.caerula.blobfish" : "Blobfish",
     "entity.caerula.lula" : "Lula"

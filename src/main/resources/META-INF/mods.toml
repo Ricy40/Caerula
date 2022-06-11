@@ -24,6 +24,6 @@ Caerula mod made by Ricy40
 [[dependencies.caerula]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,1.19)"
+    versionRange="[1.19,1.20)"
     ordering="NONE"
     side="BOTH"

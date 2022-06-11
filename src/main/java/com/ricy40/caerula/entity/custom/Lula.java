@@ -89,7 +89,6 @@ public class Lula extends WaterAnimal implements Bucketable {
             float clockTick = correctedTick < 0 ? 0f : (correctedTick > 50 ? correctedTick % 50 : correctedTick);
             this.setClockTickSync(clockTick);
             this.setSwimAnimTimeSync(clockTick / 20);
-
         }
     }
     
@@ -351,7 +350,6 @@ public class Lula extends WaterAnimal implements Bucketable {
 
         @Override
         public void tick() {
-
             if (this.lula.isInWaterOrBubble()) {
                 this.lula.tDirection = new Vec3ex(this.lula.getX() - this.lula.xFlee, this.lula.getY() - this.lula.yFlee, this.lula.getZ() - this.lula.zFlee);
                 this.lula.tXRot = Mth.wrapDegrees(rotateX(this.lula.tDirection));

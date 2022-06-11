@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItemModelProvider extends ItemModelProvider {
 
@@ -43,18 +44,18 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     private ItemModelBuilder simpleItem(Item item) {
-        return withExistingParent(item.getRegistryName().getPath(),
+        return withExistingParent(ForgeRegistries.ITEMS.getKey(item).getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(Caerula.MOD_ID,"item/" + item.getRegistryName().getPath()));
+                new ResourceLocation(Caerula.MOD_ID,"item/" + ForgeRegistries.ITEMS.getKey(item).getPath()));
     }
 
     private ItemModelBuilder handheldItem(Item item) {
-        return withExistingParent(item.getRegistryName().getPath(),
+        return withExistingParent(ForgeRegistries.ITEMS.getKey(item).getPath(),
                 new ResourceLocation("item/handheld")).texture("layer0",
-                new ResourceLocation(Caerula.MOD_ID,"item/" + item.getRegistryName().getPath()));
+                new ResourceLocation(Caerula.MOD_ID,"item/" + ForgeRegistries.ITEMS.getKey(item).getPath()));
     }
 
     private void basicSpawnEggItem(Item item) {
-        withExistingParent(item.getRegistryName().getPath(), "item/template_spawn_egg");
+        withExistingParent(ForgeRegistries.ITEMS.getKey(item).getPath(), "item/template_spawn_egg");
     }
 }
