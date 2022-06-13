@@ -27,6 +27,7 @@ import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ModifiableBiomeInfo.BiomeInfo.Builder;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
@@ -34,21 +35,18 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = Caerula.MOD_ID)
+@Mod.EventBusSubscriber(modid = Caerula.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class DataGenerators {
 
     public static final String MODID = Caerula.MOD_ID;
-    public static final boolean ENABLED = true;
 
     public static final String TEST = "test";
     public static final ResourceLocation ADD_FEATURES_TO_BIOMES_RL = new ResourceLocation(MODID, TEST);
 
-    private DataGenerators() {
-
-        if (!ENABLED)
-            return;
+    public DataGenerators() {
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -57,10 +55,10 @@ public final class DataGenerators {
         serializers.register(modBus);
         serializers.register(TEST, TestModifier::makeCodec);
 
-        modBus.addListener(this::onGatherData);
     }
 
-    public void onGatherData(GatherDataEvent event) {
+    @SubscribeEvent
+    public static void onGatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
@@ -103,7 +101,7 @@ public final class DataGenerators {
     }
 
     public static Map<ResourceLocation, PlacedFeature> getPlacedFeatures(String... namespace) {
-        Map<ResourceLocation, PlacedFeature> map = Map.of();
+        Map<ResourceLocation, PlacedFeature> map = new HashMap<>();
 
         for (String name: namespace) {
             RegistryAccess registries = RegistryAccess.builtinCopy();
@@ -116,7 +114,7 @@ public final class DataGenerators {
     }
 
     public static Map<ResourceLocation, Biome> getBiomes(String... namespace) {
-        Map<ResourceLocation, Biome> map = Map.of();
+        Map<ResourceLocation, Biome> map = new HashMap<>();
 
         for (String name: namespace) {
             RegistryAccess registries = RegistryAccess.builtinCopy();

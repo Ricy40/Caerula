@@ -57,6 +57,7 @@ public class Lula extends WaterAnimal implements Bucketable {
         this.speedMultiplier = 0f;
         this.fleeTime = 0f;
         this.tDirection = new Vec3ex(0f, 0f, 0f);
+
     }
 
     public static AttributeSupplier.Builder createAttributes() {
