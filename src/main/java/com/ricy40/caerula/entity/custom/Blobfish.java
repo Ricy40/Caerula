@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class Blobfish extends AbstractFish {
 
@@ -25,7 +26,6 @@ public class Blobfish extends AbstractFish {
 
     protected void registerGoals() {
         super.registerGoals();
-
     }
 
     public ItemStack getBucketItemStack() {

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "caerula:block/nixium_block",
-    "side": "caerula:block/nixium_block",
-    "top": "caerula:block/nixium_block"
-  }
-}

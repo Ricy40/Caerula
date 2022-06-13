@@ -5,6 +5,11 @@ import com.ricy40.caerula.block.ModBlocks;
 import com.ricy40.caerula.entity.ModEntityTypes;
 import com.ricy40.caerula.entity.client.render.*;
 import com.ricy40.caerula.item.ModItems;
+import com.ricy40.caerula.world.dimension.ModDimensions;
+import com.ricy40.caerula.world.gen.biomes.ModBiomes;
+import com.ricy40.caerula.world.gen.configuredfeatures.ModAquaticFeatures;
+import com.ricy40.caerula.world.gen.configuredfeatures.ModAquaticPlacements;
+import com.ricy40.caerula.world.gen.configuredfeatures.ModFeatures;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -28,6 +33,13 @@ public class Caerula {
         ModBlocks.register(bus);
 
         ModEntityTypes.register(bus);
+        ModDimensions.register();
+
+        ModFeatures.register(bus);
+        ModAquaticFeatures.register(bus);
+        ModAquaticPlacements.register(bus);
+
+        ModBiomes.register(bus);
 
         bus.addListener(this::setup);
         bus.addListener(this::clientSetup);

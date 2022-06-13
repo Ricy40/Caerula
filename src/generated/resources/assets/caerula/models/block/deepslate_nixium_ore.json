@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "caerula:block/deepslate_nixium_ore"
-  }
-}
