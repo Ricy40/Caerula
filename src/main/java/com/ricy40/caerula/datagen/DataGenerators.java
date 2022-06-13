@@ -66,11 +66,11 @@ public final class DataGenerators {
         generator.addProvider(event.includeClient(), new ModItemModelProvider(generator, existingFileHelper));
 
         ModBlockTagsProvider blockTags = new ModBlockTagsProvider(generator, existingFileHelper);
-        generator.addProvider(event.includeClient(), blockTags);
-        generator.addProvider(event.includeClient(), new ModItemTagsProvider(generator, blockTags, existingFileHelper));
+        generator.addProvider(event.includeServer(), blockTags);
+        generator.addProvider(event.includeServer(), new ModItemTagsProvider(generator, blockTags, existingFileHelper));
 
-        generator.addProvider(event.includeClient(), new ModLootTableProvider(generator));
-        generator.addProvider(event.includeClient(), new ModRecipeProvider(generator));
+        generator.addProvider(event.includeServer(), new ModLootTableProvider(generator));
+        generator.addProvider(event.includeServer(), new ModRecipeProvider(generator));
 
         // Any reference holders our objects have must come from this same RegistryAccess instance,
         // or encoding our objects will fail.
