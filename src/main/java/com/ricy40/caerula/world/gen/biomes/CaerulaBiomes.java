@@ -1,10 +1,7 @@
 package com.ricy40.caerula.world.gen.biomes;
 
-import com.ricy40.caerula.entity.ModEntityTypes;
 import com.ricy40.caerula.world.gen.configuredfeatures.ModAquaticPlacements;
-import com.ricy40.caerula.world.gen.configuredfeatures.ModBiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
-import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.sounds.Music;
 import net.minecraft.util.Mth;

@@ -93,23 +93,17 @@
     "water_ambient": [
       {
         "type": "caerula:blobfish",
-        "maxCount": 3,
-        "minCount": 0,
-        "weight": 2
+        "maxCount": 6,
+        "minCount": 3,
+        "weight": 15
       }
     ],
     "water_creature": [
       {
         "type": "caerula:lula",
         "maxCount": 2,
-        "minCount": 0,
-        "weight": 8
-      },
-      {
-        "type": "caerula:lula",
-        "maxCount": 1,
-        "minCount": 0,
-        "weight": 2
+        "minCount": 1,
+        "weight": 10
       }
     ]
   },

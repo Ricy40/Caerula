@@ -2,32 +2,41 @@
   "type": "caerula:caerula",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "caerula:caerula_noise",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
         {
           "biome": "caerula:red_fields",
           "parameters": {
-            "temperature": 1,
-            "humidity": 1,
-            "continentalness": 1,
-            "erosion": 1,
-            "weirdness": 1,
-            "depth": 1,
-            "offset": 1
+            "temperature": 0.5,
+            "humidity": 0.8,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0.99,
+            "offset": 0
           }
         },
         {
           "biome": "caerula:deep_red_fields",
           "parameters": {
-            "temperature": 1,
-            "humidity": 1,
-            "continentalness": 1,
-            "erosion": 1,
-            "weirdness": 1,
+            "temperature": 0.4,
+            "humidity": 0.8,
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "weirdness": [
+              -1,
+              1
+            ],
             "depth": 1.2,
-            "offset": 1
+            "offset": 0
           }
         }
       ]

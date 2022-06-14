@@ -1,0 +1,36 @@
+{
+    "parent": "expansion:progression/space",
+    "display": {
+        "title": {
+            "translate": "exp_advancement_mercury_title"
+        },
+        "description": {
+            "translate": "exp_advancement_mercury_desc"
+        },
+        "icon": {
+            "item": "minecraft:player_head",
+            "nbt": "{SkullOwner:{Id:[I;497550848,1749895286,-1496956169,382266798],Properties:{textures:[{Value:\"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzE3OGYyMzU3NjhlZDJmMGYxYTA3YWIwMmI5MmY1OTljYzQyYzc0MWQyZjczM2U1MzY4YjVhMTA0ODRiM2NiIn19fQ==\"}]}}}"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true
+    },
+    "criteria": {
+        "expansion:goto_mercury": {
+            "trigger": "minecraft:location",
+            "conditions": {
+                "player": {
+                    "location": {
+                        "dimension": "expansion:mercury"
+                    }
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "expansion:goto_mercury"
+        ]
+    ]
+}

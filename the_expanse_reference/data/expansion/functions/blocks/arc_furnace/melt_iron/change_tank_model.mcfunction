@@ -1,0 +1,4 @@
+execute if block ~ ~ ~ minecraft:dropper{Items:[{Slot:0b}]} unless block ~ ~ ~ minecraft:dropper{Items:[{Slot:2b}]} store result block ~ ~ ~ Items[3].tag.CustomModelData int 1 run scoreboard players get @s exp_steel_lvl
+execute if block ~ ~ ~ minecraft:dropper{Items:[{Slot:2b}]} unless block ~ ~ ~ minecraft:dropper{Items:[{Slot:0b}]} store result block ~ ~ ~ Items[3].tag.CustomModelData int 1 run scoreboard players get @s exp_steel_lvl
+execute if block ~ ~ ~ minecraft:dropper{Items:[{Slot:0b},{Slot:2b}]} store result block ~ ~ ~ Items[4].tag.CustomModelData int 1 run scoreboard players get @s exp_steel_lvl
+execute unless block ~ ~ ~ minecraft:dropper{Items:[{Slot:0b}]} unless block ~ ~ ~ minecraft:dropper{Items:[{Slot:2b}]} store result block ~ ~ ~ Items[2].tag.CustomModelData int 1 run scoreboard players get @s exp_steel_lvl

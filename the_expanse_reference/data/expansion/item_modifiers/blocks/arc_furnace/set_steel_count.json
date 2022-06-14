@@ -1,0 +1,12 @@
+[
+    {
+      "function": "minecraft:set_count",
+      "count": {
+        "type": "minecraft:score",
+        "target": "this",
+        "score": "exp_hold_count",
+        "scale": 1
+      }
+    }
+  ]
+  

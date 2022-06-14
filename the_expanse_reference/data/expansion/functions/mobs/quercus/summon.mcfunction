@@ -1,0 +1,4 @@
+summon vindicator ~ ~ ~ {Air:999999,Silent:1b,CustomNameVisible:1b,DeathLootTable:"expansion:mobs/mob_death",Health:100f,Tags:["quercus_mob","expansion_mob"],Passengers:[{id:"minecraft:armor_stand",CustomNameVisible:0b,Invulnerable:1b,Air:999999,ShowArms:0b,Marker:1b,Invisible:1b,NoBasePlate:1b,PersistenceRequired:1b,Tags:["expansion_mob_body","quercus_mob_body"],ArmorItems:[{},{},{},{id:"minecraft:jigsaw",Count:1b,tag:{CustomModelData:125001}}],CustomName:'{"text":" "}'}],CustomName:'{"text":"Quercus","italic":false}',ArmorItems:[{},{},{},{id:"minecraft:jigsaw",Count:1b,tag:{CustomModelData:125000}}],ArmorDropChances:[0.0F,0.0F,0.0F,0.0F],ActiveEffects:[{Id:14b,Amplifier:1b,Duration:999999999,ShowParticles:0b},{Id:30b,Amplifier:1b,Duration:999999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:100},{Name:generic.follow_range,Base:200},{Name:generic.attack_damage,Base:20},{Name:generic.armor,Base:30},{Name:generic.attack_knockback,Base:20}]}
+
+
+

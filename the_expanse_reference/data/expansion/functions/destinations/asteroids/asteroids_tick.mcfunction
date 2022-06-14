@@ -1,0 +1,1 @@
+execute as @a[predicate=expansion:dimension/asteroids] at @s run function expansion:destinations/asteroids/asteroids_player

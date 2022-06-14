@@ -1,0 +1,14 @@
+{
+  "condition": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "vehicle": {
+      "type": "minecraft:pig",
+      "nbt": "{Tags:[\"rocket_pig\"]}",
+      "vehicle": {
+        "type": "minecraft:armor_stand",
+        "nbt": "{Tags:[\"rocket\"]}"
+      }
+    }
+  }
+}
