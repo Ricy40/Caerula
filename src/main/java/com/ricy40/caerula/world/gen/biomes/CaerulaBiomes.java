@@ -54,7 +54,6 @@ public class CaerulaBiomes {
         BiomeGenerationSettings.Builder biomegenerationsettings$builder = new BiomeGenerationSettings.Builder();
         globalOverworldGeneration(biomegenerationsettings$builder);
         BiomeDefaultFeatures.addDefaultOres(biomegenerationsettings$builder);
-        BiomeDefaultFeatures.addDefaultSoftDisks(biomegenerationsettings$builder);
         BiomeDefaultFeatures.addWaterTrees(biomegenerationsettings$builder);
         BiomeDefaultFeatures.addDefaultFlowers(biomegenerationsettings$builder);
         BiomeDefaultFeatures.addDefaultGrass(biomegenerationsettings$builder);
@@ -66,14 +65,12 @@ public class CaerulaBiomes {
     public static Biome redFields(boolean isDeep) {
         MobSpawnSettings.Builder mobspawnsettings$builder = new MobSpawnSettings.Builder();
         if (isDeep) {
-            BiomeDefaultFeatures.oceanSpawns(mobspawnsettings$builder, 8, 4, 8);
+            ModBiomeDefaultFeatures.oceanSpawns(mobspawnsettings$builder, 10, 4, 8);
         } else {
-            BiomeDefaultFeatures.oceanSpawns(mobspawnsettings$builder, 10, 2, 15);
+            ModBiomeDefaultFeatures.oceanSpawns(mobspawnsettings$builder, 10, 2, 15);
         }
 
-        mobspawnsettings$builder.
-                addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(ModEntityTypes.LULA.get(), 5, 1, 3))
-                .addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(ModEntityTypes.BLOBFISH.get(), 25, 8, 8));
+        //mobspawnsettings$builder.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(ModEntityTypes.LULA.get(), 2, 0, 1));
 
         BiomeGenerationSettings.Builder biomegenerationsettings$builder = baseOceanGeneration();
         biomegenerationsettings$builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, isDeep ? ModAquaticPlacements.RED_SEAGRASS_DEEP_WARM.getHolder().get() : ModAquaticPlacements.RED_SEAGRASS_WARM.getHolder().get());

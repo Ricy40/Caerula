@@ -17,6 +17,18 @@
             "depth": 1,
             "offset": 1
           }
+        },
+        {
+          "biome": "caerula:deep_red_fields",
+          "parameters": {
+            "temperature": 1,
+            "humidity": 1,
+            "continentalness": 1,
+            "erosion": 1,
+            "weirdness": 1,
+            "depth": 1.2,
+            "offset": 1
+          }
         }
       ]
     }

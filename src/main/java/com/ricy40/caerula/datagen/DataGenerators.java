@@ -94,7 +94,8 @@ public final class DataGenerators {
 
         final DataProvider biomeProvider = JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, MODID, ops, Registry.BIOME_REGISTRY,
                 getBiomes(registries,
-                        "red_fields"
+                        "red_fields",
+                        "deep_red_fields"
                 ));
         generator.addProvider(event.includeServer(), biomeProvider);
 

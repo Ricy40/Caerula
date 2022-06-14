@@ -15,6 +15,8 @@ public class ModBiomes {
 
     public static final RegistryObject<Biome> RED_FIELDS = registerBiome("red_fields",
             () -> CaerulaBiomes.redFields(false));
+    public static final RegistryObject<Biome> DEEP_RED_FIELDS = registerBiome("deep_red_fields",
+            () -> CaerulaBiomes.redFields(true));
 
     public static void register(IEventBus bus) {
         BIOMES.register(bus);

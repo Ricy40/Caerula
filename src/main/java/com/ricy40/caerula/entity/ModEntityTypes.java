@@ -16,7 +16,7 @@ public class ModEntityTypes {
             DeferredRegister.create(ForgeRegistries.ENTITIES, Caerula.MOD_ID);
 
     public static final RegistryObject<EntityType<Blobfish>> BLOBFISH = ENTITY_TYPES.register("blobfish",
-            () -> EntityType.Builder.of(Blobfish::new, MobCategory.WATER_CREATURE)
+            () -> EntityType.Builder.of(Blobfish::new, MobCategory.WATER_AMBIENT)
                     .sized(0.4f, 0.2f)
                     .build(new ResourceLocation(Caerula.MOD_ID, "blobfish").toString()));
     public static final RegistryObject<EntityType<Lula>> LULA = ENTITY_TYPES.register("lula",
