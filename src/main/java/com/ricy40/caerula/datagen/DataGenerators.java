@@ -79,7 +79,7 @@ public final class DataGenerators {
 
         // Create and add our data providers.
         final DataProvider placedFeatureProvider = JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, MODID, ops, Registry.PLACED_FEATURE_REGISTRY,
-                getPlacedFeatures(
+                getPlacedFeatures(registries,
                         "red_seagrass_warm",
                         "red_seagrass_normal",
                         "red_seagrass_cold",
@@ -93,18 +93,17 @@ public final class DataGenerators {
         generator.addProvider(event.includeServer(), placedFeatureProvider);
 
         final DataProvider biomeProvider = JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, MODID, ops, Registry.BIOME_REGISTRY,
-                getBiomes(
+                getBiomes(registries,
                         "red_fields"
                 ));
         generator.addProvider(event.includeServer(), biomeProvider);
 
     }
 
-    public static Map<ResourceLocation, PlacedFeature> getPlacedFeatures(String... namespace) {
+    public static Map<ResourceLocation, PlacedFeature> getPlacedFeatures(RegistryAccess registries, String... namespace) {
         Map<ResourceLocation, PlacedFeature> map = new HashMap<>();
 
         for (String name: namespace) {
-            RegistryAccess registries = RegistryAccess.builtinCopy();
             ResourceLocation RL = new ResourceLocation(MODID, name);
             Registry<PlacedFeature> placedFeatures = registries.registryOrThrow(Registry.PLACED_FEATURE_REGISTRY);
             PlacedFeature PF = placedFeatures.get(RL);
@@ -113,11 +112,10 @@ public final class DataGenerators {
         return map;
     }
 
-    public static Map<ResourceLocation, Biome> getBiomes(String... namespace) {
+    public static Map<ResourceLocation, Biome> getBiomes(RegistryAccess registries, String... namespace) {
         Map<ResourceLocation, Biome> map = new HashMap<>();
 
         for (String name: namespace) {
-            RegistryAccess registries = RegistryAccess.builtinCopy();
             ResourceLocation RL = new ResourceLocation(MODID, name);
             Registry<Biome> biomes = registries.registryOrThrow(Registry.BIOME_REGISTRY);
             Biome B = biomes.get(RL);
