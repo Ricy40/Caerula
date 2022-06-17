@@ -1,1 +1,0 @@
-execute in expansion:europa run tp @s ~ 200 ~

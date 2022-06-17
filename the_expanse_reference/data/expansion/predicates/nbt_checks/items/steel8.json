@@ -1,7 +1,0 @@
-{
-    "condition": "minecraft:entity_properties",
-    "entity": "this",
-    "predicate": {
-        "nbt": "{Item:{id:\"minecraft:jigsaw\",tag:{steel_ingot:1b},Count:8b}}"
-    }
-}

@@ -1,9 +1,0 @@
-{
-    "processors": [
-      {
-        "heightmap":"WORLD_SURFACE_WG",
-        "offset":145,
-        "processor_type": "minecraft:gravity"
-      }
-    ]
-  }

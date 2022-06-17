@@ -1,1 +1,0 @@
-execute as @a[predicate=expansion:dimension/moon] at @s run function expansion:destinations/moon/moon_player

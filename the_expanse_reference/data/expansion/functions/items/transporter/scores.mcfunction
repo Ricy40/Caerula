@@ -1,5 +1,0 @@
-scoreboard players add #global exp_room_count 1
-scoreboard players operation @s exp_room_id = #global exp_room_count 
-execute store result storage expansion:transporter_room_id data.room_id int 1 run scoreboard players get @s exp_room_id
-item modify entity @s weapon.mainhand expansion:transporter/assign_id
-tag @s add generate_room
