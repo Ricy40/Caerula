@@ -1,6 +1,0 @@
-function expansion:handy_tools/raycast/cast
-execute at @e[tag=expansion_ray,distance=..5,limit=1,sort=nearest] align xyz positioned ~.5 ~ ~.5 run summon armor_stand ^ ^ ^ {Marker:0b,Invisible:1b,Tags:["lunar_module"],Passengers:[{id:"minecraft:pig",Silent:1b,Invulnerable:1b,NoAI:1b,NoGravity:1b,Saddle:1b,Tags:["module_pig"],ActiveEffects:[{Id:14b,Amplifier:0b,Duration:99999999,ShowParticles:0b},{Id:11b,Amplifier:5b,Duration:99999999,ShowParticles:0b}]}],DisabledSlots:2039583,ArmorItems:[{},{},{},{id:"minecraft:carrot_on_a_stick",Count:1b,tag:{Unbreakable:1b,CustomModelData:1012004,lunar_module:1b}}]}
-execute at @e[tag=lunar_module,distance=..5,limit=1,sort=nearest] run summon villager ~ ~1.5 ~0.7 {NoGravity:1b,Silent:1b,NoAI:1b,Tags:["lunar_villager","takeoff_button"],PersistenceRequired:1b,ActiveEffects:[{Id:11b,Amplifier:5b,Duration:999999,ShowParticles:0b},{Id:14b,Amplifier:1b,Duration:999999,ShowParticles:0b}]}
-
-execute at @e[tag=expansion_ray,distance=..5,limit=1,sort=nearest] if entity @e[type=minecraft:armor_stand,nbt={Tags:["lunar_module"]},distance=..1] run clear @s carrot_on_a_stick{lunar_module:1b} 1
-execute as @e[tag=expansion_ray,limit=1,sort=nearest] run kill @s

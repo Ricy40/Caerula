@@ -1,1 +1,0 @@
-execute as @a[predicate=expansion:dimension/mars] at @s run function expansion:destinations/mars/mars_player

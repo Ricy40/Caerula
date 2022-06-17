@@ -1,5 +1,0 @@
-#function expansion:vehicles/spaceship/transitions/transition_debug_step_1
-execute if entity @s[scores={exp_x=0..,exp_z=0..}] in expansion:space run tp @s 2568 512 -1485 -45 0
-execute if entity @s[scores={exp_x=0..,exp_z=..0}] in expansion:space run tp @s 2568 512 -1725 -135 0
-execute if entity @s[scores={exp_x=..0,exp_z=0..}] in expansion:space run tp @s 2328 512 -1485 45 0
-execute if entity @s[scores={exp_x=..0,exp_z=..0}] in expansion:space run tp @s 2328 512 -1725 135 0
