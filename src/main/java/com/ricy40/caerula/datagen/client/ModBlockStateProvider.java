@@ -23,6 +23,9 @@ public class ModBlockStateProvider<T extends ModelBuilder<T>> extends BlockState
         simpleBlock(ModBlocks.DEEPSLATE_NIXIUM_ORE.get());
         slabBlock(ModBlocks.NIXIUM_SLAB.get(), caerula("block/nixium_block"), caerula("block/nixium_block"));
         stairsBlock(ModBlocks.NIXIUM_STAIRS.get(), "block/nixium", caerula("block/nixium_block"));
+
+        //logBlock(ModBlocks.NIXIUM_BLOCK.get(), caerula());
+
     }
 
     private static ResourceLocation caerula(String path) {

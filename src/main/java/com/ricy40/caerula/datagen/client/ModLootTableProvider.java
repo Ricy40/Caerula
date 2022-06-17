@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.*;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
@@ -67,6 +69,11 @@ public class ModLootTableProvider extends LootTableProvider {
             add(ModBlocks.NIXIUM_ORE.get(), createOreDrop(ModBlocks.NIXIUM_ORE.get(), ModItems.RAW_NIXIUM.get()));
             add(ModBlocks.DEEPSLATE_NIXIUM_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_NIXIUM_ORE.get(), ModItems.RAW_NIXIUM.get()));
 
+            dropSelf(ModBlocks.PURPLE_SEASHROOM.get());
+            add(ModBlocks.PURPLE_SEASHROOM_BLOCK.get(), createMushroomBlockDrop(ModBlocks.PURPLE_SEASHROOM_BLOCK.get(), ModBlocks.PURPLE_SEASHROOM.get()));
+            add(ModBlocks.MYCELIUM_SAND.get(), createSingleItemTableWithSilkTouch(ModBlocks.MYCELIUM_SAND.get(), Blocks.SAND));
+
+            //Check BlockLoot
 
         }
 

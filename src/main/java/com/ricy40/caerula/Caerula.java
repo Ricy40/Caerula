@@ -10,6 +10,7 @@ import com.ricy40.caerula.world.gen.biomes.ModBiomes;
 import com.ricy40.caerula.world.gen.configuredfeatures.ModAquaticFeatures;
 import com.ricy40.caerula.world.gen.configuredfeatures.ModAquaticPlacements;
 import com.ricy40.caerula.world.gen.configuredfeatures.ModFeatures;
+import com.ricy40.caerula.world.gen.configuredfeatures.features.ModTreeFeatures;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -37,6 +38,7 @@ public class Caerula {
 
         ModFeatures.register(bus);
         ModAquaticFeatures.register(bus);
+        ModTreeFeatures.register(bus);
         ModAquaticPlacements.register(bus);
 
         ModBiomes.register(bus);
@@ -56,6 +58,7 @@ public class Caerula {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.TALL_RED_SEAGRASS.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.BUSH_CORAL.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.DEAD_BUSH_CORAL.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.PURPLE_SEASHROOM.get(), RenderType.cutout());
 
         EntityRenderers.register(ModEntityTypes.BLOBFISH.get(), BlobfishRenderer::new);
         EntityRenderers.register(ModEntityTypes.LULA.get(), LulaRenderer::new);

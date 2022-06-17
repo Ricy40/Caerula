@@ -3,6 +3,8 @@ package com.ricy40.caerula.world.gen.configuredfeatures;
 import com.mojang.serialization.Codec;
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.world.gen.configuredfeatures.features.RedSeagrassFeature;
+import com.ricy40.caerula.world.gen.configuredfeatures.features.hugeseashroom.HugePurpleSeashroomFeature;
+import com.ricy40.caerula.world.gen.configuredfeatures.features.hugeseashroom.HugeSeashroomFeatureConfiguration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -19,7 +21,9 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.HugeBrownMushroomFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -35,14 +39,12 @@ public abstract class ModFeatures<FC extends FeatureConfiguration> {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Caerula.MOD_ID);
 
     public static final RegistryObject<RedSeagrassFeature> RED_SEAGRASS = FEATURES.register("red_seagrass", () -> new RedSeagrassFeature(ProbabilityFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<HugeSeashroomFeatureConfiguration>> HUGE_PURPLE_SEASHROOM = FEATURES.register("huge_purple_seashroom", () -> new HugePurpleSeashroomFeature(HugeSeashroomFeatureConfiguration.CODEC));
 
     public static void register(IEventBus eventBus) {
         FEATURES.register(eventBus);
     }
 
-    private static <C extends FeatureConfiguration, F extends Feature<C>> F register(String pKey, F pValue) {
-        return Registry.register(Registry.FEATURE, pKey, pValue);
-    }
 
     protected void setBlock(LevelWriter pLevel, BlockPos pPos, BlockState pState) {
         pLevel.setBlock(pPos, pState, 3);

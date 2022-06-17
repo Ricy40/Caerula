@@ -8,11 +8,13 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -43,6 +45,10 @@ public class ModRecipeProvider extends RecipeProvider {
         cookRecipes(consumer, "smoking", RecipeSerializer.SMOKING_RECIPE, 100);
         cookRecipes(consumer, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 600);
 
+        ShapelessRecipeBuilder.shapeless(Items.MUSHROOM_STEW).requires(Blocks.BROWN_MUSHROOM).requires(ModBlocks.PURPLE_SEASHROOM.get()).requires(Items.BOWL).unlockedBy("has_mushroom_stew", has(Items.MUSHROOM_STEW)).unlockedBy("has_bowl", has(Items.BOWL)).unlockedBy("has_brown_mushroom", has(Blocks.BROWN_MUSHROOM)).unlockedBy("has_purple_seashroom", has(ModBlocks.PURPLE_SEASHROOM.get())).save(consumer, "mushroom_stew_purple_and_brown");
+        ShapelessRecipeBuilder.shapeless(Items.MUSHROOM_STEW).requires(Blocks.RED_MUSHROOM).requires(ModBlocks.PURPLE_SEASHROOM.get()).requires(Items.BOWL).unlockedBy("has_mushroom_stew", has(Items.MUSHROOM_STEW)).unlockedBy("has_bowl", has(Items.BOWL)).unlockedBy("has_red_mushroom", has(Blocks.RED_MUSHROOM)).unlockedBy("has_purple_seashroom", has(ModBlocks.PURPLE_SEASHROOM.get())).save(consumer, "mushroom_stew_purple_and_red");
+
+
 
         //Check RecipeProvider
 
@@ -52,79 +58,4 @@ public class ModRecipeProvider extends RecipeProvider {
         return new ResourceLocation(Caerula.MOD_ID, path);
     }
 
-    /*
-    private static void cookRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String pCookingMethod, SimpleCookingSerializer<?> pCookingSerializer, int pCookingTime) {
-        simpleCookingRecipe(pFinishedRecipeConsumer, pCookingMethod, pCookingSerializer, pCookingTime, ModItems.BLOBFISH.get(), ModItems.COOKED_BLOBFISH.get(), 0.35F);
-        simpleCookingRecipe(pFinishedRecipeConsumer, pCookingMethod, pCookingSerializer, pCookingTime, ModItems.LULA.get(), ModItems.COOKED_LULA.get(), 0.35F);
-    }
-
-    private static void simpleCookingRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String pCookingMethod, SimpleCookingSerializer<?> pCookingSerializer, int pCookingTime, ItemLike pIngredient, ItemLike pResult, float pExperience) {
-        SimpleCookingRecipeBuilder.cooking(Ingredient.of(pIngredient), pResult, pExperience, pCookingTime, pCookingSerializer).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(pFinishedRecipeConsumer, getItemName(pResult) + "_from_" + pCookingMethod);
-    }
-
-    private static void oneToOneConversionRecipe(Consumer<FinishedRecipe> consumer, ItemLike pResult, ItemLike pIngredient, @Nullable String pGroup) {
-        oneToOneConversionRecipe(consumer, pResult, pIngredient, pGroup, 1);
-    }
-
-    private static void oneToOneConversionRecipe(Consumer<FinishedRecipe> consumer, ItemLike pResult, ItemLike pIngredient, @Nullable String pGroup, int pResultCount) {
-        ShapelessRecipeBuilder.shapeless(pResult, pResultCount).requires(pIngredient).group(pGroup).unlockedBy(getHasName(pIngredient), has(pIngredient)).save(consumer, getConversionRecipeName(pResult, pIngredient));
-    }
-
-    private static void oreSmelting(Consumer<FinishedRecipe> consumer, List<ItemLike> pIngredients, ItemLike pResult, float pExperience, int pCookingTime, String pGroup) {
-        oreCooking(consumer, RecipeSerializer.SMELTING_RECIPE, pIngredients, pResult, pExperience, pCookingTime, pGroup, "_from_smelting");
-    }
-
-    private static void oreBlasting(Consumer<FinishedRecipe> consumer, List<ItemLike> pIngredients, ItemLike pResult, float pExperience, int pCookingTime, String pGroup) {
-        oreCooking(consumer, RecipeSerializer.BLASTING_RECIPE, pIngredients, pResult, pExperience, pCookingTime, pGroup, "_from_blasting");
-    }
-
-    private static void oreCooking(Consumer<FinishedRecipe> consumer, SimpleCookingSerializer<?> pCookingSerializer, List<ItemLike> pIngredients, ItemLike pResult, float pExperience, int pCookingTime, String pGroup, String pRecipeName) {
-        for(ItemLike itemlike : pIngredients) {
-            SimpleCookingRecipeBuilder.cooking(Ingredient.of(itemlike), pResult, pExperience, pCookingTime, pCookingSerializer).group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike)).save(consumer, getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
-        }
-
-    }
-
-    private static void nineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, ItemLike pUnpacked, ItemLike pPacked) {
-        nineBlockStorageRecipes(consumer, pUnpacked, pPacked, getSimpleRecipeName(pPacked), (String)null, getSimpleRecipeName(pUnpacked), (String)null);
-    }
-
-    private static void nineBlockStorageRecipesWithCustomPacking(Consumer<FinishedRecipe> consumer, ItemLike pUnpacked, ItemLike pPacked, String pPackingRecipeName, String pPackingRecipeGroup) {
-        nineBlockStorageRecipes(consumer, pUnpacked, pPacked, pPackingRecipeName, pPackingRecipeGroup, getSimpleRecipeName(pUnpacked), (String)null);
-    }
-
-    private static void nineBlockStorageRecipesRecipesWithCustomUnpacking(Consumer<FinishedRecipe> consumer, ItemLike pUnpacked, ItemLike pPacked, String pUnpackingRecipeName, String pUnpackingRecipeGroup) {
-        nineBlockStorageRecipes(consumer, pUnpacked, pPacked, getSimpleRecipeName(pPacked), (String)null, pUnpackingRecipeName, pUnpackingRecipeGroup);
-    }
-
-    private static void nineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, ItemLike pUnpacked, ItemLike pPacked, String pPackingRecipeName, @Nullable String pPackingRecipeGroup, String pUnpackingRecipeName, @Nullable String pUnpackingRecipeGroup) {
-        ShapelessRecipeBuilder.shapeless(pUnpacked, 9).requires(pPacked).group(pUnpackingRecipeGroup).unlockedBy(getHasName(pPacked), has(pPacked)).save(consumer, new ResourceLocation(pUnpackingRecipeName));
-        ShapedRecipeBuilder.shaped(pPacked).define('#', pUnpacked).pattern("###").pattern("###").pattern("###").group(pPackingRecipeGroup).unlockedBy(getHasName(pUnpacked), has(pUnpacked)).save(consumer, new ResourceLocation(pPackingRecipeName));
-    }
-
-    private static String getHasName(ItemLike pItemLike) {
-        return "has_" + getItemName(pItemLike);
-    }
-
-    private static String getSimpleRecipeName(ItemLike pItemLike) {
-        return getItemName(pItemLike);
-    }
-
-    private static String getItemName(ItemLike pItemLike) {
-        return Registry.ITEM.getKey(pItemLike.asItem()).getPath();
-    }
-
-    private static String getConversionRecipeName(ItemLike pResult, ItemLike pIngredient) {
-        return getItemName(pResult) + "_from_" + getItemName(pIngredient);
-    }
-
-    private static RecipeBuilder slabBuilder(ItemLike pSlab, Ingredient pMaterial) {
-        return ShapedRecipeBuilder.shaped(pSlab, 6).define('#', pMaterial).pattern("###");
-    }
-
-    private static RecipeBuilder stairBuilder(ItemLike pStairs, Ingredient pMaterial) {
-        return ShapedRecipeBuilder.shaped(pStairs, 4).define('#', pMaterial).pattern("#  ").pattern("## ").pattern("###");
-    }
-
-     */
 }

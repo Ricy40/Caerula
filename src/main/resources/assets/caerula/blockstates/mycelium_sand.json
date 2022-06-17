@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "caerula:block/mycelium_sand"
+      },
+      {
+        "model": "caerula:block/mycelium_sand",
+        "y": 90
+      },
+      {
+        "model": "caerula:block/mycelium_sand",
+        "y": 180
+      },
+      {
+        "model": "caerula:block/mycelium_sand",
+        "y": 270
+      }
+    ]
+  }
+}

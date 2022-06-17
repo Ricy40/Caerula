@@ -2,7 +2,7 @@
   "type": "caerula:caerula",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraf:overworld",
+    "settings": "minecraft:overworld",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [

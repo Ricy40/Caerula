@@ -1,0 +1,7 @@
+{
+    "parent": "block/template_single_face",
+    "ambientocclusion": false,
+    "textures": {
+        "texture": "caerula:block/seashroom_block_inside"
+    }
+}

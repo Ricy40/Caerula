@@ -25,6 +25,9 @@
     "block.caerula.nixium_stairs" : "Nixium Stairs",
     "block.caerula.nixium_ore" : "Nixium Ore",
     "block.caerula.deepslate_nixium_ore" : "Deepslate Nixium Ore",
+    "block.caerula.purple_seashroom" : "Purple Seashroom",
+    "block.caerula.purple_seashroom_block" : "Purple Seashroom Block",
+    "block.caerula.mycelium_sand" : "Mysealia",
 
     "entity.caerula.blobfish" : "Blobfish",
     "entity.caerula.lula" : "Lula"

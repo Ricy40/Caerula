@@ -1,6 +1,7 @@
 package com.ricy40.caerula.datagen;
 
 import com.ricy40.caerula.Caerula;
+import com.ricy40.caerula.block.ModBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
@@ -13,15 +14,39 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     protected void addTags() {
         tag(BlockTags.WALLS)
-                //.add(ModBlocks.WALLBLOCK)
                 ;
 
         tag(BlockTags.FENCES)
-                //.add(ModBlocks.FENCEBLOCK)
                 ;
 
         tag(BlockTags.FENCE_GATES)
-                //.add(ModBlocks.FENCEGATEBLOCK)
+                ;
+
+        tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(ModBlocks.PURPLE_SEASHROOM_BLOCK.get())
+                .add(ModBlocks.PURPLE_SEASHROOM.get())
+                ;
+
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.NIXIUM_ORE.get())
+                .add(ModBlocks.DEEPSLATE_NIXIUM_ORE.get())
+                .add(ModBlocks.RAW_NIXIUM_BLOCK.get())
+                .add(ModBlocks.NIXIUM_BLOCK.get())
+                .add(ModBlocks.NIXIUM_STAIRS.get())
+                .add(ModBlocks.NIXIUM_SLAB.get())
+                .add(ModBlocks.BUSH_CORAL.get())
+                .add(ModBlocks.DEAD_BUSH_CORAL.get())
+                ;
+
+        tag(BlockTags.MINEABLE_WITH_HOE)
+            ;
+
+        tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(ModBlocks.MYCELIUM_SAND.get())
+                ;
+
+        tag(BlockTags.MUSHROOM_GROW_BLOCK)
+                .add(ModBlocks.MYCELIUM_SAND.get())
                 ;
     }
 }

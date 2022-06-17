@@ -18,6 +18,7 @@ import java.util.function.Supplier;
 public class ModAquaticFeatures {
     
     public static DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, Caerula.MOD_ID);
+
     public static final RegistryObject<ConfiguredFeature<?, ?>> RED_SEAGRASS_SHORT = registerConfiguredFeature("red_seagrass_short", () -> new ConfiguredFeature<>(ModFeatures.RED_SEAGRASS.get(), new ProbabilityFeatureConfiguration(0.3F)));
     public static final RegistryObject<ConfiguredFeature<?, ?>> RED_SEAGRASS_SLIGHTLY_LESS_SHORT = registerConfiguredFeature("red_seagrass_slightly_less_short", () -> new ConfiguredFeature<>(ModFeatures.RED_SEAGRASS.get(), new ProbabilityFeatureConfiguration(0.4F)));
     public static final RegistryObject<ConfiguredFeature<?, ?>> RED_SEAGRASS_MID = registerConfiguredFeature("red_seagrass_mid", () -> new ConfiguredFeature<>(ModFeatures.RED_SEAGRASS.get(), new ProbabilityFeatureConfiguration(0.6F)));
