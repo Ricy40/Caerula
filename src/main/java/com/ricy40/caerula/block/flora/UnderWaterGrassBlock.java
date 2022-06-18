@@ -43,7 +43,7 @@ public abstract class UnderWaterGrassBlock extends SnowyDirtBlock {
         if (!canBeGrass(state, level, pos)) {
             if (!level.isAreaLoaded(pos, 1))
                 return;
-            level.setBlockAndUpdate(pos, Blocks.DIRT.defaultBlockState());
+            level.setBlockAndUpdate(pos, Blocks.SAND.defaultBlockState());
         } else {
             if (!level.isAreaLoaded(pos, 3))
                 return;

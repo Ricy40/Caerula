@@ -1,4 +1,4 @@
-package com.ricy40.caerula.world.gen.configuredfeatures.features;
+package com.ricy40.caerula.world.gen.configuredfeatures;
 
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.block.ModBlocks;
@@ -31,7 +31,7 @@ public class ModTreeFeatures {
                             .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
                     BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState()
                             .setValue(HugeMushroomBlock.UP, Boolean.FALSE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 3)));
+                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
 
     public static final RegistryObject<ConfiguredFeature<HugeSeashroomFeatureConfiguration, ?>> HUGE_PURPLE_SEASHROOM_TWOCAP
             = CONFIGURED_FEATURES.register("huge_purple_seashroom_twocap", () -> new ConfiguredFeature<>(ModFeatures.HUGE_PURPLE_SEASHROOM.get(),
@@ -60,7 +60,7 @@ public class ModTreeFeatures {
                             .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
                     BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState()
                             .setValue(HugeMushroomBlock.UP, Boolean.FALSE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2, 3,4)));
+                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2, 3,3)));
 
     public static void register(IEventBus bus) {
         CONFIGURED_FEATURES.register(bus);

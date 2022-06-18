@@ -21,12 +21,26 @@ public class SeashroomBlock extends WaterBushBlock implements BonemealableBlock 
 
     protected static final float AABB_OFFSET = 3.0F;
     protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
-    private final Supplier<Holder<? extends ConfiguredFeature<?, ?>>> featureSupplier;
-    
+    private final Supplier<Holder<? extends ConfiguredFeature<?, ?>>> featureSupplierCommon;
+    private final Supplier<Holder<? extends ConfiguredFeature<?, ?>>> featureSupplierUncommon;
+    private final Supplier<Holder<? extends ConfiguredFeature<?, ?>>> featureSupplierRare;
+
     public SeashroomBlock(BlockBehaviour.Properties properties, Supplier<Holder<? extends ConfiguredFeature<?, ?>>> feature) {
         super(properties);
-        this.featureSupplier = feature;
+        this.featureSupplierCommon = feature;
+        this.featureSupplierUncommon = feature;
+        this.featureSupplierRare = feature;
     }
+
+    public SeashroomBlock(BlockBehaviour.Properties properties, Supplier<Holder<? extends ConfiguredFeature<?, ?>>> feature, Supplier<Holder<? extends ConfiguredFeature<?, ?>>> feature1, Supplier<Holder<? extends ConfiguredFeature<?, ?>>> feature2) {
+        super(properties);
+
+        this.featureSupplierCommon = feature;
+        this.featureSupplierUncommon = feature1;
+        this.featureSupplierRare = feature2;
+    }
+
+
 
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
@@ -79,11 +93,24 @@ public class SeashroomBlock extends WaterBushBlock implements BonemealableBlock 
 
     public boolean growMushroom(ServerLevel server, BlockPos pos, BlockState state, RandomSource random) {
         server.removeBlock(pos, false);
-        if (this.featureSupplier.get().value().place(server, server.getChunkSource().getGenerator(), random, pos)) {
+
+        if (randType().get().value().place(server, server.getChunkSource().getGenerator(), random, pos)) {
             return true;
         } else {
             server.setBlock(pos, state, 3);
             return false;
+        }
+    }
+
+    public Supplier<Holder<? extends ConfiguredFeature<?, ?>>> randType() {
+        double num = RandomSource.create().nextDouble();
+        System.out.println(num);
+        if (num < 0.65d) {
+            return this.featureSupplierCommon;
+        } else if (num < 0.95d) {
+            return this.featureSupplierUncommon;
+        } else {
+            return this.featureSupplierRare;
         }
     }
     

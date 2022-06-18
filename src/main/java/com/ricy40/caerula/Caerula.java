@@ -10,7 +10,7 @@ import com.ricy40.caerula.world.gen.biomes.ModBiomes;
 import com.ricy40.caerula.world.gen.configuredfeatures.ModAquaticFeatures;
 import com.ricy40.caerula.world.gen.configuredfeatures.ModAquaticPlacements;
 import com.ricy40.caerula.world.gen.configuredfeatures.ModFeatures;
-import com.ricy40.caerula.world.gen.configuredfeatures.features.ModTreeFeatures;
+import com.ricy40.caerula.world.gen.configuredfeatures.ModTreeFeatures;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;

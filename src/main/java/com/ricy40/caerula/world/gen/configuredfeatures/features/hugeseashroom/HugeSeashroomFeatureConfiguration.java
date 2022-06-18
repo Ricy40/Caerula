@@ -62,10 +62,10 @@ public class HugeSeashroomFeatureConfiguration  implements FeatureConfiguration 
         this.midCapProvider = bottomCapBlock;
         this.bottomCapProvider = bottomCapBlock;
         this.stemProvider = stemBlock;
-        this.topFoliageRadius = bottomFoliageRadius;
-        this.midFoliageRadius = bottomFoliageRadius;
+        this.topFoliageRadius = 0;
+        this.midFoliageRadius = 0;
         this.bottomFoliageRadius = bottomFoliageRadius;
-        this.layers = HugeSeashroomLayers.THREE;
+        this.layers = HugeSeashroomLayers.ONE;
     }
 
     public enum HugeSeashroomLayers {

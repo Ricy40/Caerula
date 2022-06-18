@@ -1,6 +1,7 @@
 package com.ricy40.caerula.world.gen.configuredfeatures.features.hugeseashroom;
 
 import com.mojang.serialization.Codec;
+import com.ricy40.caerula.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 import javax.annotation.Nullable;
 
@@ -39,7 +41,6 @@ public abstract class AbstractHugeSeashroomFeature extends Feature<HugeSeashroom
 
     protected int getTreeHeight(HugeSeashroomFeatureConfiguration config, RandomSource random) {
 
-
         System.out.println(config.layers);
 
         int maxHeight = config.layers.getMaxHeight();
@@ -54,49 +55,37 @@ public abstract class AbstractHugeSeashroomFeature extends Feature<HugeSeashroom
 
     protected void generateCapHeights(HugeSeashroomFeatureConfiguration config, RandomSource random, int height) {
 
-        int minAboveBottomCap;
-        int minAboveMidCap;
-
-        if (config.layers == HugeSeashroomFeatureConfiguration.HugeSeashroomLayers.THREE) {
-            minAboveBottomCap = 4;
-            minAboveMidCap = 2;
+        if (config.layers == HugeSeashroomFeatureConfiguration.HugeSeashroomLayers.ONE) {
+            this.bottomCapLevel = 2 == height ? 2 : random.nextInt(2, height);
         } else if (config.layers == HugeSeashroomFeatureConfiguration.HugeSeashroomLayers.TWO) {
-            minAboveBottomCap = 2;
-            minAboveMidCap = 0;
+            this.bottomCapLevel = 2 == height - 2 ? 2 : random.nextInt(2, height - 2);
+            this.midCapLevel = this.bottomCapLevel + 2 == height ? height : random.nextInt(this.bottomCapLevel + 2, height);
         } else {
-            minAboveBottomCap = 0;
-            minAboveMidCap = 0;
+            this.bottomCapLevel = 2 == height - 4 ? 2 : random.nextInt(2, height - 4);
+            this.midCapLevel = this.bottomCapLevel + 2 == height - 2 ? height -2 : random.nextInt(this.bottomCapLevel + 2, height - 2);
+            this.topCapLevel = this.midCapLevel + 2 == height ? height : random.nextInt(this.midCapLevel + 2, height);
         }
-
-        this.bottomCapLevel = random.nextInt(1, height - minAboveBottomCap);
-        this.midCapLevel = random.nextInt(this.bottomCapLevel + 1, height - minAboveMidCap);
-        this.topCapLevel = random.nextInt(this.midCapLevel + 1, height);
-
-        System.out.println("botCap: " + this.bottomCapLevel);
-        System.out.println("midCap: " + this.midCapLevel);
-        System.out.println("topCap: " + this.topCapLevel);
     }
 
     protected boolean isValidPosition(LevelAccessor pLevel, BlockPos pPos, int pMaxHeight, BlockPos.MutableBlockPos pMutablePos, HugeSeashroomFeatureConfiguration pConfig) {
-        int i = pPos.getY();
-        if (i >= pLevel.getMinBuildHeight() + 1 && i + pMaxHeight + 1 < pLevel.getMaxBuildHeight()) {
+        int y = pPos.getY();
+        if (y >= pLevel.getMinBuildHeight() + 1 && y + pMaxHeight + 1 < pLevel.getMaxBuildHeight()) {
             BlockState blockstate = pLevel.getBlockState(pPos.below());
             if (!isDirt(blockstate) && !blockstate.is(BlockTags.MUSHROOM_GROW_BLOCK)) {
                 return false;
             } else {
                 for(int j = 0; j <= pMaxHeight; ++j) {
-                    int k = this.getTreeRadiusForHeight(-1, -1, Math.max(pConfig.bottomFoliageRadius, Math.max(pConfig.midFoliageRadius, pConfig.topFoliageRadius)), j);
+                    int k = this.getTreeRadiusForHeight(pConfig, j);
 
                     for(int l = -k; l <= k; ++l) {
-                        for(int i1 = -k; i1 <= k; ++i1) {
-                            BlockState blockstate1 = pLevel.getBlockState(pMutablePos.setWithOffset(pPos, l, j, i1));
-                            if ((!blockstate1.isAir() && !blockstate1.is(BlockTags.LEAVES)) || blockstate1 != Blocks.WATER.defaultBlockState() ) {
+                        for(int i = -k; i <= k; ++i) {
+                            BlockState blockstate1 = pLevel.getBlockState(pMutablePos.setWithOffset(pPos, l, j, i));
+                            if (!blockstate1.is(BlockTags.LEAVES) && !blockstate1.isAir() && blockstate1 != Blocks.WATER.defaultBlockState() && blockstate1 != ModBlocks.PURPLE_SEASHROOM.get().defaultBlockState()) {
                                 return false;
                             }
                         }
                     }
                 }
-
                 return true;
             }
         } else {
@@ -108,29 +97,28 @@ public abstract class AbstractHugeSeashroomFeature extends Feature<HugeSeashroom
         WorldGenLevel worldgenlevel = pContext.level();
         BlockPos blockpos = pContext.origin();
         RandomSource randomsource = pContext.random();
-        HugeSeashroomFeatureConfiguration hugeseashroomfeatureconfiguration = pContext.config();
+        HugeSeashroomFeatureConfiguration config = pContext.config();
 
-        int i = this.getTreeHeight(hugeseashroomfeatureconfiguration, randomsource);
-        System.out.println("Height: " + i);
-        this.generateCapHeights(hugeseashroomfeatureconfiguration, randomsource, i);
+        int i = this.getTreeHeight(config, randomsource);
+        this.generateCapHeights(config, randomsource, i);
 
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-        if (!this.isValidPosition(worldgenlevel, blockpos, i, blockpos$mutableblockpos, hugeseashroomfeatureconfiguration)) {
+        if (!this.isValidPosition(worldgenlevel, blockpos, i, blockpos$mutableblockpos, config)) {
             return false;
         } else {
-            this.makeCap(worldgenlevel, randomsource, blockpos, this.bottomCapLevel, blockpos$mutableblockpos, hugeseashroomfeatureconfiguration);
-            if (hugeseashroomfeatureconfiguration.layers != HugeSeashroomFeatureConfiguration.HugeSeashroomLayers.ONE) {
-                this.makeCap(worldgenlevel, randomsource, blockpos, this.midCapLevel, blockpos$mutableblockpos, hugeseashroomfeatureconfiguration);
+            this.makeCap(worldgenlevel, randomsource, blockpos, this.bottomCapLevel, blockpos$mutableblockpos, config.bottomFoliageRadius, config.bottomCapProvider);
+            if (config.layers != HugeSeashroomFeatureConfiguration.HugeSeashroomLayers.ONE) {
+                this.makeCap(worldgenlevel, randomsource, blockpos, this.midCapLevel, blockpos$mutableblockpos, config.midFoliageRadius, config.midCapProvider);
             }
-            if (hugeseashroomfeatureconfiguration.layers == HugeSeashroomFeatureConfiguration.HugeSeashroomLayers.THREE) {
-                this.makeCap(worldgenlevel, randomsource, blockpos, this.topCapLevel, blockpos$mutableblockpos, hugeseashroomfeatureconfiguration);
+            if (config.layers == HugeSeashroomFeatureConfiguration.HugeSeashroomLayers.THREE) {
+                this.makeCap(worldgenlevel, randomsource, blockpos, this.topCapLevel, blockpos$mutableblockpos, config.topFoliageRadius, config.topCapProvider);
             }
-            this.placeTrunk(worldgenlevel, randomsource, blockpos, hugeseashroomfeatureconfiguration, i, blockpos$mutableblockpos);
+            this.placeTrunk(worldgenlevel, randomsource, blockpos, config, i, blockpos$mutableblockpos);
             return true;
         }
     }
 
-    protected abstract int getTreeRadiusForHeight(int p_65094_, int p_65095_, int p_65096_, int p_65097_);
+    protected abstract int getTreeRadiusForHeight(HugeSeashroomFeatureConfiguration config, int height);
 
-    protected abstract void makeCap(LevelAccessor levelAccessor, RandomSource random, BlockPos pos, int height, BlockPos.MutableBlockPos mutablePos, HugeSeashroomFeatureConfiguration config);
+    protected abstract void makeCap(LevelAccessor levelAccessor, RandomSource random, BlockPos pos, int height, BlockPos.MutableBlockPos mutablePos, int radius, BlockStateProvider block);
 }
