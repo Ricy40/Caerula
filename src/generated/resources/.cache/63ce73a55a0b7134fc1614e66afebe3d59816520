@@ -1,3 +1,4 @@
-// 1.19	2022-06-14T11:20:12.4307493	worldgen/biome generator for caerula
-3f2dcef271a524be69effd9e4f8db0955d98dbc6 data/caerula/worldgen/biome/deep_red_fields.json
-e2ab8c9c3981f9a95247fc90839a5329588f0529 data/caerula/worldgen/biome/red_fields.json
+// 1.19	2022-06-19T18:10:07.2440107	worldgen/biome generator for caerula
+38056297cdd4518c7947f83d544b96f2348a2d5c data/caerula/worldgen/biome/deep_red_fields.json
+11a1ad88f6da1e4a179c2c46f7014d0fdfc9afec data/caerula/worldgen/biome/red_fields.json
+f5e29cd83c8b92649971db98bfe6892ad853feff data/caerula/worldgen/biome/seashroom_fields.json

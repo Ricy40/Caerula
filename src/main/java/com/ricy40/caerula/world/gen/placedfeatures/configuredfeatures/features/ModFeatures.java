@@ -1,13 +1,12 @@
-package com.ricy40.caerula.world.gen.configuredfeatures;
+package com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features;
 
-import com.mojang.serialization.Codec;
 import com.ricy40.caerula.Caerula;
-import com.ricy40.caerula.world.gen.configuredfeatures.features.RedSeagrassFeature;
-import com.ricy40.caerula.world.gen.configuredfeatures.features.hugeseashroom.HugePurpleSeashroomFeature;
-import com.ricy40.caerula.world.gen.configuredfeatures.features.hugeseashroom.HugeSeashroomFeatureConfiguration;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.utilfeatures.RandomProbabilityThreeFeatureConfiguration;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.hugeseashroom.HugePurpleSeashroomFeature;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.hugeseashroom.HugeSeashroomFeatureConfiguration;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.utilfeatures.RandomProbabilityThreeSelectorFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
@@ -18,12 +17,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.HugeBrownMushroomFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -33,18 +29,23 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public abstract class ModFeatures<FC extends FeatureConfiguration> {
     
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Caerula.MOD_ID);
 
-    public static final RegistryObject<RedSeagrassFeature> RED_SEAGRASS = FEATURES.register("red_seagrass", () -> new RedSeagrassFeature(ProbabilityFeatureConfiguration.CODEC));
-    public static final RegistryObject<Feature<HugeSeashroomFeatureConfiguration>> HUGE_PURPLE_SEASHROOM = FEATURES.register("huge_purple_seashroom", () -> new HugePurpleSeashroomFeature(HugeSeashroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<RandomProbabilityThreeFeatureConfiguration>> RANDOM_PROBABILITY_THREE_SECLECTOR = registerFeature("random_probability_selector_three", () -> new RandomProbabilityThreeSelectorFeature(RandomProbabilityThreeFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<ProbabilityFeatureConfiguration>> RED_SEAGRASS = registerFeature("red_seagrass", () -> new RedSeagrassFeature(ProbabilityFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<HugeSeashroomFeatureConfiguration>> HUGE_PURPLE_SEASHROOM = registerFeature("huge_purple_seashroom", () -> new HugePurpleSeashroomFeature(HugeSeashroomFeatureConfiguration.CODEC));
 
     public static void register(IEventBus eventBus) {
         FEATURES.register(eventBus);
     }
 
+    public static <F extends FeatureConfiguration> RegistryObject<Feature<F>> registerFeature(String name, Supplier<Feature<F>> feature) {
+        return FEATURES.register(name, feature);
+    }
 
     protected void setBlock(LevelWriter pLevel, BlockPos pPos, BlockState pState) {
         pLevel.setBlock(pPos, pState, 3);
@@ -62,13 +63,12 @@ public abstract class ModFeatures<FC extends FeatureConfiguration> {
         }
 
     }
-    
+
     public abstract boolean place(FeaturePlaceContext<FC> pContext);
 
-    public boolean place(FC p_225029_, WorldGenLevel p_225030_, ChunkGenerator p_225031_, RandomSource p_225032_, BlockPos p_225033_) {
-        return p_225030_.ensureCanWrite(p_225033_) ? this.place(new FeaturePlaceContext<>(Optional.empty(), p_225030_, p_225031_, p_225032_, p_225033_, p_225029_)) : false;
+    public boolean place(FC featureConfig, WorldGenLevel gen, ChunkGenerator chunkGen, RandomSource random, BlockPos pos) {
+        return gen.ensureCanWrite(pos) && this.place(new FeaturePlaceContext<>(Optional.empty(), gen, chunkGen, random, pos, featureConfig));
     }
-
     protected static boolean isStone(BlockState pState) {
         return pState.is(net.minecraftforge.common.Tags.Blocks.STONE);
     }

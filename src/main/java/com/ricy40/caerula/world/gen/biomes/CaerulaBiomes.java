@@ -1,6 +1,6 @@
 package com.ricy40.caerula.world.gen.biomes;
 
-import com.ricy40.caerula.world.gen.configuredfeatures.ModAquaticPlacements;
+import com.ricy40.caerula.world.gen.placedfeatures.ModAquaticPlacements;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.sounds.Music;
@@ -11,6 +11,8 @@ import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
 
 import javax.annotation.Nullable;
+
+import static com.ricy40.caerula.world.gen.biomes.ModBiomeDefaultFeatures.seashroomSpawns;
 
 public class CaerulaBiomes {
 
@@ -50,7 +52,7 @@ public class CaerulaBiomes {
     private static BiomeGenerationSettings.Builder baseOceanGeneration() {
         BiomeGenerationSettings.Builder biomegenerationsettings$builder = new BiomeGenerationSettings.Builder();
         globalOverworldGeneration(biomegenerationsettings$builder);
-        BiomeDefaultFeatures.addDefaultOres(biomegenerationsettings$builder);
+        ModBiomeDefaultFeatures.addDefaultOres(biomegenerationsettings$builder);
         BiomeDefaultFeatures.addWaterTrees(biomegenerationsettings$builder);
         BiomeDefaultFeatures.addDefaultFlowers(biomegenerationsettings$builder);
         BiomeDefaultFeatures.addDefaultGrass(biomegenerationsettings$builder);
@@ -67,15 +69,20 @@ public class CaerulaBiomes {
             ModBiomeDefaultFeatures.oceanSpawns(mobspawnsettings$builder, 10, 2, 15);
         }
 
-        //mobspawnsettings$builder.addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(ModEntityTypes.LULA.get(), 2, 0, 1));
-
         BiomeGenerationSettings.Builder biomegenerationsettings$builder = baseOceanGeneration();
         biomegenerationsettings$builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, isDeep ? ModAquaticPlacements.RED_SEAGRASS_DEEP_WARM.getHolder().get() : ModAquaticPlacements.RED_SEAGRASS_WARM.getHolder().get());
         if (isDeep) {
             ModBiomeDefaultFeatures.addDefaultSeagrass(biomegenerationsettings$builder);
         }
 
-        //BiomeDefaultFeatures.addLukeWarmKelp(biomegenerationsettings$builder);
+        return baseOcean(mobspawnsettings$builder, 4566514, 267827, biomegenerationsettings$builder);
+    }
+
+    public static Biome seashroomFields() {
+        MobSpawnSettings.Builder mobspawnsettings$builder = new MobSpawnSettings.Builder();
+        seashroomSpawns(mobspawnsettings$builder);
+        BiomeGenerationSettings.Builder biomegenerationsettings$builder = baseOceanGeneration();
+        ModBiomeDefaultFeatures.addSeashroomFieldVegetation(biomegenerationsettings$builder);
         return baseOcean(mobspawnsettings$builder, 4566514, 267827, biomegenerationsettings$builder);
     }
     

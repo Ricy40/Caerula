@@ -4,7 +4,7 @@ import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.block.flora.*;
 import com.ricy40.caerula.item.ModCreativeModeTab;
 import com.ricy40.caerula.item.ModItems;
-import com.ricy40.caerula.world.gen.configuredfeatures.ModTreeFeatures;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.ModTreeFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.BlockItem;

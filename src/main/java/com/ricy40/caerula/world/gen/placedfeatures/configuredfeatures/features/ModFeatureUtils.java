@@ -1,4 +1,4 @@
-package com.ricy40.caerula.util;
+package com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features;
 
 import net.minecraft.core.Holder;
 import net.minecraft.data.BuiltinRegistries;

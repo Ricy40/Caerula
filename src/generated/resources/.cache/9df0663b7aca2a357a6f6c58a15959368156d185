@@ -1,4 +1,8 @@
-// 1.19	2022-06-14T01:06:32.8303155	worldgen/placed_feature generator for caerula
+// 1.19	2022-06-19T18:10:07.260005	worldgen/placed_feature generator for caerula
+8c3986ded37bf99a3b05f8a66c739ffbdd7aa09d data/caerula/worldgen/placed_feature/ore_nixium_middle.json
+bc09bb828c61fce650d7c3bc5c58230fc4635e14 data/caerula/worldgen/placed_feature/ore_nixium_small.json
+008554695bea2e0adab60cb56e0961f339ece99f data/caerula/worldgen/placed_feature/ore_nixium_upper.json
+01fe665157bbdb3a3e1390934f150a75e06f27f2 data/caerula/worldgen/placed_feature/purple_seashroom_fields.json
 10dd75f87bce4ef83660bad8a6c4b1d993b077c9 data/caerula/worldgen/placed_feature/red_seagrass_cold.json
 cbda9811c8658c8901a4436ed41155e04e56af0c data/caerula/worldgen/placed_feature/red_seagrass_deep.json
 85428c7cd83ec4df02388e1de844d0d75239425f data/caerula/worldgen/placed_feature/red_seagrass_deep_cold.json
@@ -8,3 +12,4 @@ fbb956a9e8bc6046618dc197f4970f7ad07b8b28 data/caerula/worldgen/placed_feature/re
 3008e0bb8c85bbe2ecd7008bf5ff818d5a5373d0 data/caerula/worldgen/placed_feature/red_seagrass_simple.json
 a1c48bf4891a4351d04031a74b96da633f2b9bcb data/caerula/worldgen/placed_feature/red_seagrass_swamp.json
 3c10033f7be25785433c2f36fe2e8280118954c1 data/caerula/worldgen/placed_feature/red_seagrass_warm.json
+c8d03304b21cf6861dde48be71a8fa45ff07f680 data/caerula/worldgen/placed_feature/seashroom_fields_trees.json

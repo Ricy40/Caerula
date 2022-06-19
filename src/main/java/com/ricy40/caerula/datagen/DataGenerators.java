@@ -9,6 +9,12 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import com.ricy40.caerula.world.gen.biomes.ModBiomes;
+import com.ricy40.caerula.world.gen.placedfeatures.ModOrePlacements;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.ModAquaticFeatures;
+import com.ricy40.caerula.world.gen.placedfeatures.ModAquaticPlacements;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.ModOreFeatures;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.ModTreeFeatures;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
@@ -21,6 +27,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.biome.MobSpawnSettings.SpawnerData;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
@@ -78,34 +85,53 @@ public final class DataGenerators {
         final RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, registries);
 
         // Create and add our data providers.
-        final DataProvider placedFeatureProvider = JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, MODID, ops, Registry.PLACED_FEATURE_REGISTRY,
-                getPlacedFeatures(registries,
-                        "red_seagrass_warm",
-                        "red_seagrass_normal",
-                        "red_seagrass_cold",
-                        "red_seagrass_river",
-                        "red_seagrass_swamp",
-                        "red_seagrass_deep_warm",
-                        "red_seagrass_deep",
-                        "red_seagrass_deep_cold",
-                        "red_seagrass_simple"
-                ));
+        final DataProvider configuredFeatureProvider = JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, MODID, ops, Registry.CONFIGURED_FEATURE_REGISTRY, getConfiguredFeatures(registries));
+        generator.addProvider(event.includeServer(), configuredFeatureProvider);
+
+        final DataProvider placedFeatureProvider = JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, MODID, ops, Registry.PLACED_FEATURE_REGISTRY, getPlacedFeatures(registries));
         generator.addProvider(event.includeServer(), placedFeatureProvider);
 
-        final DataProvider biomeProvider = JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, MODID, ops, Registry.BIOME_REGISTRY,
-                getBiomes(registries,
-                        "red_fields",
-                        "deep_red_fields"
-                ));
+        final DataProvider biomeProvider = JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, MODID, ops, Registry.BIOME_REGISTRY, getBiomes(registries));
         generator.addProvider(event.includeServer(), biomeProvider);
 
     }
 
-    public static Map<ResourceLocation, PlacedFeature> getPlacedFeatures(RegistryAccess registries, String... namespace) {
+    public static Map<ResourceLocation, ConfiguredFeature<?, ?>> getConfiguredFeatures(RegistryAccess registries) {
+        Map<ResourceLocation, ConfiguredFeature<?, ?>> map = new HashMap<>();
+
+        for (int i = 0; i < ModAquaticFeatures.configuredFeatureList.size(); i++) {
+            ResourceLocation RL = new ResourceLocation(MODID, ModAquaticFeatures.configuredFeatureList.get(i));
+            Registry<ConfiguredFeature<?, ?>> configuredFeatures = registries.registryOrThrow(Registry.CONFIGURED_FEATURE_REGISTRY);
+            ConfiguredFeature<?, ?> PF = configuredFeatures.get(RL);
+            map.put(RL, PF);
+        }
+        for (int i = 0; i < ModTreeFeatures.configuredTreeFeatureList.size(); i++) {
+            ResourceLocation RL = new ResourceLocation(MODID, ModTreeFeatures.configuredTreeFeatureList.get(i));
+            Registry<ConfiguredFeature<?, ?>> configuredFeatures = registries.registryOrThrow(Registry.CONFIGURED_FEATURE_REGISTRY);
+            ConfiguredFeature<?, ?> PF = configuredFeatures.get(RL);
+            map.put(RL, PF);
+        }
+        for (int i = 0; i < ModOreFeatures.configuredOreFeatureList.size(); i++) {
+            ResourceLocation RL = new ResourceLocation(MODID, ModOreFeatures.configuredOreFeatureList.get(i));
+            Registry<ConfiguredFeature<?, ?>> configuredFeatures = registries.registryOrThrow(Registry.CONFIGURED_FEATURE_REGISTRY);
+            ConfiguredFeature<?, ?> PF = configuredFeatures.get(RL);
+            map.put(RL, PF);
+        }
+
+        return map;
+    }
+
+    public static Map<ResourceLocation, PlacedFeature> getPlacedFeatures(RegistryAccess registries) {
         Map<ResourceLocation, PlacedFeature> map = new HashMap<>();
 
-        for (String name: namespace) {
-            ResourceLocation RL = new ResourceLocation(MODID, name);
+        for (int i = 0; i < ModAquaticPlacements.placedFeatureList.size(); i++) {
+            ResourceLocation RL = new ResourceLocation(MODID, ModAquaticPlacements.placedFeatureList.get(i));
+            Registry<PlacedFeature> placedFeatures = registries.registryOrThrow(Registry.PLACED_FEATURE_REGISTRY);
+            PlacedFeature PF = placedFeatures.get(RL);
+            map.put(RL, PF);
+        }
+        for (int i = 0; i < ModOrePlacements.placedOreFeatureList.size(); i++) {
+            ResourceLocation RL = new ResourceLocation(MODID, ModOrePlacements.placedOreFeatureList.get(i));
             Registry<PlacedFeature> placedFeatures = registries.registryOrThrow(Registry.PLACED_FEATURE_REGISTRY);
             PlacedFeature PF = placedFeatures.get(RL);
             map.put(RL, PF);
@@ -113,11 +139,11 @@ public final class DataGenerators {
         return map;
     }
 
-    public static Map<ResourceLocation, Biome> getBiomes(RegistryAccess registries, String... namespace) {
+    public static Map<ResourceLocation, Biome> getBiomes(RegistryAccess registries) {
         Map<ResourceLocation, Biome> map = new HashMap<>();
 
-        for (String name: namespace) {
-            ResourceLocation RL = new ResourceLocation(MODID, name);
+        for (int i = 0; i < ModBiomes.biomeList.size(); i++) {
+            ResourceLocation RL = new ResourceLocation(MODID, ModBiomes.biomeList.get(i));
             Registry<Biome> biomes = registries.registryOrThrow(Registry.BIOME_REGISTRY);
             Biome B = biomes.get(RL);
             map.put(RL, B);

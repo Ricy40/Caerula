@@ -1,0 +1,64 @@
+{
+  "type": "caerula:huge_purple_seashroom",
+  "config": {
+    "bottom_cap_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "caerula:purple_seashroom_block",
+        "Properties": {
+          "down": "false",
+          "east": "true",
+          "north": "true",
+          "south": "true",
+          "up": "true",
+          "west": "true"
+        }
+      }
+    },
+    "bottom_foliage_radius": 2,
+    "mid_cap_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "caerula:purple_seashroom_block",
+        "Properties": {
+          "down": "false",
+          "east": "true",
+          "north": "true",
+          "south": "true",
+          "up": "true",
+          "west": "true"
+        }
+      }
+    },
+    "mid_foliage_radius": 0,
+    "stem_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:mushroom_stem",
+        "Properties": {
+          "down": "false",
+          "east": "true",
+          "north": "true",
+          "south": "true",
+          "up": "false",
+          "west": "true"
+        }
+      }
+    },
+    "top_cap_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "caerula:purple_seashroom_block",
+        "Properties": {
+          "down": "false",
+          "east": "true",
+          "north": "true",
+          "south": "true",
+          "up": "true",
+          "west": "true"
+        }
+      }
+    },
+    "top_foliage_radius": 0
+  }
+}

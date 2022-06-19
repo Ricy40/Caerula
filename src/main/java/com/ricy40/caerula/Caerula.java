@@ -7,10 +7,12 @@ import com.ricy40.caerula.entity.client.render.*;
 import com.ricy40.caerula.item.ModItems;
 import com.ricy40.caerula.world.dimension.ModDimensions;
 import com.ricy40.caerula.world.gen.biomes.ModBiomes;
-import com.ricy40.caerula.world.gen.configuredfeatures.ModAquaticFeatures;
-import com.ricy40.caerula.world.gen.configuredfeatures.ModAquaticPlacements;
-import com.ricy40.caerula.world.gen.configuredfeatures.ModFeatures;
-import com.ricy40.caerula.world.gen.configuredfeatures.ModTreeFeatures;
+import com.ricy40.caerula.world.gen.placedfeatures.ModOrePlacements;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.ModAquaticFeatures;
+import com.ricy40.caerula.world.gen.placedfeatures.ModAquaticPlacements;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.ModOreFeatures;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.ModFeatures;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.ModTreeFeatures;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -39,7 +41,9 @@ public class Caerula {
         ModFeatures.register(bus);
         ModAquaticFeatures.register(bus);
         ModTreeFeatures.register(bus);
+        ModOreFeatures.register(bus);
         ModAquaticPlacements.register(bus);
+        ModOrePlacements.register(bus);
 
         ModBiomes.register(bus);
 

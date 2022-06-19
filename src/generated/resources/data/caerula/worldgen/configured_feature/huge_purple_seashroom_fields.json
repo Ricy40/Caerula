@@ -1,0 +1,20 @@
+{
+  "type": "caerula:random_probability_selector_three",
+  "config": {
+    "feature_1": {
+      "feature": "caerula:huge_purple_seashroom_onecap",
+      "placement": []
+    },
+    "feature_2": {
+      "feature": "caerula:huge_purple_seashroom_twocap",
+      "placement": []
+    },
+    "feature_3": {
+      "feature": "caerula:huge_purple_seashroom_threecap",
+      "placement": []
+    },
+    "probability1": 1,
+    "probability2": 1,
+    "probability3": 1
+  }
+}

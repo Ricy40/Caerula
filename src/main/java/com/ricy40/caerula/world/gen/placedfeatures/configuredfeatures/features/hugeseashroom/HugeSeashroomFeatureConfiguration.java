@@ -1,11 +1,9 @@
-package com.ricy40.caerula.world.gen.configuredfeatures.features.hugeseashroom;
+package com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.hugeseashroom;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-
-import javax.annotation.Nullable;
 
 public class HugeSeashroomFeatureConfiguration  implements FeatureConfiguration {
     public static final Codec<HugeSeashroomFeatureConfiguration> CODEC = RecordCodecBuilder.create((seashroom) -> {

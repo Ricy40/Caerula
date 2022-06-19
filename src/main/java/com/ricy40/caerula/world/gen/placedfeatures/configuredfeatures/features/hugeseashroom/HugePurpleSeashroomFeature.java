@@ -1,4 +1,4 @@
-package com.ricy40.caerula.world.gen.configuredfeatures.features.hugeseashroom;
+package com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.hugeseashroom;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;

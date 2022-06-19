@@ -71,8 +71,8 @@
       "minecraft:red_mushroom_normal",
       "minecraft:patch_sugar_cane",
       "minecraft:patch_pumpkin",
-      "caerula:red_seagrass_deep_warm",
-      "caerula:red_seagrass_simple"
+      "caerula:seashroom_fields_trees",
+      "caerula:purple_seashroom_fields"
     ],
     [
       "minecraft:freeze_top_layer"
@@ -87,22 +87,8 @@
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
-    "water_ambient": [
-      {
-        "type": "caerula:blobfish",
-        "maxCount": 6,
-        "minCount": 3,
-        "weight": 8
-      }
-    ],
-    "water_creature": [
-      {
-        "type": "caerula:lula",
-        "maxCount": 4,
-        "minCount": 1,
-        "weight": 10
-      }
-    ]
+    "water_ambient": [],
+    "water_creature": []
   },
   "temperature": 0.5
 }

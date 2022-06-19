@@ -1,4 +1,4 @@
-package com.ricy40.caerula.world.gen.configuredfeatures.features;
+package com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features;
 
 import com.mojang.serialization.Codec;
 import com.ricy40.caerula.block.ModBlocks;
