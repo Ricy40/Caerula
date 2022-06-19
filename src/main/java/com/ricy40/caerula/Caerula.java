@@ -36,7 +36,6 @@ public class Caerula {
         ModBlocks.register(bus);
 
         ModEntityTypes.register(bus);
-        ModDimensions.register();
 
         ModFeatures.register(bus);
         ModAquaticFeatures.register(bus);
@@ -46,6 +45,7 @@ public class Caerula {
         ModOrePlacements.register(bus);
 
         ModBiomes.register(bus);
+        ModDimensions.register();
 
         bus.addListener(this::setup);
         bus.addListener(this::clientSetup);

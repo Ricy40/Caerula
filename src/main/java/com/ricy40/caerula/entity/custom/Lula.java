@@ -148,7 +148,6 @@ public class Lula extends WaterAnimal implements Bucketable {
         } else if (this.speedMultiplier != 0f) {
             this.speedMultiplier = 0f;
             this.tDirection = new Vec3ex(0, 0, 0);
-
             if (this.fleeTime > 0) {
                 this.fleeTime--;
             }
