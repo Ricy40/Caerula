@@ -15,7 +15,6 @@ public class ModDimensions {
 
     public static final ResourceKey<DimensionType> CAERULA_TYPE = ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY,
             new ResourceLocation(Caerula.MOD_ID, "caerula"));
-
     public static void register() {
         System.out.println("Registering ModDimensions for " + Caerula.MOD_ID);
     }
