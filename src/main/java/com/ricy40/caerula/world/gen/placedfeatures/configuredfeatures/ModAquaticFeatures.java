@@ -6,6 +6,7 @@ import com.ricy40.caerula.block.ModBlocks;
 import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.ModFeatures;
 import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.utilfeatures.RandomProbabilityThreeFeatureConfiguration;
 import net.minecraft.core.Registry;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
@@ -30,7 +31,7 @@ public class ModAquaticFeatures {
     public static final RegistryObject<ConfiguredFeature<?, ?>> RED_SEAGRASS_TALL = registerConfiguredFeature("red_seagrass_tall", () -> new ConfiguredFeature<>(ModFeatures.RED_SEAGRASS.get(), new ProbabilityFeatureConfiguration(0.8F)));
     public static final RegistryObject<ConfiguredFeature<?, ?>> RED_SEAGRASS_SIMPLE = registerConfiguredFeature("red_seagrass_simple", () -> new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RED_SEAGRASS.get()))));
     public static final RegistryObject<ConfiguredFeature<?, ?>> PATCH_PURPLE_SEASHROOM = registerConfiguredFeature("patch_purple_seashroom", () -> new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM.get()))));
-    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_PURPLE_SEASHROOM_FIELDS = registerConfiguredFeature("huge_purple_seashroom_fields", () -> new ConfiguredFeature<>(ModFeatures.RANDOM_PROBABILITY_THREE_SECLECTOR.get(), new RandomProbabilityThreeFeatureConfiguration(ModPlacementUtils.inlinePlaced(ModTreeFeatures.HUGE_PURPLE_SEASHROOM_ONECAP.getHolder().get()), ModPlacementUtils.inlinePlaced(ModTreeFeatures.HUGE_PURPLE_SEASHROOM_TWOCAP.getHolder().get()), ModPlacementUtils.inlinePlaced(ModTreeFeatures.HUGE_PURPLE_SEASHROOM_THREECAP.getHolder().get()), 1, 1, 1)));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_PURPLE_SEASHROOM_FIELDS = registerConfiguredFeature("huge_purple_seashroom_fields", () -> new ConfiguredFeature<>(ModFeatures.RANDOM_PROBABILITY_THREE_SECLECTOR.get(), new RandomProbabilityThreeFeatureConfiguration(PlacementUtils.inlinePlaced(ModTreeFeatures.HUGE_PURPLE_SEASHROOM_ONECAP.getHolder().get()), PlacementUtils.inlinePlaced(ModTreeFeatures.HUGE_PURPLE_SEASHROOM_TWOCAP.getHolder().get()), PlacementUtils.inlinePlaced(ModTreeFeatures.HUGE_PURPLE_SEASHROOM_THREECAP.getHolder().get()), 1, 1, 1)));
 
     public static void register(IEventBus bus) {
         CONFIGURED_FEATURES.register(bus);
