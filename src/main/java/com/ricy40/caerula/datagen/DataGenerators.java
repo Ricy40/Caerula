@@ -9,6 +9,7 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraftforge.common.data.JsonCodecProvider;
 import com.ricy40.caerula.world.gen.biomes.ModBiomes;
 import com.ricy40.caerula.world.gen.placedfeatures.ModOrePlacements;
 import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.ModAquaticFeatures;
@@ -61,7 +62,6 @@ public final class DataGenerators {
         final DeferredRegister<Codec<? extends BiomeModifier>> serializers = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, MODID);
         serializers.register(modBus);
         serializers.register(TEST, TestModifier::makeCodec);
-
     }
 
     @SubscribeEvent

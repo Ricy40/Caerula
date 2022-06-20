@@ -40,6 +40,4 @@ public class ModOreFeatures {
         configuredOreFeatureList.add(name);
         return CONFIGURED_FEATURES.register(name, feature);
     }
-
-
 }
