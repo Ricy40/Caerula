@@ -66,5 +66,6 @@ public class Caerula {
 
         EntityRenderers.register(ModEntityTypes.BLOBFISH.get(), BlobfishRenderer::new);
         EntityRenderers.register(ModEntityTypes.LULA.get(), LulaRenderer::new);
+        EntityRenderers.register(ModEntityTypes.SEACOW.get(), SeacowRenderer::new);
     }
 }

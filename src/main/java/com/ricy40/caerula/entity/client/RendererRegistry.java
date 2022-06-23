@@ -4,6 +4,7 @@ import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.ModEntityTypes;
 import com.ricy40.caerula.entity.client.model.BlobfishModel;
 import com.ricy40.caerula.entity.client.model.LulaModel;
+import com.ricy40.caerula.entity.client.model.SeacowModel;
 import com.ricy40.caerula.entity.client.render.BlobfishRenderer;
 import com.ricy40.caerula.entity.client.render.LulaRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -24,6 +25,7 @@ public class RendererRegistry {
     public static void registerLayerLocation(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(BlobfishModel.LAYER_LOCATION, BlobfishModel::createBodyLayer);
         event.registerLayerDefinition(LulaModel.LAYER_LOCATION, LulaModel::createBodyLayer);
+        event.registerLayerDefinition(SeacowModel.LAYER_LOCATION, SeacowModel::createBodyLayer);
     }
 
 }
