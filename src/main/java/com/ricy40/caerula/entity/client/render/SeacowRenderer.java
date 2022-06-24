@@ -3,7 +3,7 @@ package com.ricy40.caerula.entity.client.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.client.model.SeacowModel;
-import com.ricy40.caerula.entity.custom.Seacow;
+import com.ricy40.caerula.entity.custom.seacow.Seacow;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

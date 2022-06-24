@@ -2,7 +2,10 @@ package com.ricy40.caerula;
 
 import com.mojang.logging.LogUtils;
 import com.ricy40.caerula.block.ModBlocks;
+import com.ricy40.caerula.entity.ModActivites;
 import com.ricy40.caerula.entity.ModEntityTypes;
+import com.ricy40.caerula.entity.ModMemoryModuleTypes;
+import com.ricy40.caerula.entity.ModSensorTypes;
 import com.ricy40.caerula.entity.client.render.*;
 import com.ricy40.caerula.item.ModItems;
 import com.ricy40.caerula.world.dimension.ModDimensions;
@@ -35,6 +38,9 @@ public class Caerula {
         ModItems.register(bus);
         ModBlocks.register(bus);
 
+        ModActivites.register(bus);
+        ModSensorTypes.register(bus);
+        ModMemoryModuleTypes.register(bus);
         ModEntityTypes.register(bus);
 
         ModFeatures.register(bus);

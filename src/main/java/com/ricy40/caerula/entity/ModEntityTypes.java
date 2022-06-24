@@ -3,7 +3,7 @@ package com.ricy40.caerula.entity;
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.custom.Blobfish;
 import com.ricy40.caerula.entity.custom.Lula;
-import com.ricy40.caerula.entity.custom.Seacow;
+import com.ricy40.caerula.entity.custom.seacow.Seacow;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
