@@ -5,12 +5,13 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
 public class ModActivites {
-    public static final DeferredRegister<Activity> ACTIVITIES = DeferredRegister.create(Registry.ACTIVITY_REGISTRY, Caerula.MOD_ID);
+    public static final DeferredRegister<Activity> ACTIVITIES = DeferredRegister.create(ForgeRegistries.ACTIVITIES, Caerula.MOD_ID);
 
     public static final RegistryObject<Activity> SNIFFLING = registerActivity("sniffling", () -> new Activity("sniffling"));
     public static final RegistryObject<Activity> EATING = registerActivity("eating", () -> new Activity("eating"));

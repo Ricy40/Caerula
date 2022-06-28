@@ -14,10 +14,10 @@ public class SeacowAnimations {
             .addAnimation("nose",
                     new AnimationChannel(
                             AnimationChannel.Targets.ROTATION,
-                            new Keyframe(0.0F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.CATMULLROM),
-                            new Keyframe(0.5F, KeyframeAnimations.degreeVec(0, 90, 0), AnimationChannel.Interpolations.CATMULLROM),
-                            new Keyframe(1.5F, KeyframeAnimations.degreeVec(0, -90, 0), AnimationChannel.Interpolations.CATMULLROM),
-                            new Keyframe(1.96F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.CATMULLROM)
+                            new Keyframe(0.0F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(0.5F, KeyframeAnimations.degreeVec(0, 12, 0), AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(1.5F, KeyframeAnimations.degreeVec(0, -12, 0), AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(1.96F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR)
 
 
 

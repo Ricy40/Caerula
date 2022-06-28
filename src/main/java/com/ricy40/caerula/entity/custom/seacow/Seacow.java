@@ -15,24 +15,27 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.animal.axolotl.AxolotlAi;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.monster.warden.WardenAi;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 public class Seacow extends AgeableWaterAnimal {
 
     public AnimationState sniffleAnimationState = new AnimationState();
-    private int coolDownTicks;
 
 
-    public Seacow(EntityType<? extends AbstractFish> type, Level worldIn) {
+    public Seacow(EntityType<? extends AgeableWaterAnimal> type, Level worldIn) {
         super(type, worldIn);
-        this.coolDownTicks = 0;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -43,23 +46,24 @@ public class Seacow extends AgeableWaterAnimal {
     @Override
     public void tick() {
         super.tick();
-
-        double rand = this.random.nextFloat();
-
-        if (this.coolDownTicks != 0 ) {
-            this.coolDownTicks--;
-        }
-
-        if (rand > 0.99f && this.coolDownTicks == 0) {
-            this.setPose(Pose.SNIFFING);
-            this.coolDownTicks = 80;
-        } else if (this.getPose() == Pose.SNIFFING) {
-            this.setPose(Pose.SWIMMING);
-        }
     }
 
+    protected void customServerAiStep() {
+        this.level.getProfiler().push("seacowBrain");
+        this.getBrain().tick((ServerLevel)this.level, this);
+        this.level.getProfiler().pop();
+        this.level.getProfiler().push("seacowActivityUpdate");
+        SeacowAi.updateActivity(this);
+        this.level.getProfiler().pop();
+    }
+
+    public boolean canBeLeashed(Player player) {
+        return true;
+    }
+
+    @Nullable
     @Override
-    public AgeableWaterAnimal getBreedOffspring(ServerLevel level, AgeableWaterAnimal mob) {
+    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mob) {
         return ModEntityTypes.SEACOW.get().create(level);
     }
 

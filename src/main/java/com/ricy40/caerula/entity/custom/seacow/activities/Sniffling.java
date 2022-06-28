@@ -7,7 +7,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.behavior.Behavior;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 public class Sniffling <E extends Seacow> extends Behavior<E> {
@@ -15,14 +14,14 @@ public class Sniffling <E extends Seacow> extends Behavior<E> {
     public Sniffling(int duration) {
         super(ImmutableMap.of(
                 ModMemoryModuleTypes.IS_SNIFFLING.get(), MemoryStatus.VALUE_PRESENT,
-                MemoryModuleType.SNIFF_COOLDOWN, MemoryStatus.REGISTERED), duration);
+                ModMemoryModuleTypes.SNIFFLING_COOLDOWN.get(), MemoryStatus.REGISTERED), duration);
     }
 
-        protected boolean canStillUse(ServerLevel worldIn, E seacow, long duartion) {
+    protected boolean canStillUse(ServerLevel worldIn, E seacow, long duartion) {
         return true;
     }
 
-        protected void start(ServerLevel worldIn, E seacow, long duration) {
+    protected void start(ServerLevel worldIn, E seacow, long duration) {
         seacow.playSound(SoundEvents.WARDEN_SNIFF, 5.0F, 1.0F);
     }
 
@@ -31,6 +30,6 @@ public class Sniffling <E extends Seacow> extends Behavior<E> {
             seacow.setPose(Pose.SWIMMING);
         }
 
-        seacow.getBrain().eraseMemory(MemoryModuleType.IS_SNIFFING);
+        seacow.getBrain().eraseMemory(ModMemoryModuleTypes.IS_SNIFFLING.get());
     }
 }
