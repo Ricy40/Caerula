@@ -63,6 +63,10 @@ public class SeacowModel<T extends Seacow> extends HierarchicalModel<T> {
 		return this.root;
 	}
 
+	public ModelPart getHead() {
+		return this.head;
+	}
+
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		swimAnim(ageInTicks);

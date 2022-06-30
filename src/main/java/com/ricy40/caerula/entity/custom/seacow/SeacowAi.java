@@ -40,18 +40,19 @@ public class SeacowAi {
     private static final float SPEED_MULTIPLIER_WHEN_FLEEING = 1.2F;
     private static final int EATING_COOLDOWN = 1200;
     private static final int SNIFFLING_DURATION = Mth.ceil(40.0F);
-    private static final List<? extends SensorType<? extends Sensor<? super Seacow>>> SENSOR_TYPES = List.of(
+    public static final List<? extends SensorType<? extends Sensor<? super Seacow>>> SENSOR_TYPES = List.of(
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.HURT_BY,
             SensorType.IS_IN_WATER,
             SensorType.NEAREST_ADULT,
             ModSensorTypes.SEACOW_TEMPTATIONS.get()
     );
-    private static final List<MemoryModuleType<?>> MEMORY_TYPES = List.of(
+    public static final List<MemoryModuleType<?>> MEMORY_TYPES = List.of(
             MemoryModuleType.NEAREST_LIVING_ENTITIES,
             MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
             MemoryModuleType.NEAREST_VISIBLE_PLAYER,
             MemoryModuleType.NEAREST_VISIBLE_ADULT,
+            MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
             MemoryModuleType.HURT_BY,
             MemoryModuleType.HURT_BY_ENTITY,
             MemoryModuleType.LOOK_TARGET,
@@ -61,6 +62,7 @@ public class SeacowAi {
             MemoryModuleType.IS_PREGNANT,
             MemoryModuleType.WALK_TARGET,
             MemoryModuleType.BREED_TARGET,
+            MemoryModuleType.IS_PANICKING,
             MemoryModuleType.PATH,
             ModMemoryModuleTypes.IS_SNIFFLING.get(),
             ModMemoryModuleTypes.IS_EATING.get(),
@@ -68,9 +70,7 @@ public class SeacowAi {
             ModMemoryModuleTypes.EATING_COOLDOWN.get()
     );
 
-    protected static Brain<?> makeBrain(Seacow seacow, Dynamic<?> dynamic) {
-        Brain.Provider<Seacow> provider = Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
-        Brain<Seacow> brain = provider.makeBrain(dynamic);
+    protected static Brain<?> makeBrain(Brain<Seacow> brain) {
         initCoreActivity(brain);
         initIdleActivity(brain);
         initSnifflingActivity(brain);
@@ -87,7 +87,8 @@ public class SeacowAi {
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
-                new TryToSniffle()));
+                new TryToSniffle()
+        ));
 
     }
 
@@ -100,7 +101,8 @@ public class SeacowAi {
                         Pair.of(new BabyFollowAdult<>(ADULT_FOLLOW_RANGE, SeacowAi::getSpeedModifierFollowingAdult), 1)))),
                 Pair.of(3, new GateBehavior<>(ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), ImmutableSet.of(), GateBehavior.OrderPolicy.ORDERED, GateBehavior.RunningPolicy.TRY_ALL, ImmutableList.of(
                         Pair.of(new RandomSwim(0.5F), 2),
-                        Pair.of(new SetWalkTargetFromLookTarget(SeacowAi::canSetWalkTargetFromLookTarget, SeacowAi::getSpeedModifier, 3), 3), Pair.of(new RunIf<>(Entity::isInWaterOrBubble, new DoNothing(30, 60)), 5), Pair.of(new RunIf<>(Entity::isOnGround, new DoNothing(200, 400)), 5))))));
+                        Pair.of(new SetWalkTargetFromLookTarget(SeacowAi::canSetWalkTargetFromLookTarget, SeacowAi::getSpeedModifier, 3), 3),
+                        Pair.of(new RunIf<>(Entity::isInWaterOrBubble, new DoNothing(30, 60)), 5))))));
     }
 
     private static void initEatingActivity(Brain<Seacow> brain) {
@@ -117,8 +119,10 @@ public class SeacowAi {
 
     public static void updateActivity(Seacow seacow) {
         seacow.getBrain().setActiveActivityToFirstValid(ImmutableList.of(
-                ModActivites.FLEEING.get(), ModActivites.SNIFFLING.get(),
-                ModActivites.EATING.get(), Activity.IDLE));
+                //ModActivites.FLEEING.get(),
+                //ModActivites.EATING.get(),
+                ModActivites.SNIFFLING.get(),
+                Activity.IDLE));
     }
 
     private static boolean canSetWalkTargetFromLookTarget(LivingEntity entityIn) {

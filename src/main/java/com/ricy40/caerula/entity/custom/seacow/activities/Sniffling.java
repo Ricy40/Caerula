@@ -27,7 +27,7 @@ public class Sniffling <E extends Seacow> extends Behavior<E> {
 
     protected void stop(ServerLevel worldIn, E seacow, long duration) {
         if (seacow.hasPose(Pose.SNIFFING)) {
-            seacow.setPose(Pose.SWIMMING);
+            seacow.setPose(Pose.STANDING);
         }
 
         seacow.getBrain().eraseMemory(ModMemoryModuleTypes.IS_SNIFFLING.get());

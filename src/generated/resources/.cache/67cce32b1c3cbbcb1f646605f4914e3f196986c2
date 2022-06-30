@@ -1,4 +1,4 @@
-// 1.19	2022-06-17T14:47:17.7086431	LootTables
+// 1.19	2022-06-30T13:02:00.80047	LootTables
 013e21f438f4e576d4ee833e4546a06d9f44d568 data/caerula/loot_tables/blocks/bush_coral.json
 9c3610136aeb4bb527c1e275821ffb7a0ad9ecdf data/caerula/loot_tables/blocks/dead_bush_coral.json
 fc4693bd6f6a09b790b627e24f89aac9cf7c81a5 data/caerula/loot_tables/blocks/deepslate_nixium_ore.json
@@ -14,3 +14,4 @@ be63ecd7131f6bbaabf46aa45432ede0b6d0d112 data/caerula/loot_tables/blocks/raw_nix
 3c3b1271d457a3e44a686cf062b45b487369d5a1 data/caerula/loot_tables/blocks/tall_red_seagrass.json
 b4d498d02851f57fc318bdb91cf14874ce72667b data/caerula/loot_tables/entities/blobfish.json
 bbf18b4c4f5c69d078651c64ba2830669d85950f data/caerula/loot_tables/entities/lula.json
+2def79ce1bb821b4f4f07888aeb21a7aca86fc11 data/caerula/loot_tables/entities/seacow.json
