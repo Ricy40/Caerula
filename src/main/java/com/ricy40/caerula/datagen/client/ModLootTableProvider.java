@@ -107,12 +107,12 @@ public class ModLootTableProvider extends LootTableProvider {
                                     .add(LootItem.lootTableItem(ModItems.LULA.get())
                                             .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))))));
 
-            add(ModEntityTypes.SEACOW.get(),
-                    LootTable.lootTable().withPool(
-                            LootPool.lootPool()
-                                    .setRolls(ConstantValue.exactly(1F))
-                                    .add(LootItem.lootTableItem(Items.BEEF))
-                    ));
+          //  add(ModEntityTypes.SEACOW.get(),
+            //        LootTable.lootTable().withPool(
+              //              LootPool.lootPool()
+                //                    .setRolls(ConstantValue.exactly(1F))
+                  //                  .add(LootItem.lootTableItem(Items.BEEF))
+                    //));
 
         }
 

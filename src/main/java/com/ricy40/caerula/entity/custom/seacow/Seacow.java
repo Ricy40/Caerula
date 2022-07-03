@@ -5,6 +5,7 @@ import com.mojang.serialization.Dynamic;
 import com.ricy40.caerula.entity.ModEntityTypes;
 import com.ricy40.caerula.entity.custom.AgeableWaterAnimal;
 import com.ricy40.caerula.item.ModItems;
+import com.ricy40.caerula.tags.ModTags;
 import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -12,6 +13,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
@@ -110,6 +112,7 @@ public class Seacow extends AgeableWaterAnimal {
         return true;
     }
 
+
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mob) {
@@ -135,6 +138,10 @@ public class Seacow extends AgeableWaterAnimal {
         DebugPackets.sendEntityBrain(this);
     }
 
+    public boolean isFood(ItemStack item) {
+        return item.is(ModTags.Items.SEACOW_TEMPT_ITEMS);
+    }
+
     protected SoundEvent getFlopSound() {
         return SoundEvents.COD_FLOP;
     }
@@ -157,4 +164,5 @@ public class Seacow extends AgeableWaterAnimal {
     }
 
 }
+
 

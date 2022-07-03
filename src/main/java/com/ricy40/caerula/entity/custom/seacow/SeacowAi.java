@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.serialization.Dynamic;
 import com.ricy40.caerula.entity.ModActivites;
 import com.ricy40.caerula.entity.ModEntityTypes;
 import com.ricy40.caerula.entity.ModMemoryModuleTypes;

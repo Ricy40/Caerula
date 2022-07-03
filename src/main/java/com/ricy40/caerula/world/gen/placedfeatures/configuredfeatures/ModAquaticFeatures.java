@@ -42,5 +42,4 @@ public class ModAquaticFeatures {
         return CONFIGURED_FEATURES.register(name, feature);
     }
 
-
 }
