@@ -38,7 +38,7 @@ public class SeacowAi {
     private static final float SPEED_MULTIPLIER_WHEN_FOLLOWING_ADULT_IN_WATER = 0.6F;
     private static final float SPEED_MULTIPLIER_WHEN_FLEEING = 1.2F;
     private static final int EATING_COOLDOWN = 1200;
-    private static final int SNIFFLING_DURATION = Mth.ceil(40.0F);
+    private static final int SNIFFLING_DURATION = Mth.ceil(40F);
     public static final List<? extends SensorType<? extends Sensor<? super Seacow>>> SENSOR_TYPES = List.of(
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.HURT_BY,
@@ -71,8 +71,8 @@ public class SeacowAi {
 
     protected static Brain<?> makeBrain(Brain<Seacow> brain) {
         initCoreActivity(brain);
-        initIdleActivity(brain);
         initSnifflingActivity(brain);
+        initIdleActivity(brain);
         //initEatingActivity(brain);
         //initFleeActivity(seacow, brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
@@ -109,7 +109,7 @@ public class SeacowAi {
     }
 
     private static void initSnifflingActivity(Brain<Seacow> brain) {
-        brain.addActivityAndRemoveMemoryWhenStopped(ModActivites.SNIFFLING.get(), 1, ImmutableList.of(new Sniffling<>(SNIFFLING_DURATION)), ModMemoryModuleTypes.IS_SNIFFLING.get());
+        brain.addActivityAndRemoveMemoryWhenStopped(ModActivites.SNIFFLING.get(), 0, ImmutableList.of(new Sniffling<>(SNIFFLING_DURATION)), ModMemoryModuleTypes.IS_SNIFFLING.get());
     }
 
     private static void initFleeActivity(Seacow seacow, Brain<Seacow> brain) {

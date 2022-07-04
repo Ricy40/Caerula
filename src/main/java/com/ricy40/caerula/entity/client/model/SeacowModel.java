@@ -1,11 +1,8 @@
 package com.ricy40.caerula.entity.client.model;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.custom.seacow.Seacow;
-import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -26,7 +23,7 @@ public class SeacowModel<E extends Seacow> extends HierarchicalAgeableModel<E> {
 	private final ModelPart nose;
 
 	public SeacowModel(ModelPart root) {
-		super(false, 2.0F, 4.0F, 2.0F, 2.5F, 24);
+		super(false, 1.1F, 5.0F, 2.0F, 2.5F, 34);
 		this.root = root;
 		this.body = root.getChild("body");
 		this.tail1 = body.getChild("tail1");

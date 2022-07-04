@@ -163,6 +163,16 @@ public class Seacow extends AgeableWaterAnimal {
         return SoundEvents.SALMON_HURT;
     }
 
+    @Override
+    public int getMaxHeadXRot() {
+        return 30;
+    }
+
+    @Override
+    public int getMaxHeadYRot() {
+        return 65;
+    }
+
 }
 
 

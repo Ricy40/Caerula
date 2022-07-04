@@ -10,12 +10,11 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 public class TryToSniffle extends Behavior<Seacow> {
     
-    private static final IntProvider SNIFFLE_COOLDOWN = UniformInt.of(200, 300);
+    private static final IntProvider SNIFFLE_COOLDOWN = UniformInt.of(300, 400);
 
     public TryToSniffle() {
         super(ImmutableMap.of(ModMemoryModuleTypes.SNIFFLING_COOLDOWN.get(), MemoryStatus.VALUE_ABSENT));
@@ -25,7 +24,6 @@ public class TryToSniffle extends Behavior<Seacow> {
         Brain<Seacow> brain = seacow.getBrain();
         brain.setMemory(ModMemoryModuleTypes.IS_SNIFFLING.get(), Unit.INSTANCE);
         brain.setMemoryWithExpiry(ModMemoryModuleTypes.SNIFFLING_COOLDOWN.get(), Unit.INSTANCE, (long)SNIFFLE_COOLDOWN.sample(level.getRandom()));
-        brain.eraseMemory(MemoryModuleType.WALK_TARGET);
         seacow.setPose(Pose.SNIFFING);
     }
 }

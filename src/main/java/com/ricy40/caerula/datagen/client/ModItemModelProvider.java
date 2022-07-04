@@ -36,7 +36,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicSpawnEggItem(ModItems.BLOBFISH_SPAWN_EGG.get());
 
         simpleItem(ModItems.LULA_BUCKET.get());
-        simpleItem(ModItems.LULA.get());
+        simpleItem(ModItems.RAW_LULA.get());
         simpleItem(ModItems.COOKED_LULA.get());
         basicSpawnEggItem(ModItems.LULA_SPAWN_EGG.get());
 

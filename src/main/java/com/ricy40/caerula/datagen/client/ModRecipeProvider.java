@@ -40,7 +40,7 @@ public class ModRecipeProvider extends RecipeProvider {
         stairBuilder(ModBlocks.NIXIUM_STAIRS.get(), Ingredient.of(ModBlocks.NIXIUM_BLOCK.get())).unlockedBy("has_nixium_block", has(ModBlocks.NIXIUM_BLOCK.get())).save(consumer);
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.BLOBFISH.get()), ModItems.COOKED_BLOBFISH.get(), 0.35F, 200).unlockedBy("has_blobfish", has(ModItems.BLOBFISH.get())).save(consumer);
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.LULA.get()), ModItems.COOKED_LULA.get(), 0.35F, 200).unlockedBy("has_blobfish", has(ModItems.LULA.get())).save(consumer);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_LULA.get()), ModItems.COOKED_LULA.get(), 0.35F, 200).unlockedBy("has_blobfish", has(ModItems.RAW_LULA.get())).save(consumer);
 
         cookRecipes(consumer, "smoking", RecipeSerializer.SMOKING_RECIPE, 100);
         cookRecipes(consumer, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 600);

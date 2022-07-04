@@ -22,7 +22,7 @@ public class Sniffling <E extends Seacow> extends Behavior<E> {
     }
 
     protected void start(ServerLevel worldIn, E seacow, long duration) {
-        seacow.playSound(SoundEvents.WARDEN_SNIFF, 5.0F, 1.0F);
+        seacow.playSound(SoundEvents.WARDEN_SNIFF, 3.0F, 1.0F);
     }
 
     protected void stop(ServerLevel worldIn, E seacow, long duration) {

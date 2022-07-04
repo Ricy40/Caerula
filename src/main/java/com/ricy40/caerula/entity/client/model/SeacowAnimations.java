@@ -10,16 +10,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SeacowAnimations {
-    public static final AnimationDefinition SEACOW_SNIFFLE = AnimationDefinition.Builder.withLength(2.00f)
+    public static final AnimationDefinition SEACOW_SNIFFLE = AnimationDefinition.Builder.withLength(2.00F)
             .addAnimation("nose",
                     new AnimationChannel(
                             AnimationChannel.Targets.ROTATION,
                             new Keyframe(0.0F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(0.5F, KeyframeAnimations.degreeVec(0, 12, 0), AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(1.5F, KeyframeAnimations.degreeVec(0, -12, 0), AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(1.96F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR)
-
-
+                            new Keyframe(0.4F, KeyframeAnimations.degreeVec(0, 1, 0), AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(1.6F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(1.96F, KeyframeAnimations.degreeVec(0, -1, 0), AnimationChannel.Interpolations.LINEAR)
 
                             //new Keyframe(0.16F, KeyframeAnimations.degreeVec(-4.8821f, 0, 10F), AnimationChannel.Interpolations.CATMULLROM),
                             //new Keyframe(0.5F, KeyframeAnimations.degreeVec(-14.91F, 0, -10F), AnimationChannel.Interpolations.CATMULLROM),

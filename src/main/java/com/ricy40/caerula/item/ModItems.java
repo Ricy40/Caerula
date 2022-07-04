@@ -41,8 +41,8 @@ public class ModItems {
     public static final RegistryObject<Item> LULA_BUCKET = ITEMS.register("lula_bucket",
             () -> new MobBucketItem(() -> ModEntityTypes.LULA.get(), () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH,
                     (new Item.Properties()).stacksTo(1).tab(ModCreativeModeTab.CAERULA)));
-    public static final RegistryObject<Item> LULA = ITEMS.register("lula",
-            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.CAERULA).food(ModFoods.LULA)));
+    public static final RegistryObject<Item> RAW_LULA = ITEMS.register("raw_lula",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.CAERULA).food(ModFoods.RAW_LULA)));
     public static final RegistryObject<Item> COOKED_LULA = ITEMS.register("cooked_lula",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.CAERULA).food(ModFoods.COOKED_LULA)));
     public static final RegistryObject<Item> LULA_SPAWN_EGG = ITEMS.register("lula_spawn_egg",

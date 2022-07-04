@@ -18,15 +18,18 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.*;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.time.temporal.ValueRange;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -104,15 +107,16 @@ public class ModLootTableProvider extends LootTableProvider {
                     LootTable.lootTable().withPool(
                             LootPool.lootPool()
                                     .setRolls(ConstantValue.exactly(1.0F))
-                                    .add(LootItem.lootTableItem(ModItems.LULA.get())
+                                    .add(LootItem.lootTableItem(ModItems.RAW_LULA.get())
+                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
                                             .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))))));
 
-          //  add(ModEntityTypes.SEACOW.get(),
-            //        LootTable.lootTable().withPool(
-              //              LootPool.lootPool()
-                //                    .setRolls(ConstantValue.exactly(1F))
-                  //                  .add(LootItem.lootTableItem(Items.BEEF))
-                    //));
+
+            add(ModEntityTypes.SEACOW.get(),
+                    LootTable.lootTable().withPool(
+                            LootPool.lootPool()
+                                    .setRolls(ConstantValue.exactly(1F))
+                                    .add(LootItem.lootTableItem(Items.BEEF))));
 
         }
 
