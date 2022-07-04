@@ -2,6 +2,7 @@ package com.ricy40.caerula.datagen;
 
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.block.ModBlocks;
+import com.ricy40.caerula.tags.ModTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
@@ -47,6 +48,10 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
         tag(BlockTags.MUSHROOM_GROW_BLOCK)
                 .add(ModBlocks.MYCELIUM_SAND.get())
+                ;
+
+        tag(ModTags.Blocks.SEACOW_EDIBLES)
+                .add(ModBlocks.PURPLE_SEASHROOM.get())
                 ;
     }
 }

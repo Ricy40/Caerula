@@ -10,20 +10,26 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SeacowAnimations {
-    public static final AnimationDefinition SEACOW_SNIFFLE = AnimationDefinition.Builder.withLength(2.00F)
+    public static final AnimationDefinition SEACOW_SNIFFLE = AnimationDefinition.Builder.withLength(1.5F)
             .addAnimation("nose",
                     new AnimationChannel(
                             AnimationChannel.Targets.ROTATION,
-                            new Keyframe(0.0F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(0.4F, KeyframeAnimations.degreeVec(0, 1, 0), AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(1.6F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(1.96F, KeyframeAnimations.degreeVec(0, -1, 0), AnimationChannel.Interpolations.LINEAR)
+                            new Keyframe(0.16F, KeyframeAnimations.degreeVec(-4.8821f, 0, 10F), AnimationChannel.Interpolations.CATMULLROM),
+                            new Keyframe(0.5F, KeyframeAnimations.degreeVec(-14.91F, 0, -10F), AnimationChannel.Interpolations.CATMULLROM),
+                            new Keyframe(0.75F, KeyframeAnimations.degreeVec(-22.5F, 0, 5F), AnimationChannel.Interpolations.LINEAR),
+                            new Keyframe(0.83F, KeyframeAnimations.degreeVec(-20F, 0, 10F), AnimationChannel.Interpolations.CATMULLROM),
+                            new Keyframe(1.16F, KeyframeAnimations.degreeVec(-10F, 0, -10F), AnimationChannel.Interpolations.CATMULLROM),
+                            new Keyframe(1.5F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.CATMULLROM)
+                    )).build();
 
-                            //new Keyframe(0.16F, KeyframeAnimations.degreeVec(-4.8821f, 0, 10F), AnimationChannel.Interpolations.CATMULLROM),
-                            //new Keyframe(0.5F, KeyframeAnimations.degreeVec(-14.91F, 0, -10F), AnimationChannel.Interpolations.CATMULLROM),
-                            //new Keyframe(0.75F, KeyframeAnimations.degreeVec(-22.5F, 0, 5F), AnimationChannel.Interpolations.LINEAR),
-                            //new Keyframe(0.83F, KeyframeAnimations.degreeVec(-20F, 0, 10F), AnimationChannel.Interpolations.CATMULLROM),
-                            //new Keyframe(1.16F, KeyframeAnimations.degreeVec(-10F, 0, -10F), AnimationChannel.Interpolations.CATMULLROM),
-                            //new Keyframe(1.5F, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.CATMULLROM)
+    public static final AnimationDefinition SEACOW_EATING = AnimationDefinition.Builder.withLength(2F)
+            .addAnimation("nose",
+                    new AnimationChannel(
+                            AnimationChannel.Targets.ROTATION,
+                            new Keyframe(0f, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.CATMULLROM),
+                            new Keyframe(0.5f, KeyframeAnimations.degreeVec(45, 0, 0), AnimationChannel.Interpolations.CATMULLROM),
+                            new Keyframe(1f, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.CATMULLROM),
+                            new Keyframe(1.5f, KeyframeAnimations.degreeVec(45, 0, 0), AnimationChannel.Interpolations.CATMULLROM),
+                            new Keyframe(2f, KeyframeAnimations.degreeVec(0, 0, 0), AnimationChannel.Interpolations.CATMULLROM)
                     )).build();
 }

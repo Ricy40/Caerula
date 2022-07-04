@@ -41,6 +41,10 @@ public abstract class HierarchicalAgeableModel<E extends Entity> extends Hierarc
         this(false, 5.0F, 2.0F);
     }
 
+    public void setupAnim(E pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+    }
+
     public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
         if (this.young) {
             pPoseStack.pushPose();

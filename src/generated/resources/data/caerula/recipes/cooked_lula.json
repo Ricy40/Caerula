@@ -3,7 +3,7 @@
   "cookingtime": 200,
   "experience": 0.35,
   "ingredient": {
-    "item": "caerula:lula"
+    "item": "caerula:raw_lula"
   },
   "result": "caerula:cooked_lula"
 }

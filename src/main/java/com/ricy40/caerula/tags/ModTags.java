@@ -14,6 +14,7 @@ public class ModTags {
         public static final TagKey<Block> WALLS = tag("walls");
         public static final TagKey<Block> FENCES = tag("fences");
         public static final TagKey<Block> FENCE_GATES = tag("fence_gates");
+        public static final TagKey<Block> SEACOW_EDIBLES = tag("seacow_edibles");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(Caerula.MOD_ID, name));

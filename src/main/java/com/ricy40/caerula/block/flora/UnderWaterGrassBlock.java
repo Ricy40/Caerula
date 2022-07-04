@@ -36,7 +36,7 @@ public abstract class UnderWaterGrassBlock extends SnowyDirtBlock {
 
     private static boolean canPropagate(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         BlockPos blockpos = pPos.above();
-        return canBeGrass(pState, pLevel, pPos) && !pLevel.getFluidState(blockpos).is(FluidTags.WATER);
+        return canBeGrass(pState, pLevel, pPos) && pLevel.getFluidState(blockpos).is(FluidTags.WATER);
     }
 
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {

@@ -1,10 +1,10 @@
-// 1.19	2022-06-17T14:47:17.7046448	Recipes
+// 1.19	2022-07-04T17:31:30.1406078	Recipes
 9241a9c4a68a118565d088833170820eff297ffb data/caerula/advancements/recipes/caerula/cooked_blobfish.json
-222449e605f6b86d2f9bc74f5e20ce5d5d3aa191 data/caerula/advancements/recipes/caerula/cooked_lula.json
+1216b6dc666ac20020acf24dadfcb566e5b5dd42 data/caerula/advancements/recipes/caerula/cooked_lula.json
 170e04c04bc5fc7ed5f152b510309f2458866546 data/caerula/advancements/recipes/caerula/nixium_slab.json
 e4ab99c3ca0acbc4a3e32cf97e6affeae745ac15 data/caerula/advancements/recipes/caerula/nixium_stairs.json
 d161bb4978af00ab3786cbaafb011135cfc772aa data/caerula/recipes/cooked_blobfish.json
-d8671bf1a393553dad56a12954bd8a53941070fb data/caerula/recipes/cooked_lula.json
+414784ed18d7cb631997174303c6e408dcdf7503 data/caerula/recipes/cooked_lula.json
 5b7a8cfbc4e0daba25b81db1c0b8d200ed4c68ce data/caerula/recipes/nixium_slab.json
 068253e1c10b80cdf416a2f7f1dd12122c6a7152 data/caerula/recipes/nixium_stairs.json
 42b15399f9fff5516e8aebfaf85043bdf29fa504 data/minecraft/advancements/recipes/caerula/nixium_block.json

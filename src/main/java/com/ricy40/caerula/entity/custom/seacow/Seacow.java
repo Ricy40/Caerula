@@ -6,6 +6,7 @@ import com.ricy40.caerula.entity.ModEntityTypes;
 import com.ricy40.caerula.entity.custom.AgeableWaterAnimal;
 import com.ricy40.caerula.item.ModItems;
 import com.ricy40.caerula.tags.ModTags;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -13,6 +14,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -32,15 +34,31 @@ import net.minecraft.world.entity.monster.warden.WardenAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Seacow extends AgeableWaterAnimal {
 
     public AnimationState sniffleAnimationState = new AnimationState();
+    public AnimationState eatingAnimationState = new AnimationState();
+    public final Predicate<BlockState> VALID_EATDILE_BLOCKS = (block) -> {
+        if (!block.hasProperty(BlockStateProperties.WATERLOGGED) && !block.getValue(BlockStateProperties.WATERLOGGED)) {
+            return false;
+        } else if (block.is(ModTags.Blocks.SEACOW_EDIBLES)) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     public Seacow(EntityType<? extends AgeableWaterAnimal> type, Level worldIn) {
         super(type, worldIn);
@@ -95,9 +113,14 @@ public class Seacow extends AgeableWaterAnimal {
 
     public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
         if (DATA_POSE.equals(accessor)) {
-            switch (this.getPose()) {
-                case SNIFFING:
-                    this.sniffleAnimationState.start(this.tickCount);
+            if (this.getPose() == Pose.SNIFFING) {
+                this.sniffleAnimationState.start(this.tickCount);
+            } else {
+                this.sniffleAnimationState.stop();
+            } if (this.getPose() == Pose.USING_TONGUE) {
+                this.eatingAnimationState.start((this.tickCount));
+            } else {
+                this.eatingAnimationState.stop();
             }
         }
 
@@ -170,7 +193,7 @@ public class Seacow extends AgeableWaterAnimal {
 
     @Override
     public int getMaxHeadYRot() {
-        return 65;
+        return 40;
     }
 
 }

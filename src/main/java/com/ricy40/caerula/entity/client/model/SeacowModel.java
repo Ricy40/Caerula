@@ -68,10 +68,12 @@ public class SeacowModel<E extends Seacow> extends HierarchicalAgeableModel<E> {
 
 	@Override
 	public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.head.xRot = headPitch * ((float)Math.PI / 180F);
 		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
 		swimAnim(ageInTicks);
 		this.animate(entity.sniffleAnimationState, SeacowAnimations.SEACOW_SNIFFLE, ageInTicks);
+		this.animate(entity.eatingAnimationState, SeacowAnimations.SEACOW_EATING, ageInTicks);
 	}
 
 	private void swimAnim(float ageInTicks) {
