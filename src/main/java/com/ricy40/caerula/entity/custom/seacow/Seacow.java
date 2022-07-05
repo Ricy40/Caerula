@@ -39,14 +39,13 @@ public class Seacow extends AgeableWaterAnimal {
         if (block.is(Blocks.WATER)) {
             return false;
         } else if (!block.hasProperty(BlockStateProperties.WATERLOGGED)) {
-            return false;
-        } else if (!block.getValue(BlockStateProperties.WATERLOGGED)) {
-            return false;
-        } else if (block.is(ModTags.Blocks.SEACOW_EDIBLES)) {
-            return true;
-        } else {
-            return false;
+            if (!block.getValue(BlockStateProperties.WATERLOGGED)) {
+                if (block.is(ModTags.Blocks.SEACOW_EDIBLES)) {
+                    return true;
+                }
+            }
         }
+        return false;
     };
 
     public Seacow(EntityType<? extends AgeableWaterAnimal> type, Level worldIn) {
