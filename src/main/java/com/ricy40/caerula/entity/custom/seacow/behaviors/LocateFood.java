@@ -1,11 +1,11 @@
-package com.ricy40.caerula.entity.custom.seacow.activities;
+package com.ricy40.caerula.entity.custom.seacow.behaviors;
 
 import com.google.common.collect.ImmutableMap;
 import com.ricy40.caerula.entity.ModMemoryModuleTypes;
 import com.ricy40.caerula.entity.custom.seacow.Seacow;
+import com.ricy40.caerula.entity.custom.seacow.SeacowAi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
@@ -17,28 +17,46 @@ import java.util.function.Predicate;
 
 public class LocateFood <E extends Seacow> extends Behavior<E> {
 
-    private static final int HUNGER_COOLDOWN = 4000;
-
+    public BlockPos found_food;
+    
     public LocateFood() {
-        super(ImmutableMap.of(ModMemoryModuleTypes.FOOD_POS.get(), MemoryStatus.VALUE_ABSENT, MemoryModuleType.IS_PANICKING, MemoryStatus.VALUE_ABSENT, MemoryModuleType.IS_TEMPTED, MemoryStatus.VALUE_ABSENT, MemoryModuleType.BREED_TARGET, MemoryStatus.VALUE_ABSENT));
+        super(ImmutableMap.of(ModMemoryModuleTypes.IS_LOCATING_FOOD.get(), MemoryStatus.VALUE_PRESENT,
+                ModMemoryModuleTypes.FOOD_POS.get(), MemoryStatus.REGISTERED,
+                MemoryModuleType.WALK_TARGET,  MemoryStatus.VALUE_ABSENT, 
+                MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, 
+                MemoryModuleType.IS_PANICKING, MemoryStatus.VALUE_ABSENT, 
+                MemoryModuleType.IS_TEMPTED, MemoryStatus.VALUE_ABSENT,
+                ModMemoryModuleTypes.LOCATE_FOOD_COOLDOWN.get(), MemoryStatus.REGISTERED), 20);
     }
-
-    protected boolean checkExtraStartConditions(ServerLevel pLevel, E seacow) {
-        return seacow.getPose() == Pose.STANDING || seacow.getPose() == Pose.SWIMMING;
+    
+    protected boolean canStillUse(ServerLevel pLevel, E pEntity, long pGameTime) {
+        return true;
     }
-
-    @Override
+    
     protected void start(ServerLevel pLevel, E seacow, long pGameTime) {
-        if (seacow.isInWaterOrBubble() && !seacow.isInLava()) {
-            Optional<BlockPos> food = findNearestBlock(seacow, seacow.VALID_EATDILE_BLOCKS, 7);
-            if (food.isPresent()) {
-                System.out.println("Found food!");
-                seacow.getBrain().setMemory(ModMemoryModuleTypes.FOOD_POS.get(), food);
+        this.found_food = null;
+    }
+    
+    protected void tick(ServerLevel pLevel, E seacow, long pGameTime) {
+        if (this.found_food == null) {
+            if (seacow.isInWaterOrBubble() && !seacow.isInLava()) {
+                Optional<BlockPos> food = findNearestBlock(seacow, seacow.VALID_EATDILE_BLOCKS, 7);
+                if (food.isPresent()) {
+                    this.found_food = food.get();
+                }
             }
         }
     }
 
+    protected void stop(ServerLevel pLevel, E seacow, long pGameTime) {
+        seacow.getBrain().eraseMemory(ModMemoryModuleTypes.IS_LOCATING_FOOD.get());
+        if (this.found_food != null) {
+            SeacowAi.setFoodLocation(seacow, this.found_food);
+        }
+    }
+
     private Optional<BlockPos> findNearestBlock(E seacow, Predicate<BlockState> pPredicate, double pDistance) {
+        
         BlockPos blockpos = seacow.blockPosition();
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 

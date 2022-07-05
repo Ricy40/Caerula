@@ -1,18 +1,14 @@
-package com.ricy40.caerula.entity.custom.seacow.activities;
+package com.ricy40.caerula.entity.custom.seacow.behaviors;
 
 import com.google.common.collect.ImmutableMap;
+import com.ricy40.caerula.entity.ModMemoryModuleTypes;
 import com.ricy40.caerula.entity.custom.seacow.Seacow;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
-import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
-
-import java.util.Random;
 
 public class Sniffling <E extends Seacow> extends Behavior<E> {
     
@@ -21,7 +17,7 @@ public class Sniffling <E extends Seacow> extends Behavior<E> {
     private int sniffleCounter;
 
     public Sniffling() {
-        super(ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), TIME_OUT_DURATION);
+        super(ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT, ModMemoryModuleTypes.FOOD_POS.get(), MemoryStatus.VALUE_ABSENT), TIME_OUT_DURATION);
     }
 
     protected boolean canStillUse(ServerLevel worldIn, E seacow, long duartion) {
@@ -36,7 +32,7 @@ public class Sniffling <E extends Seacow> extends Behavior<E> {
     protected void start(ServerLevel worldIn, E seacow, long duration) {
         if (seacow.isInWaterOrBubble() && !seacow.isInLava()) {
             seacow.setPose(Pose.SNIFFING);
-            seacow.playSound(SoundEvents.WARDEN_SNIFF, 3.0F, 1.0F);
+            seacow.playSound(SoundEvents.WARDEN_SNIFF, 1.0F, 1.0F);
             this.sniffleCounter = 0;
         }
     }

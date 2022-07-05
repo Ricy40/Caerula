@@ -3,6 +3,7 @@ package com.ricy40.caerula.block.flora;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
@@ -26,17 +27,16 @@ public abstract class UnderWaterGrassBlock extends SnowyDirtBlock {
             return true;
         } else if (blockstate.is(Blocks.WATER)) {
             return true;
-        } else if (blockstate.getFluidState().getAmount() == 8) {
+        } else if (blockstate.canOcclude()) {
             return false;
         } else {
-            int i = LayerLightEngine.getLightBlockInto(pLevelReader, pState, pPos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(pLevelReader, blockpos));
-            return i < pLevelReader.getMaxLightLevel();
+            return true;
         }
     }
 
     private static boolean canPropagate(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         BlockPos blockpos = pPos.above();
-        return canBeGrass(pState, pLevel, pPos) && pLevel.getFluidState(blockpos).is(FluidTags.WATER);
+        return canBeGrass(pState, pLevel, pPos) || pLevel.getFluidState(blockpos).is(FluidTags.WATER);
     }
 
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {

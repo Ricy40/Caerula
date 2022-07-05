@@ -1,21 +1,14 @@
 package com.ricy40.caerula.entity.custom.seacow;
 
-import com.mojang.math.Vector3f;
 import com.mojang.serialization.Dynamic;
 import com.ricy40.caerula.entity.ModEntityTypes;
 import com.ricy40.caerula.entity.custom.AgeableWaterAnimal;
-import com.ricy40.caerula.item.ModItems;
 import com.ricy40.caerula.tags.ModTags;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
@@ -23,35 +16,31 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.animal.AbstractFish;
-import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.entity.animal.axolotl.Axolotl;
-import net.minecraft.world.entity.animal.axolotl.AxolotlAi;
-import net.minecraft.world.entity.animal.frog.Tadpole;
-import net.minecraft.world.entity.monster.warden.Warden;
-import net.minecraft.world.entity.monster.warden.WardenAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 public class Seacow extends AgeableWaterAnimal {
 
+    private int hungerTimer;
+    private boolean isHungry;
+    private static final int HUNGER_COOLDOWN = 6000;
+
     public AnimationState sniffleAnimationState = new AnimationState();
     public AnimationState eatingAnimationState = new AnimationState();
     public final Predicate<BlockState> VALID_EATDILE_BLOCKS = (block) -> {
-        if (!block.hasProperty(BlockStateProperties.WATERLOGGED) && !block.getValue(BlockStateProperties.WATERLOGGED)) {
+        if (block.is(Blocks.WATER)) {
+            return false;
+        } else if (!block.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            return false;
+        } else if (!block.getValue(BlockStateProperties.WATERLOGGED)) {
             return false;
         } else if (block.is(ModTags.Blocks.SEACOW_EDIBLES)) {
             return true;
@@ -64,6 +53,8 @@ public class Seacow extends AgeableWaterAnimal {
         super(type, worldIn);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
+        this.hungerTimer = 0;
+        this.isHungry = false;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -75,6 +66,11 @@ public class Seacow extends AgeableWaterAnimal {
     @Override
     public void tick() {
         super.tick();
+        if (this.hungerTimer > HUNGER_COOLDOWN) {
+            this.isHungry = true;
+        } else {
+            hungerTimer++;
+        }
     }
 
     public void aiStep() {
@@ -196,6 +192,14 @@ public class Seacow extends AgeableWaterAnimal {
         return 40;
     }
 
+    public boolean isHungry() {
+        return isHungry;
+    }
+
+    public void eat() {
+        this.hungerTimer = 0;
+        this.isHungry = false;
+    }
 }
 
 

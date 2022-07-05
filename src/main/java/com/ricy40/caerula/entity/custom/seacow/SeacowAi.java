@@ -8,11 +8,10 @@ import com.ricy40.caerula.entity.ModActivites;
 import com.ricy40.caerula.entity.ModEntityTypes;
 import com.ricy40.caerula.entity.ModMemoryModuleTypes;
 import com.ricy40.caerula.entity.ModSensorTypes;
-import com.ricy40.caerula.entity.custom.seacow.activities.Eating;
-import com.ricy40.caerula.entity.custom.seacow.activities.Sniffling;
+import com.ricy40.caerula.entity.custom.seacow.behaviors.*;
 import com.ricy40.caerula.tags.ModTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Unit;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -23,7 +22,6 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
-import net.minecraft.world.entity.animal.frog.ShootTongue;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -64,13 +62,16 @@ public class SeacowAi {
             MemoryModuleType.IS_PANICKING,
             MemoryModuleType.PATH,
             ModMemoryModuleTypes.EATING_COOLDOWN.get(),
-            ModMemoryModuleTypes.FOOD_POS.get()
+            ModMemoryModuleTypes.FOOD_POS.get(),
+            ModMemoryModuleTypes.LOCATE_FOOD_COOLDOWN.get(),
+            ModMemoryModuleTypes.IS_LOCATING_FOOD.get()
     );
 
     protected static Brain<?> makeBrain(Brain<Seacow> brain) {
         initCoreActivity(brain);
-        initEatingActivity(brain);
         initIdleActivity(brain);
+        initLocateFoodActivity(brain);
+        initEatingActivity(brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         brain.setDefaultActivity(Activity.IDLE);
         brain.useDefaultActivity();
@@ -88,29 +89,32 @@ public class SeacowAi {
     }
 
     private static void initIdleActivity(Brain<Seacow> brain) {
-        brain.addActivity(Activity.IDLE, ImmutableList.of(
-                Pair.of(0, new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0F), UniformInt.of(30, 60))),
-                Pair.of(1, new AnimalMakeLove(ModEntityTypes.SEACOW.get(), 0.2F)),
-                Pair.of(2, new RunOne<>(ImmutableList.of(
+        brain.addActivity(Activity.IDLE, 10, ImmutableList.of(
+                new TryToLocateFood(),
+                new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0F), UniformInt.of(30, 60)),
+                new AnimalMakeLove(ModEntityTypes.SEACOW.get(), 0.2F),
+                new RunOne<>(ImmutableList.of(
                         Pair.of(new FollowTemptation(SeacowAi::getSpeedModifier), 1),
                         Pair.of(new BabyFollowAdult<>(ADULT_FOLLOW_RANGE, SeacowAi::getSpeedModifierFollowingAdult), 1),
-                        Pair.of(new Sniffling<>(), 3)))),
-                Pair.of(3, new GateBehavior<>(ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), ImmutableSet.of(), GateBehavior.OrderPolicy.ORDERED, GateBehavior.RunningPolicy.TRY_ALL, ImmutableList.of(
+                        Pair.of(new Sniffling<>(), 3))),
+                new GateBehavior<>(ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), ImmutableSet.of(), GateBehavior.OrderPolicy.ORDERED, GateBehavior.RunningPolicy.TRY_ALL, ImmutableList.of(
                         Pair.of(new RandomSwim(0.5F), 2),
                         Pair.of(new SetWalkTargetFromLookTarget(SeacowAi::canSetWalkTargetFromLookTarget, SeacowAi::getSpeedModifier, 3), 3),
-                        Pair.of(new RunIf<>(Entity::isInWaterOrBubble, new DoNothing(30, 60)), 5))))));
+                        Pair.of(new RunIf<>(Entity::isInWaterOrBubble, new DoNothing(30, 60)), 5)))));
+    }
+
+    private static void initLocateFoodActivity(Brain<Seacow> brain) {
+        brain.addActivityAndRemoveMemoryWhenStopped(ModActivites.LOCATE_FOOD.get(), 5, ImmutableList.of(new LocateFood<>()), ModMemoryModuleTypes.IS_LOCATING_FOOD.get());
     }
 
     private static void initEatingActivity(Brain<Seacow> brain) {
-        brain.addActivityAndRemoveMemoryWhenStopped(ModActivites.EATING.get(), 0, ImmutableList.of(new Eating<>()), ModMemoryModuleTypes.FOOD_POS.get());
-
+        brain.addActivityAndRemoveMemoryWhenStopped(ModActivites.EATING.get(), 5, ImmutableList.of(new GoToFoodLocation<>(ModMemoryModuleTypes.FOOD_POS.get(),1, 1.2F), new Eating<>()), ModMemoryModuleTypes.FOOD_POS.get());
     }
 
     public static void updateActivity(Seacow seacow) {
         seacow.getBrain().setActiveActivityToFirstValid(ImmutableList.of(
-                //ModActivites.FLEEING.get(),
-                //ModActivites.EATING.get(),
-                ModActivites.SNIFFLING.get(),
+                ModActivites.LOCATE_FOOD.get(),
+                ModActivites.EATING.get(),
                 Activity.IDLE));
     }
 
@@ -135,5 +139,20 @@ public class SeacowAi {
 
     public static Ingredient getTemptations() {
         return Ingredient.of(ModTags.Items.SEACOW_TEMPT_ITEMS);
+    }
+
+    public static void setEatCooldown(LivingEntity entity) {
+        if (entity.getBrain().hasMemoryValue(ModMemoryModuleTypes.EATING_COOLDOWN.get())) {
+            entity.getBrain().setMemoryWithExpiry(ModMemoryModuleTypes.EATING_COOLDOWN.get(), Unit.INSTANCE, EATING_COOLDOWN);
+        }
+    }
+    
+    public static void setFoodLocation(Seacow seacow, BlockPos pos) {
+        if (seacow.level.getWorldBorder().isWithinBounds(pos) && !seacow.getBrain().getMemory(ModMemoryModuleTypes.FOOD_POS.get()).isPresent()) {
+            setEatCooldown(seacow);
+            seacow.getBrain().setMemoryWithExpiry(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(pos), 100L);
+            seacow.getBrain().setMemoryWithExpiry(ModMemoryModuleTypes.FOOD_POS.get(), pos, 100L);
+            seacow.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
+        }
     }
 }
