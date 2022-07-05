@@ -13,7 +13,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 public class TryToLocateFood extends Behavior<Seacow> {
-    private static final IntProvider LOCATE_FOOD_COOLDOWN = UniformInt.of(200, 300);
+    private static final IntProvider LOCATE_FOOD_COOLDOWN = UniformInt.of(500, 800);
 
     public TryToLocateFood() {
         super(ImmutableMap.of(ModMemoryModuleTypes.FOOD_POS.get(), MemoryStatus.VALUE_ABSENT, ModMemoryModuleTypes.LOCATE_FOOD_COOLDOWN.get(), MemoryStatus.VALUE_ABSENT));

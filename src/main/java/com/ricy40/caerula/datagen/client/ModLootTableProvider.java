@@ -111,12 +111,17 @@ public class ModLootTableProvider extends LootTableProvider {
                                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
                                             .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))))));
 
-
             add(ModEntityTypes.SEACOW.get(),
                     LootTable.lootTable().withPool(
                             LootPool.lootPool()
                                     .setRolls(ConstantValue.exactly(1F))
                                     .add(LootItem.lootTableItem(Items.BEEF))));
+
+            add(ModEntityTypes.MERSHROOM.get(),
+                    LootTable.lootTable().withPool(
+                            LootPool.lootPool()
+                                    .setRolls(ConstantValue.exactly(1F))
+                                    .add(LootItem.lootTableItem(ModBlocks.PURPLE_SEASHROOM.get()))));
 
         }
 

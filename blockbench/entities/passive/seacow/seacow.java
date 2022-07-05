@@ -28,6 +28,10 @@ public class seacow<T extends Entity> extends EntityModel<T> {
 
 		PartDefinition tail3_r1 = tail3.addOrReplaceChild("tail3_r1", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -5.0F, 22.0F, 0.0F, 10.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 5.0F, -17.0F, 0.0F, 0.0F, 1.5708F));
 
+		PartDefinition mush3 = tail1.addOrReplaceChild("mush3", CubeListBuilder.create().texOffs(3, 53).addBox(-4.0F, -7.0F, 0.0F, 8.0F, 7.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -2.0F, 5.0F, 0.0F, 2.3562F, 0.0F));
+
+		PartDefinition mush3p2_r1 = mush3.addOrReplaceChild("mush3p2_r1", CubeListBuilder.create().texOffs(3, 53).addBox(-4.0F, -7.0F, 1.0F, 8.0F, 7.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
+
 		PartDefinition finleft = body.addOrReplaceChild("finleft", CubeListBuilder.create().texOffs(42, 0).addBox(-1.0F, -1.0F, -1.5F, 7.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(6.0F, 1.0F, -3.5F));
 
 		PartDefinition finright = body.addOrReplaceChild("finright", CubeListBuilder.create().texOffs(0, 44).addBox(-6.0F, -1.0F, -1.5F, 7.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-6.0F, 1.0F, -3.5F));
@@ -39,10 +43,6 @@ public class seacow<T extends Entity> extends EntityModel<T> {
 		PartDefinition mush2 = body.addOrReplaceChild("mush2", CubeListBuilder.create().texOffs(3, 53).addBox(-4.0F, -7.0F, 0.0F, 8.0F, 7.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.0F, -4.0F, 3.0F, 0.0F, -2.3562F, 0.0F));
 
 		PartDefinition mush2p2_r1 = mush2.addOrReplaceChild("mush2p2_r1", CubeListBuilder.create().texOffs(3, 53).addBox(-4.0F, -7.0F, 1.0F, 8.0F, 7.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
-
-		PartDefinition mush3 = body.addOrReplaceChild("mush3", CubeListBuilder.create().texOffs(3, 53).addBox(-4.0F, -7.0F, 0.0F, 8.0F, 7.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -2.0F, 14.0F, 0.0F, 2.3562F, 0.0F));
-
-		PartDefinition mush3p2_r1 = mush3.addOrReplaceChild("mush3p2_r1", CubeListBuilder.create().texOffs(3, 53).addBox(-4.0F, -7.0F, 1.0F, 8.0F, 7.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
 		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(36, 28).addBox(-3.0F, -2.5F, -5.0F, 6.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 19.5F, -9.0F));
 
