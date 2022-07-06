@@ -1,6 +1,7 @@
 package com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features;
 
 import com.ricy40.caerula.Caerula;
+import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.hugeseashroom.HugeYellowSeashroomFeature;
 import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.utilfeatures.RandomProbabilityThreeFeatureConfiguration;
 import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.hugeseashroom.HugePurpleSeashroomFeature;
 import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.hugeseashroom.HugeSeashroomFeatureConfiguration;
@@ -38,6 +39,7 @@ public abstract class ModFeatures<FC extends FeatureConfiguration> {
     public static final RegistryObject<Feature<RandomProbabilityThreeFeatureConfiguration>> RANDOM_PROBABILITY_THREE_SECLECTOR = registerFeature("random_probability_selector_three", () -> new RandomProbabilityThreeSelectorFeature(RandomProbabilityThreeFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<ProbabilityFeatureConfiguration>> RED_SEAGRASS = registerFeature("red_seagrass", () -> new RedSeagrassFeature(ProbabilityFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<HugeSeashroomFeatureConfiguration>> HUGE_PURPLE_SEASHROOM = registerFeature("huge_purple_seashroom", () -> new HugePurpleSeashroomFeature(HugeSeashroomFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<HugeSeashroomFeatureConfiguration>> HUGE_YELLOW_SEASHROOM = registerFeature("huge_yellow_seashroom", () -> new HugeYellowSeashroomFeature(HugeSeashroomFeatureConfiguration.CODEC));
 
     public static void register(IEventBus eventBus) {
         FEATURES.register(eventBus);

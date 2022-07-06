@@ -37,11 +37,19 @@ public class ModBlocks {
     public static final RegistryObject<Block> NIXIUM_ORE = registerBlock("nixium_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModCreativeModeTab.CAERULA);
     public static final RegistryObject<Block> DEEPSLATE_NIXIUM_ORE = registerBlock("deepslate_nixium_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), ModCreativeModeTab.CAERULA);
 
-    public static final RegistryObject<Block> PURPLE_SEASHROOM = registerBlock("purple_seashroom", () -> new SeashroomBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_WATER_PLANT, MaterialColor.COLOR_BROWN).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).lightLevel((light) -> {return 1;}).hasPostProcess(ModBlocks::always),
+    public static final RegistryObject<Block> PURPLE_SEASHROOM = registerBlock("purple_seashroom", () -> new SeashroomBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_WATER_PLANT, MaterialColor.COLOR_PURPLE).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).lightLevel((light) -> {return 1;}).hasPostProcess(ModBlocks::always),
             () -> ModTreeFeatures.HUGE_PURPLE_SEASHROOM_ONECAP.getHolder().get(),
             () -> ModTreeFeatures.HUGE_PURPLE_SEASHROOM_TWOCAP.getHolder().get(),
             () -> ModTreeFeatures.HUGE_PURPLE_SEASHROOM_THREECAP.getHolder().get()),  ModCreativeModeTab.CAERULA);
-    public static final RegistryObject<Block> PURPLE_SEASHROOM_BLOCK = registerBlock("purple_seashroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.DIRT).strength(0.2F).sound(SoundType.WOOD)), ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<Block> YELLOW_SEASHROOM = registerBlock("yellow_seashroom", () -> new SeashroomBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_WATER_PLANT, MaterialColor.COLOR_YELLOW).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).lightLevel((light) -> {return 1;}).hasPostProcess(ModBlocks::always),
+            () -> ModTreeFeatures.HUGE_YELLOW_SEASHROOM_ONECAP.getHolder().get(),
+            () -> ModTreeFeatures.HUGE_YELLOW_SEASHROOM_TWOCAP.getHolder().get(),
+            () -> ModTreeFeatures.HUGE_YELLOW_SEASHROOM_THREECAP.getHolder().get()),  ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<HugeMushroomBlock> PURPLE_SEASHROOM_BLOCK = registerBlock("purple_seashroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.DIRT).strength(0.2F).sound(SoundType.WOOD)), ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<HugeMushroomBlock> YELLOW_SEASHROOM_BLOCK = registerBlock("yellow_seashroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.DIRT).strength(0.2F).sound(SoundType.WOOD)), ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<HugeMushroomBlock> ORANGE_SEASHROOM_BLOCK = registerBlock("orange_seashroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.DIRT).strength(0.2F).sound(SoundType.WOOD)), ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<HugeMushroomBlock> BROWN_SEASHROOM_BLOCK = registerBlock("brown_seashroom_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.DIRT).strength(0.2F).sound(SoundType.WOOD)), ModCreativeModeTab.CAERULA);
+    public static final RegistryObject<HugeMushroomBlock> SEASHROOM_STEM = registerBlock("seashroom_stem", () -> new HugeMushroomBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOL).strength(0.2F).sound(SoundType.WOOD)), ModCreativeModeTab.CAERULA);
     public static final RegistryObject<Block> MYCELIUM_SAND = registerBlock("mycelium_sand", () -> new MyceliumSandBlock(BlockBehaviour.Properties.of(Material.GRASS, MaterialColor.COLOR_PURPLE).randomTicks().strength(0.6F).sound(SoundType.GRASS)), ModCreativeModeTab.CAERULA);
 
 

@@ -104,7 +104,6 @@ public class SeashroomBlock extends WaterBushBlock implements BonemealableBlock 
 
     public Supplier<Holder<? extends ConfiguredFeature<?, ?>>> randType() {
         double num = RandomSource.create().nextDouble();
-        System.out.println(num);
         if (num < 0.65d) {
             return this.featureSupplierCommon;
         } else if (num < 0.95d) {

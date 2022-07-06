@@ -9,7 +9,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -33,7 +35,9 @@ public abstract class AbstractHugeSeashroomFeature extends Feature<HugeSeashroom
         for(int i = 0; i < height; ++i) {
             mutablePos.set(pos).move(Direction.UP, i);
             if (!levelAccessor.getBlockState(mutablePos).isSolidRender(levelAccessor, mutablePos)) {
-                this.setBlock(levelAccessor, mutablePos, config.stemProvider.getState(random, pos));
+                BlockState state = config.stemProvider.getState(random, pos);
+                if (i == height - 1) {state.setValue(HugeMushroomBlock.UP, true);}
+                this.setBlock(levelAccessor, mutablePos, state);
             }
         }
 

@@ -22,44 +22,37 @@ public class ModTreeFeatures {
     public static DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, Caerula.MOD_ID);
     public static List<String> configuredTreeFeatureList = new ArrayList<>();
 
-    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_PURPLE_SEASHROOM_ONECAP
-            = registerConfiguredFeature("huge_purple_seashroom_onecap", () -> new ConfiguredFeature<>(ModFeatures.HUGE_PURPLE_SEASHROOM.get(),
-            new HugeSeashroomFeatureConfiguration(
-                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState()
-                            .setValue(HugeMushroomBlock.UP, Boolean.TRUE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
-                    BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState()
-                            .setValue(HugeMushroomBlock.UP, Boolean.FALSE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_PURPLE_SEASHROOM_ONECAP = registerConfiguredFeature("huge_purple_seashroom_onecap",
+            () -> new ConfiguredFeature<>(ModFeatures.HUGE_PURPLE_SEASHROOM.get(), new HugeSeashroomFeatureConfiguration(
+                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.SEASHROOM_STEM.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_PURPLE_SEASHROOM_TWOCAP = registerConfiguredFeature("huge_purple_seashroom_twocap",
+            () -> new ConfiguredFeature<>(ModFeatures.HUGE_PURPLE_SEASHROOM.get(), new HugeSeashroomFeatureConfiguration(
+                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.SEASHROOM_STEM.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2, 3)));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_PURPLE_SEASHROOM_THREECAP = registerConfiguredFeature("huge_purple_seashroom_threecap",
+            () -> new ConfiguredFeature<>(ModFeatures.HUGE_PURPLE_SEASHROOM.get(), new HugeSeashroomFeatureConfiguration(
+                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.SEASHROOM_STEM.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2, 3,4)));
 
-    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_PURPLE_SEASHROOM_TWOCAP
-            = registerConfiguredFeature("huge_purple_seashroom_twocap", () -> new ConfiguredFeature<>(ModFeatures.HUGE_PURPLE_SEASHROOM.get(),
-            new HugeSeashroomFeatureConfiguration(
-                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState()
-                            .setValue(HugeMushroomBlock.UP, Boolean.TRUE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
-                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState()
-                            .setValue(HugeMushroomBlock.UP, Boolean.TRUE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
-                    BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState()
-                            .setValue(HugeMushroomBlock.UP, Boolean.FALSE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2, 3)));
-
-    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_PURPLE_SEASHROOM_THREECAP
-            = registerConfiguredFeature("huge_purple_seashroom_threecap", () -> new ConfiguredFeature<>(ModFeatures.HUGE_PURPLE_SEASHROOM.get(),
-            new HugeSeashroomFeatureConfiguration(
-                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState()
-                            .setValue(HugeMushroomBlock.UP, Boolean.TRUE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
-                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState()
-                            .setValue(HugeMushroomBlock.UP, Boolean.TRUE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
-                    BlockStateProvider.simple(ModBlocks.PURPLE_SEASHROOM_BLOCK.get().defaultBlockState()
-                            .setValue(HugeMushroomBlock.UP, Boolean.TRUE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
-                    BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState()
-                            .setValue(HugeMushroomBlock.UP, Boolean.FALSE)
-                            .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2, 3,3)));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_YELLOW_SEASHROOM_ONECAP = registerConfiguredFeature("huge_yellow_seashroom_onecap",
+            () -> new ConfiguredFeature<>(ModFeatures.HUGE_YELLOW_SEASHROOM.get(), new HugeSeashroomFeatureConfiguration(
+                    BlockStateProvider.simple(ModBlocks.YELLOW_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.SEASHROOM_STEM.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_YELLOW_SEASHROOM_TWOCAP = registerConfiguredFeature("huge_yellow_seashroom_twocap",
+            () -> new ConfiguredFeature<>(ModFeatures.HUGE_YELLOW_SEASHROOM.get(), new HugeSeashroomFeatureConfiguration(
+                    BlockStateProvider.simple(ModBlocks.YELLOW_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.ORANGE_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.SEASHROOM_STEM.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2, 3)));
+    public static final RegistryObject<ConfiguredFeature<?, ?>> HUGE_YELLOW_SEASHROOM_THREECAP = registerConfiguredFeature("huge_yellow_seashroom_threecap",
+            () -> new ConfiguredFeature<>(ModFeatures.HUGE_YELLOW_SEASHROOM.get(), new HugeSeashroomFeatureConfiguration(
+                    BlockStateProvider.simple(ModBlocks.YELLOW_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.ORANGE_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.BROWN_SEASHROOM_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.TRUE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)),
+                    BlockStateProvider.simple(ModBlocks.SEASHROOM_STEM.get().defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2, 3,4)));
 
     public static void register(IEventBus bus) {
         CONFIGURED_FEATURES.register(bus);

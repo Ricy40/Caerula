@@ -73,8 +73,13 @@ public class ModLootTableProvider extends LootTableProvider {
             add(ModBlocks.DEEPSLATE_NIXIUM_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_NIXIUM_ORE.get(), ModItems.RAW_NIXIUM.get()));
 
             dropSelf(ModBlocks.PURPLE_SEASHROOM.get());
+            dropSelf(ModBlocks.YELLOW_SEASHROOM.get());
             add(ModBlocks.PURPLE_SEASHROOM_BLOCK.get(), createMushroomBlockDrop(ModBlocks.PURPLE_SEASHROOM_BLOCK.get(), ModBlocks.PURPLE_SEASHROOM.get()));
+            add(ModBlocks.YELLOW_SEASHROOM_BLOCK.get(), createMushroomBlockDrop(ModBlocks.YELLOW_SEASHROOM_BLOCK.get(), ModBlocks.YELLOW_SEASHROOM.get()));
+            add(ModBlocks.ORANGE_SEASHROOM_BLOCK.get(), createMushroomBlockDrop(ModBlocks.ORANGE_SEASHROOM_BLOCK.get(), ModBlocks.YELLOW_SEASHROOM.get()));
+            add(ModBlocks.BROWN_SEASHROOM_BLOCK.get(), createMushroomBlockDrop(ModBlocks.BROWN_SEASHROOM_BLOCK.get(), ModBlocks.YELLOW_SEASHROOM.get()));
             add(ModBlocks.MYCELIUM_SAND.get(), createSingleItemTableWithSilkTouch(ModBlocks.MYCELIUM_SAND.get(), Blocks.SAND));
+            dropWhenSilkTouch(ModBlocks.SEASHROOM_STEM.get());
 
             //Check BlockLoot
 
