@@ -59,14 +59,14 @@ public class Mershroom extends Seacow implements Shearable, IForgeShearable {
         return pLevel.getBlockState(pPos.below()).is(Blocks.MYCELIUM) ? 10.0F : pLevel.getPathfindingCostFromLightLevels(pPos);
     }
 
-    public static boolean checkMushroomSpawnRules(EntityType<Mershroom> mershroom, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+    public static boolean checkSeashroomSpawnRules(EntityType<Mershroom> mershroom, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(BlockTags.MUSHROOM_GROW_BLOCK) && isBrightEnoughToSpawn(level, pos);
     }
 
     public void thunderHit(ServerLevel pLevel, LightningBolt pLightning) {
         UUID uuid = pLightning.getUUID();
         if (!uuid.equals(this.lastLightningBoltUUID)) {
-            this.setMushroomType(this.getMushroomType() == MushroomType.PURPLE ? MushroomType.YELLOW : MushroomType.PURPLE);
+            this.setSeashroomType(this.getSeashroomType() == SeashroomType.PURPLE ? SeashroomType.YELLOW : SeashroomType.PURPLE);
             this.lastLightningBoltUUID = uuid;
             this.playSound(SoundEvents.MOOSHROOM_CONVERT, 2.0F, 1.0F);
         }
@@ -75,7 +75,7 @@ public class Mershroom extends Seacow implements Shearable, IForgeShearable {
 
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_TYPE, MushroomType.PURPLE.type);
+        this.entityData.define(DATA_TYPE, SeashroomType.PURPLE.type);
     }
 
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
@@ -114,7 +114,7 @@ public class Mershroom extends Seacow implements Shearable, IForgeShearable {
             }
 
             return InteractionResult.sidedSuccess(this.level.isClientSide);
-        } else if (this.getMushroomType() == MushroomType.YELLOW && itemstack.is(ItemTags.SMALL_FLOWERS)) {
+        } else if (this.getSeashroomType() == SeashroomType.YELLOW && itemstack.is(ItemTags.SMALL_FLOWERS)) {
             if (this.effect != null) {
                 for(int i = 0; i < 2; ++i) {
                     this.level.addParticle(ParticleTypes.SMOKE, this.getX() + this.random.nextDouble() / 2.0D, this.getY(0.5D), this.getZ() + this.random.nextDouble() / 2.0D, 0.0D, this.random.nextDouble() / 5.0D, 0.0D);
@@ -178,7 +178,7 @@ public class Mershroom extends Seacow implements Shearable, IForgeShearable {
 
             java.util.List<ItemStack> items = new java.util.ArrayList<>();
             for(int i = 0; i < 5; ++i) {
-                items.add(new ItemStack(this.getMushroomType().blockState.getBlock()));
+                items.add(new ItemStack(this.getSeashroomType().blockState.getBlock()));
             }
             return items;
         }
@@ -192,7 +192,7 @@ public class Mershroom extends Seacow implements Shearable, IForgeShearable {
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-        pCompound.putString("Type", this.getMushroomType().type);
+        pCompound.putString("Type", this.getSeashroomType().type);
         if (this.effect != null) {
             pCompound.putInt("EffectId", MobEffect.getId(this.effect));
             net.minecraftforge.common.ForgeHooks.saveMobEffect(pCompound, "forge:effect_id", this.effect);
@@ -203,7 +203,7 @@ public class Mershroom extends Seacow implements Shearable, IForgeShearable {
     
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
-        this.setMushroomType(Mershroom.MushroomType.byType(pCompound.getString("Type")));
+        this.setSeashroomType(Mershroom.SeashroomType.byType(pCompound.getString("Type")));
         if (pCompound.contains("EffectId", 1)) {
             this.effect = MobEffect.byId(pCompound.getInt("EffectId"));
             this.effect = net.minecraftforge.common.ForgeHooks.loadMobEffect(pCompound, "forge:effect_id", this.effect);
@@ -228,31 +228,31 @@ public class Mershroom extends Seacow implements Shearable, IForgeShearable {
         return Optional.empty();
     }
 
-    private void setMushroomType(Mershroom.MushroomType pType) {
+    private void setSeashroomType(Mershroom.SeashroomType pType) {
         this.entityData.set(DATA_TYPE, pType.type);
     }
 
-    public Mershroom.MushroomType getMushroomType() {
-        return Mershroom.MushroomType.byType(this.entityData.get(DATA_TYPE));
+    public Mershroom.SeashroomType getSeashroomType() {
+        return Mershroom.SeashroomType.byType(this.entityData.get(DATA_TYPE));
     }
     
     public Mershroom getBreedOffspring(ServerLevel level, AgeableMob mob) {
         Mershroom mershroom = ModEntityTypes.MERSHROOM.get().create(level);
-        mershroom.setMushroomType(this.getOffspringType((Mershroom)mob));
+        mershroom.setSeashroomType(this.getOffspringType((Mershroom)mob));
         return mershroom;
     }
 
-    private Mershroom.MushroomType getOffspringType(Mershroom pMate) {
-        Mershroom.MushroomType mershroom$mushroomtype = this.getMushroomType();
-        Mershroom.MushroomType mershroom$mushroomtype1 = pMate.getMushroomType();
-        Mershroom.MushroomType mershroom$mushroomtype2;
-        if (mershroom$mushroomtype == mershroom$mushroomtype1 && this.random.nextInt(1024) == 0) {
-            mershroom$mushroomtype2 = mershroom$mushroomtype == MushroomType.YELLOW ? MushroomType.PURPLE : MushroomType.YELLOW;
+    private Mershroom.SeashroomType getOffspringType(Mershroom pMate) {
+        Mershroom.SeashroomType seashroomType = this.getSeashroomType();
+        Mershroom.SeashroomType seashroomType1 = pMate.getSeashroomType();
+        Mershroom.SeashroomType seashroomType2;
+        if (seashroomType == seashroomType1 && this.random.nextInt(1024) == 0) {
+            seashroomType2 = seashroomType == SeashroomType.YELLOW ? SeashroomType.PURPLE : SeashroomType.YELLOW;
         } else {
-            mershroom$mushroomtype2 = this.random.nextBoolean() ? mershroom$mushroomtype : mershroom$mushroomtype1;
+            seashroomType2 = this.random.nextBoolean() ? seashroomType : seashroomType1;
         }
 
-        return mershroom$mushroomtype2;
+        return seashroomType2;
     }
 
     
@@ -260,14 +260,14 @@ public class Mershroom extends Seacow implements Shearable, IForgeShearable {
         return readyForShearing();
     }
 
-    public static enum MushroomType {
+    public enum SeashroomType {
         PURPLE("purple", ModBlocks.PURPLE_SEASHROOM.get().defaultBlockState()),
-        YELLOW("yellow", ModBlocks.RED_SEAGRASS.get().defaultBlockState());
+        YELLOW("yellow", ModBlocks.YELLOW_SEASHROOM.get().defaultBlockState());
 
         final String type;
         final BlockState blockState;
 
-        private MushroomType(String pType, BlockState state) {
+        SeashroomType(String pType, BlockState state) {
             this.type = pType;
             this.blockState = state;
         }
@@ -276,10 +276,10 @@ public class Mershroom extends Seacow implements Shearable, IForgeShearable {
             return this.blockState;
         }
 
-        static Mershroom.MushroomType byType(String pName) {
-            for(Mershroom.MushroomType mershroom$mushroomtype : values()) {
-                if (mershroom$mushroomtype.type.equals(pName)) {
-                    return mershroom$mushroomtype;
+        static Mershroom.SeashroomType byType(String pName) {
+            for(Mershroom.SeashroomType seashroomType : values()) {
+                if (seashroomType.type.equals(pName)) {
+                    return seashroomType;
                 }
             }
 

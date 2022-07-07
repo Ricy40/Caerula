@@ -31,15 +31,15 @@ public class Seacow extends AgeableWaterAnimal {
 
     private int hungerTimer;
     private boolean isHungry;
-    private static final int HUNGER_COOLDOWN = 6000;
+    private static final int HUNGER_COOLDOWN = 300;
 
     public AnimationState sniffleAnimationState = new AnimationState();
     public AnimationState eatingAnimationState = new AnimationState();
     public final Predicate<BlockState> VALID_EATDILE_BLOCKS = (block) -> {
         if (block.is(Blocks.WATER)) {
             return false;
-        } else if (!block.hasProperty(BlockStateProperties.WATERLOGGED)) {
-            if (!block.getValue(BlockStateProperties.WATERLOGGED)) {
+        } else if (block.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            if (block.getValue(BlockStateProperties.WATERLOGGED)) {
                 if (block.is(ModTags.Blocks.SEACOW_EDIBLES)) {
                     return true;
                 }

@@ -1,4 +1,4 @@
-// 1.19	2022-07-04T17:31:30.1423062	Item Models: caerula
+// 1.19	2022-07-07T13:36:56.3330998	Item Models: caerula
 42a34a753645fbd80fbb3bfcb49edc017c01efd2 assets/caerula/models/item/blobfish.json
 5e4e8bef6958b98f30f21c4d3366b13c6f033f8f assets/caerula/models/item/blobfish_bucket.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/caerula/models/item/blobfish_spawn_egg.json
@@ -7,6 +7,7 @@
 d3305a89bac352266a06340a7e7ed13e8bcce42d assets/caerula/models/item/deepslate_nixium_ore.json
 816d6c9e391af6c7b13729c49849257834574c18 assets/caerula/models/item/lula_bucket.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/caerula/models/item/lula_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/caerula/models/item/mershroom_spawn_egg.json
 0896300d43f12884faa76309884d0127e2b93765 assets/caerula/models/item/nixium_block.json
 50ccff4b7b78bffe76e5f28569e3d63cf40adf8b assets/caerula/models/item/nixium_ingot.json
 798da26243019ee6955ff0e19b87c14b99701372 assets/caerula/models/item/nixium_nugget.json
@@ -16,3 +17,4 @@ bdad981f94a44483d969e7329368c92b43f10109 assets/caerula/models/item/nixium_ore.j
 2ed100c9e971340a2c7172edb22ff8409508dc56 assets/caerula/models/item/raw_lula.json
 5500dc0f18088ee3ed80cc11087daafbcfec4d76 assets/caerula/models/item/raw_nixium.json
 b1379eae40683db16e7e8ca239073ed4b671658c assets/caerula/models/item/raw_nixium_block.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/caerula/models/item/seacow_spawn_egg.json

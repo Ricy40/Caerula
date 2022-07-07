@@ -40,6 +40,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COOKED_LULA.get());
         basicSpawnEggItem(ModItems.LULA_SPAWN_EGG.get());
 
+        basicSpawnEggItem(ModItems.SEACOW_SPAWN_EGG.get());
+        basicSpawnEggItem(ModItems.MERSHROOM_SPAWN_EGG.get());
+
 
     }
 

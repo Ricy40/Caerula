@@ -45,8 +45,6 @@ public abstract class AbstractHugeSeashroomFeature extends Feature<HugeSeashroom
 
     protected int getTreeHeight(HugeSeashroomFeatureConfiguration config, RandomSource random) {
 
-        System.out.println(config.layers);
-
         int maxHeight = config.layers.getMaxHeight();
         int minHeight = config.layers.getMinHeight();
 

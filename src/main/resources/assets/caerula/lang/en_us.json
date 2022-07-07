@@ -28,7 +28,14 @@
     "block.caerula.purple_seashroom" : "Purple Seashroom",
     "block.caerula.purple_seashroom_block" : "Purple Seashroom Block",
     "block.caerula.mycelium_sand" : "Mysealia",
+    "block.caerula.seashroom_stem": "Seashroom Stem",
+    "block.caerula.yellow_seashroom_block": "Yellow Seashroom Block",
+    "block.caerula.orange_seashroom_block": "Orange Seashroom Block",
+    "block.caerula.brown_seashroom_block": "Brown Seashroom Block",
+    "block.caerula.yellow_seashroom": "Yellow Seashroom",
 
     "entity.caerula.blobfish" : "Blobfish",
-    "entity.caerula.lula" : "Lula"
+    "entity.caerula.lula" : "Lula",
+    "entity.caerula.seacow" : "Seacow",
+    "entity.caerula.mershroom" : "Mershroom"
 }

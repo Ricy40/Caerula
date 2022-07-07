@@ -14,9 +14,9 @@ import java.util.Map;
 
 public class MershroomRenderer extends MobRenderer<Mershroom, SeacowModel<Mershroom>> {
 
-    private static final Map<Mershroom.MushroomType, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (type) -> {
-        type.put(Mershroom.MushroomType.YELLOW, new ResourceLocation(Caerula.MOD_ID, "textures/entity/seacow/purple_mershroom.png"));
-        type.put(Mershroom.MushroomType.PURPLE, new ResourceLocation(Caerula.MOD_ID,"textures/entity/seacow/yellow_mershroom.png"));
+    private static final Map<Mershroom.SeashroomType, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (type) -> {
+        type.put(Mershroom.SeashroomType.PURPLE, new ResourceLocation(Caerula.MOD_ID,"textures/entity/seacow/purple_mershroom.png"));
+        type.put(Mershroom.SeashroomType.YELLOW, new ResourceLocation(Caerula.MOD_ID, "textures/entity/seacow/yellow_mershroom.png"));
     });
 
     public MershroomRenderer(EntityRendererProvider.Context context) {
@@ -33,6 +33,6 @@ public class MershroomRenderer extends MobRenderer<Mershroom, SeacowModel<Mershr
 
     @Override
     public ResourceLocation getTextureLocation(Mershroom pEntity) {
-        return TEXTURES.get(pEntity.getMushroomType());
+        return TEXTURES.get(pEntity.getSeashroomType());
     }
 }

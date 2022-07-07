@@ -52,6 +52,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
         tag(ModTags.Blocks.SEACOW_EDIBLES)
                 .add(ModBlocks.PURPLE_SEASHROOM.get())
+                .add(ModBlocks.YELLOW_SEASHROOM.get())
                 ;
     }
 }

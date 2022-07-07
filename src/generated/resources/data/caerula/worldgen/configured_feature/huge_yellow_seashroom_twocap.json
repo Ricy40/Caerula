@@ -1,10 +1,10 @@
 {
-  "type": "caerula:huge_purple_seashroom",
+  "type": "caerula:huge_yellow_seashroom",
   "config": {
     "bottom_cap_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "caerula:purple_seashroom_block",
+        "Name": "caerula:orange_seashroom_block",
         "Properties": {
           "down": "false",
           "east": "true",
@@ -15,11 +15,11 @@
         }
       }
     },
-    "bottom_foliage_radius": 4,
+    "bottom_foliage_radius": 3,
     "mid_cap_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "caerula:purple_seashroom_block",
+        "Name": "caerula:yellow_seashroom_block",
         "Properties": {
           "down": "false",
           "east": "true",
@@ -30,7 +30,7 @@
         }
       }
     },
-    "mid_foliage_radius": 3,
+    "mid_foliage_radius": 2,
     "stem_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
@@ -48,7 +48,7 @@
     "top_cap_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "caerula:purple_seashroom_block",
+        "Name": "caerula:yellow_seashroom_block",
         "Properties": {
           "down": "false",
           "east": "true",
@@ -59,6 +59,6 @@
         }
       }
     },
-    "top_foliage_radius": 2
+    "top_foliage_radius": 0
   }
 }
