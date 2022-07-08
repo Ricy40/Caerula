@@ -34,7 +34,6 @@ public class LocateFood <E extends Seacow> extends Behavior<E> {
         this.found_food = null;
     }
 
-    @Override
     protected boolean canStillUse(ServerLevel pLevel, E seacow, long pGameTime) {
         if (seacow.isHungry()) {
             System.out.println("hungry");
