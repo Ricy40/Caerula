@@ -20,9 +20,7 @@ public class ModMemoryModuleTypes {
 
     public static final DeferredRegister<MemoryModuleType<?>> MEMORY_MODULE_TYPES = DeferredRegister.create(ForgeRegistries.MEMORY_MODULE_TYPES, Caerula.MOD_ID);
 
-    public static final RegistryObject<MemoryModuleType<Unit>> EATING_COOLDOWN = registerMemoryModuleType("eating_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
     public static final RegistryObject<MemoryModuleType<Unit>> LOCATE_FOOD_COOLDOWN = registerMemoryModuleType("locate_food_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
-    public static final RegistryObject<MemoryModuleType<Unit>> IS_LOCATING_FOOD = registerMemoryModuleType("is_locating_food", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
     public static final RegistryObject<MemoryModuleType<BlockPos>> FOOD_POS = registerMemoryModuleType("food_pos", () -> new MemoryModuleType<>(Optional.empty()));
 
     private static <T> RegistryObject<MemoryModuleType<T>> registerMemoryModuleType(String name, Supplier<MemoryModuleType<T>> module) {

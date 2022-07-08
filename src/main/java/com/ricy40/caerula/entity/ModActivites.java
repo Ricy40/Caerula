@@ -14,7 +14,6 @@ public class ModActivites {
     public static final DeferredRegister<Activity> ACTIVITIES = DeferredRegister.create(ForgeRegistries.ACTIVITIES, Caerula.MOD_ID);
 
     public static final RegistryObject<Activity> EATING = registerActivity("eating", () -> new Activity("eating"));
-    public static final RegistryObject<Activity> LOCATE_FOOD = registerActivity("locate_food", () -> new Activity("locate_food"));
 
     private static RegistryObject<Activity> registerActivity(String name, Supplier<Activity> activity) {
         return ACTIVITIES.register(name, activity);

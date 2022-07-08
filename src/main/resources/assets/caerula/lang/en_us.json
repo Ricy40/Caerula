@@ -14,6 +14,8 @@
     "item.caerula.lula" : "Raw Lula",
     "item.caerula.cooked_lula" : "Calamari",
     "item.caerula.lula_spawn_egg" : "Lula Spawn Egg",
+    "item.caerula.seacow_spawn_egg" : "Seacow Spawn Egg",
+    "item.caerula.mershroom_spawn_egg" : "Mershroom Spawn Egg",
 
     "block.caerula.red_seagrass" : "Red Seagrass",
     "block.caerula.tall_red_seagrass" : "Tall Red Seagrass",

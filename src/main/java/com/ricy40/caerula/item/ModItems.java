@@ -46,10 +46,10 @@ public class ModItems {
     public static final RegistryObject<Item> COOKED_LULA = ITEMS.register("cooked_lula",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.CAERULA).food(ModFoods.COOKED_LULA)));
     public static final RegistryObject<Item> LULA_SPAWN_EGG = ITEMS.register("lula_spawn_egg",
-            () -> new ForgeSpawnEggItem(() -> ModEntityTypes.LULA.get(), 16754062, 16435377, (new Item.Properties()).tab(ModCreativeModeTab.CAERULA)));
+            () -> new ForgeSpawnEggItem(() -> ModEntityTypes.LULA.get(), 16435377, 16754062, (new Item.Properties()).tab(ModCreativeModeTab.CAERULA)));
 
     public static final RegistryObject<Item> SEACOW_SPAWN_EGG = ITEMS.register("seacow_spawn_egg",
-            () -> new ForgeSpawnEggItem(() -> ModEntityTypes.SEACOW.get(), 5197647, 7039851, (new Item.Properties()).tab(ModCreativeModeTab.CAERULA)));
+            () -> new ForgeSpawnEggItem(() -> ModEntityTypes.SEACOW.get(), 5197647, 12566463, (new Item.Properties()).tab(ModCreativeModeTab.CAERULA)));
     public static final RegistryObject<Item> MERSHROOM_SPAWN_EGG = ITEMS.register("mershroom_spawn_egg",
             () -> new ForgeSpawnEggItem(() -> ModEntityTypes.MERSHROOM.get(), 6114396, 13880516, (new Item.Properties()).tab(ModCreativeModeTab.CAERULA)));
 

@@ -61,16 +61,13 @@ public class SeacowAi {
             MemoryModuleType.BREED_TARGET,
             MemoryModuleType.IS_PANICKING,
             MemoryModuleType.PATH,
-            ModMemoryModuleTypes.EATING_COOLDOWN.get(),
             ModMemoryModuleTypes.FOOD_POS.get(),
-            ModMemoryModuleTypes.LOCATE_FOOD_COOLDOWN.get(),
-            ModMemoryModuleTypes.IS_LOCATING_FOOD.get()
+            ModMemoryModuleTypes.LOCATE_FOOD_COOLDOWN.get()
     );
 
     protected static Brain<?> makeBrain(Brain<Seacow> brain) {
         initCoreActivity(brain);
         initIdleActivity(brain);
-        initLocateFoodActivity(brain);
         initEatingActivity(brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         brain.setDefaultActivity(Activity.IDLE);
@@ -81,7 +78,7 @@ public class SeacowAi {
     private static void initCoreActivity(Brain<Seacow> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new AnimalPanic(2.0F),
-                new LookAtTargetSink(45, 90),
+                new LookAtTargetSink(35, 60),
                 new MoveToTargetSink(),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
         ));
@@ -90,7 +87,7 @@ public class SeacowAi {
 
     private static void initIdleActivity(Brain<Seacow> brain) {
         brain.addActivity(Activity.IDLE, 10, ImmutableList.of(
-                new TryToLocateFood(),
+                new LocateFood<>(),
                 new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0F), UniformInt.of(30, 60)),
                 new AnimalMakeLove(ModEntityTypes.SEACOW.get(), 0.2F),
                 new RunOne<>(ImmutableList.of(
@@ -103,19 +100,17 @@ public class SeacowAi {
                         Pair.of(new RunIf<>(Entity::isInWaterOrBubble, new DoNothing(30, 60)), 5)))));
     }
 
-    private static void initLocateFoodActivity(Brain<Seacow> brain) {
-        brain.addActivityAndRemoveMemoryWhenStopped(ModActivites.LOCATE_FOOD.get(), 5, ImmutableList.of(new LocateFood<>()), ModMemoryModuleTypes.IS_LOCATING_FOOD.get());
-    }
-
     private static void initEatingActivity(Brain<Seacow> brain) {
-        brain.addActivityAndRemoveMemoryWhenStopped(ModActivites.EATING.get(), 5, ImmutableList.of(new GoToFoodLocation<>(ModMemoryModuleTypes.FOOD_POS.get(),1, 1.2F), new Eating<>()), ModMemoryModuleTypes.FOOD_POS.get());
+        brain.addActivityAndRemoveMemoryWhenStopped(ModActivites.EATING.get(), 5,
+                ImmutableList.of(new GoToFoodLocation<>(ModMemoryModuleTypes.FOOD_POS.get(),1, 1.2F), new Eating<>()),
+                ModMemoryModuleTypes.FOOD_POS.get());
     }
 
     public static void updateActivity(Seacow seacow) {
         seacow.getBrain().setActiveActivityToFirstValid(ImmutableList.of(
-                ModActivites.LOCATE_FOOD.get(),
                 ModActivites.EATING.get(),
                 Activity.IDLE));
+        System.out.println(seacow.getBrain().getActiveNonCoreActivity());
     }
 
     private static boolean canSetWalkTargetFromLookTarget(LivingEntity entityIn) {
@@ -140,18 +135,13 @@ public class SeacowAi {
     public static Ingredient getTemptations() {
         return Ingredient.of(ModTags.Items.SEACOW_TEMPT_ITEMS);
     }
-
-    public static void setEatCooldown(LivingEntity entity) {
-        if (entity.getBrain().hasMemoryValue(ModMemoryModuleTypes.EATING_COOLDOWN.get())) {
-            entity.getBrain().setMemoryWithExpiry(ModMemoryModuleTypes.EATING_COOLDOWN.get(), Unit.INSTANCE, EATING_COOLDOWN);
-        }
-    }
     
     public static void setFoodLocation(Seacow seacow, BlockPos pos) {
         if (seacow.level.getWorldBorder().isWithinBounds(pos) && !seacow.getBrain().getMemory(ModMemoryModuleTypes.FOOD_POS.get()).isPresent()) {
-            setEatCooldown(seacow);
+
             seacow.getBrain().setMemoryWithExpiry(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(pos), 100L);
             seacow.getBrain().setMemoryWithExpiry(ModMemoryModuleTypes.FOOD_POS.get(), pos, 100L);
+
             seacow.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
         }
     }

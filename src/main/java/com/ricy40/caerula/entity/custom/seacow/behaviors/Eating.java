@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.phys.Vec3;
 
 
@@ -28,6 +29,7 @@ public class Eating <E extends Seacow> extends Behavior<E> {
     }
 
     protected void start(ServerLevel pLevel, E seacow, long pGameTime) {
+        System.out.println("Is Eating");
         seacow.playSound(SoundEvents.GENERIC_EAT, 1, 1);
         this.eatingTicks = 0;
         this.foodLocation = seacow.getBrain().getMemory(ModMemoryModuleTypes.FOOD_POS.get()).get();
