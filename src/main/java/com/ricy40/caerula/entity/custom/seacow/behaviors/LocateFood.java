@@ -19,27 +19,26 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 public class LocateFood <E extends Seacow> extends Behavior<E> {
-    private static final IntProvider LOCATE_FOOD_COOLDOWN = UniformInt.of(500, 800);
 
     public BlockPos found_food;
     
     public LocateFood() {
         super(ImmutableMap.of(
                 ModMemoryModuleTypes.FOOD_POS.get(), MemoryStatus.VALUE_ABSENT, 
-                ModMemoryModuleTypes.LOCATE_FOOD_COOLDOWN.get(), MemoryStatus.VALUE_ABSENT,
-                MemoryModuleType.IS_PANICKING, MemoryStatus.VALUE_ABSENT,
-                MemoryModuleType.IS_TEMPTED, MemoryStatus.VALUE_ABSENT), 20);
+                ModMemoryModuleTypes.IS_LOCATING_FOOD.get(), MemoryStatus.VALUE_PRESENT
+        ));
     }
 
     protected void start(ServerLevel level, Seacow seacow, long gameTime) {
         System.out.println("Is Locating Food");
-        Brain<Seacow> brain = seacow.getBrain();
-        brain.setMemoryWithExpiry(ModMemoryModuleTypes.LOCATE_FOOD_COOLDOWN.get(), Unit.INSTANCE, (long) LOCATE_FOOD_COOLDOWN.sample(level.getRandom()));
         this.found_food = null;
     }
 
     @Override
     protected boolean canStillUse(ServerLevel pLevel, E seacow, long pGameTime) {
+        if (seacow.isHungry()) {
+            System.out.println("hungry");
+        }
         return seacow.isHungry();
     }
 
@@ -56,6 +55,9 @@ public class LocateFood <E extends Seacow> extends Behavior<E> {
     }
 
     protected void stop(ServerLevel pLevel, E seacow, long pGameTime) {
+        seacow.getBrain().eraseMemory(ModMemoryModuleTypes.IS_LOCATING_FOOD.get());
+        seacow.getBrain().eraseMemory(MemoryModuleType.LOOK_TARGET);
+        seacow.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
         if (this.found_food != null) {
             SeacowAi.setFoodLocation(seacow, this.found_food);
         }

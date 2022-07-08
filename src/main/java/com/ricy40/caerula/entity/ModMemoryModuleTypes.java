@@ -22,6 +22,7 @@ public class ModMemoryModuleTypes {
 
     public static final RegistryObject<MemoryModuleType<Unit>> LOCATE_FOOD_COOLDOWN = registerMemoryModuleType("locate_food_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
     public static final RegistryObject<MemoryModuleType<BlockPos>> FOOD_POS = registerMemoryModuleType("food_pos", () -> new MemoryModuleType<>(Optional.empty()));
+    public static final RegistryObject<MemoryModuleType<Unit>> IS_LOCATING_FOOD = registerMemoryModuleType("is_locating_food", () -> new MemoryModuleType<>(Optional.of(Codec.unit(Unit.INSTANCE))));
 
     private static <T> RegistryObject<MemoryModuleType<T>> registerMemoryModuleType(String name, Supplier<MemoryModuleType<T>> module) {
         return MEMORY_MODULE_TYPES.register(name, module);

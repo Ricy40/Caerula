@@ -22,6 +22,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.animal.axolotl.AxolotlAi;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -36,7 +37,6 @@ public class SeacowAi {
     private static final float SPEED_MULTIPLIER_WHEN_IDLING_IN_WATER = 0.5F;
     private static final float SPEED_MULTIPLIER_WHEN_FOLLOWING_ADULT_IN_WATER = 0.6F;
     private static final float SPEED_MULTIPLIER_WHEN_FLEEING = 1.2F;
-    private static final int EATING_COOLDOWN = 1200;
     public static final List<? extends SensorType<? extends Sensor<? super Seacow>>> SENSOR_TYPES = List.of(
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.HURT_BY,
@@ -62,13 +62,15 @@ public class SeacowAi {
             MemoryModuleType.IS_PANICKING,
             MemoryModuleType.PATH,
             ModMemoryModuleTypes.FOOD_POS.get(),
-            ModMemoryModuleTypes.LOCATE_FOOD_COOLDOWN.get()
+            ModMemoryModuleTypes.LOCATE_FOOD_COOLDOWN.get(),
+            ModMemoryModuleTypes.IS_LOCATING_FOOD.get()
     );
 
     protected static Brain<?> makeBrain(Brain<Seacow> brain) {
         initCoreActivity(brain);
         initIdleActivity(brain);
         initEatingActivity(brain);
+        initLocatingFood(brain);
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         brain.setDefaultActivity(Activity.IDLE);
         brain.useDefaultActivity();
@@ -87,7 +89,7 @@ public class SeacowAi {
 
     private static void initIdleActivity(Brain<Seacow> brain) {
         brain.addActivity(Activity.IDLE, 10, ImmutableList.of(
-                new LocateFood<>(),
+                new TryToLocateFood(),
                 new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0F), UniformInt.of(30, 60)),
                 new AnimalMakeLove(ModEntityTypes.SEACOW.get(), 0.2F),
                 new RunOne<>(ImmutableList.of(
@@ -106,9 +108,16 @@ public class SeacowAi {
                 ModMemoryModuleTypes.FOOD_POS.get());
     }
 
+    private static void initLocatingFood(Brain<Seacow> brain) {
+        brain.addActivityAndRemoveMemoryWhenStopped(ModActivites.LOCATING_FOOD.get(), 5,
+                ImmutableList.of(new LocateFood<>()),
+                ModMemoryModuleTypes.IS_LOCATING_FOOD.get());
+    }
+
     public static void updateActivity(Seacow seacow) {
         seacow.getBrain().setActiveActivityToFirstValid(ImmutableList.of(
                 ModActivites.EATING.get(),
+                ModActivites.LOCATING_FOOD.get(),
                 Activity.IDLE));
         System.out.println(seacow.getBrain().getActiveNonCoreActivity());
     }

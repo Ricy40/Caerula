@@ -31,7 +31,7 @@ public class Seacow extends AgeableWaterAnimal {
 
     private int hungerTimer;
     private boolean isHungry;
-    private static final int HUNGER_COOLDOWN = 300;
+    private static final int HUNGER_COOLDOWN = 200;
 
     public AnimationState sniffleAnimationState = new AnimationState();
     public AnimationState eatingAnimationState = new AnimationState();
