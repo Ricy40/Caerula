@@ -1,4 +1,4 @@
-package com.ricy40.caerula.item.misc;
+package com.ricy40.caerula.item.custom;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -18,7 +18,12 @@ public class CaerulaItem extends Item {
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (pEntity instanceof Player) {
             Player player = (Player) pEntity;
-            player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 5));
+
+            player.setAirSupply(player.getMaxAirSupply());
+
+            if (player.hasEffect(MobEffects.DARKNESS)) {
+                player.removeEffect(MobEffects.DARKNESS);
+            }
         }
     }
 }

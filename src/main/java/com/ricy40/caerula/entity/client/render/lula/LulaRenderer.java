@@ -1,9 +1,9 @@
-package com.ricy40.caerula.entity.client.render;
+package com.ricy40.caerula.entity.client.render.lula;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.ricy40.caerula.Caerula;
-import com.ricy40.caerula.entity.client.model.LulaModel;
+import com.ricy40.caerula.entity.client.model.lula.LulaModel;
 import com.ricy40.caerula.entity.custom.Lula;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

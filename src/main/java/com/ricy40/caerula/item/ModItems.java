@@ -2,10 +2,8 @@ package com.ricy40.caerula.item;
 
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.ModEntityTypes;
-import com.ricy40.caerula.item.misc.CaerulaItem;
+import com.ricy40.caerula.item.custom.CaerulaItem;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;

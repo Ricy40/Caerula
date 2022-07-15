@@ -2,11 +2,11 @@ package com.ricy40.caerula.entity.client;
 
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.ModEntityTypes;
-import com.ricy40.caerula.entity.client.model.BlobfishModel;
-import com.ricy40.caerula.entity.client.model.LulaModel;
-import com.ricy40.caerula.entity.client.model.SeacowModel;
-import com.ricy40.caerula.entity.client.render.BlobfishRenderer;
-import com.ricy40.caerula.entity.client.render.LulaRenderer;
+import com.ricy40.caerula.entity.client.model.blobfish.BlobfishModel;
+import com.ricy40.caerula.entity.client.model.lula.LulaModel;
+import com.ricy40.caerula.entity.client.model.seacow.SeacowModel;
+import com.ricy40.caerula.entity.client.render.blobfish.BlobfishRenderer;
+import com.ricy40.caerula.entity.client.render.lula.LulaRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

@@ -1,7 +1,8 @@
-// 1.19	2022-07-07T13:36:56.3330998	Item Models: caerula
+// 1.19	2022-07-14T13:20:26.317479	Item Models: caerula
 42a34a753645fbd80fbb3bfcb49edc017c01efd2 assets/caerula/models/item/blobfish.json
 5e4e8bef6958b98f30f21c4d3366b13c6f033f8f assets/caerula/models/item/blobfish_bucket.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/caerula/models/item/blobfish_spawn_egg.json
+9dd9a99a1cb60e4599e2bf2b7fb47e91f60e1874 assets/caerula/models/item/caerula.json
 78e6a31172c94b435470792546202f90ca3273bc assets/caerula/models/item/cooked_blobfish.json
 583569806bb0036ee0e760a966c56e45a22d4f48 assets/caerula/models/item/cooked_lula.json
 d3305a89bac352266a06340a7e7ed13e8bcce42d assets/caerula/models/item/deepslate_nixium_ore.json

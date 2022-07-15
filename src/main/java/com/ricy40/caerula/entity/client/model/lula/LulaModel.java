@@ -1,4 +1,4 @@
-package com.ricy40.caerula.entity.client.model;
+package com.ricy40.caerula.entity.client.model.lula;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

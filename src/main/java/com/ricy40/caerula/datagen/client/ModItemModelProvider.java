@@ -26,6 +26,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent("nixium_slab", modLoc("block/nixium_slab"));
         withExistingParent("nixium_stairs", modLoc("block/nixium_stairs"));
 
+        simpleItem(ModItems.CAERULA.get());
         simpleItem(ModItems.NIXIUM_INGOT.get());
         simpleItem(ModItems.NIXIUM_NUGGET.get());
         simpleItem(ModItems.RAW_NIXIUM.get());

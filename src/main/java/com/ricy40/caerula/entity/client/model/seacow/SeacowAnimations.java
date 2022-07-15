@@ -1,4 +1,4 @@
-package com.ricy40.caerula.entity.client.model;
+package com.ricy40.caerula.entity.client.model.seacow;
 
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;

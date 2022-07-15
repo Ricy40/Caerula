@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
@@ -32,17 +33,14 @@ public class Seacow extends AgeableWaterAnimal {
     private int hungerTimer;
     private boolean isHungry;
     private static final int HUNGER_COOLDOWN = 200;
-
     public AnimationState sniffleAnimationState = new AnimationState();
     public AnimationState eatingAnimationState = new AnimationState();
-    public final Predicate<BlockState> VALID_EATDILE_BLOCKS = (block) -> {
+    public final Predicate<BlockState> VALID_EDIBLE_BLOCKS = (block) -> {
         if (block.is(Blocks.WATER)) {
             return false;
         } else if (block.hasProperty(BlockStateProperties.WATERLOGGED)) {
             if (block.getValue(BlockStateProperties.WATERLOGGED)) {
-                if (block.is(ModTags.Blocks.SEACOW_EDIBLES)) {
-                    return true;
-                }
+                return block.is(ModTags.Blocks.SEACOW_EDIBLES);
             }
         }
         return false;
@@ -74,7 +72,7 @@ public class Seacow extends AgeableWaterAnimal {
 
     public void aiStep() {
         if (!this.isInWater() && this.onGround && this.verticalCollision) {
-            this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
             this.onGround = false;
             this.hasImpulse = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
@@ -93,7 +91,7 @@ public class Seacow extends AgeableWaterAnimal {
     }
 
     @Override
-    public void travel(Vec3 vector) {
+    public void travel(@NotNull Vec3 vector) {
         if (this.isEffectiveAi() && this.isInWater()) {
             this.moveRelative(0.01F, vector);
             this.move(MoverType.SELF, this.getDeltaMovement());
@@ -106,7 +104,7 @@ public class Seacow extends AgeableWaterAnimal {
         }
     }
 
-    public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
+    public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> accessor) {
         if (DATA_POSE.equals(accessor)) {
             if (this.getPose() == Pose.SNIFFING) {
                 this.sniffleAnimationState.start(this.tickCount);
@@ -125,11 +123,6 @@ public class Seacow extends AgeableWaterAnimal {
     public boolean canBeLeashed(Player player) {
         return true;
     }
-
-    protected boolean canRandomSwim() {
-        return true;
-    }
-
 
     @Nullable
     @Override
@@ -165,7 +158,7 @@ public class Seacow extends AgeableWaterAnimal {
     }
 
     @Override
-    protected float getStandingEyeHeight(Pose pPose, EntityDimensions pSize) {
+    protected float getStandingEyeHeight(@NotNull Pose pPose, EntityDimensions pSize) {
         return pSize.height * 0.6F;
     }
 
@@ -177,7 +170,7 @@ public class Seacow extends AgeableWaterAnimal {
         return SoundEvents.SALMON_DEATH;
     }
 
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
         return SoundEvents.SALMON_HURT;
     }
 

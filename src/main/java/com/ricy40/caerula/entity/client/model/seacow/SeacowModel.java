@@ -1,7 +1,8 @@
-package com.ricy40.caerula.entity.client.model;
+package com.ricy40.caerula.entity.client.model.seacow;
 
 import com.google.common.collect.ImmutableList;
 import com.ricy40.caerula.Caerula;
+import com.ricy40.caerula.entity.client.model.HierarchicalAgeableModel;
 import com.ricy40.caerula.entity.custom.seacow.Seacow;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

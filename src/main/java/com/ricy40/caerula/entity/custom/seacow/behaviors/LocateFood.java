@@ -44,7 +44,7 @@ public class LocateFood <E extends Seacow> extends Behavior<E> {
     protected void tick(ServerLevel pLevel, E seacow, long pGameTime) {
         if (this.found_food == null) {
             if (seacow.isInWaterOrBubble() && !seacow.isInLava()) {
-                Optional<BlockPos> food = findNearestBlock(seacow, seacow.VALID_EATDILE_BLOCKS, 7);
+                Optional<BlockPos> food = findNearestBlock(seacow, seacow.VALID_EDIBLE_BLOCKS, 7);
                 if (food.isPresent()) {
                     System.out.println("Found food");
                     this.found_food = food.get();
