@@ -117,7 +117,6 @@ public class SeacowAi {
                 ModActivites.EATING.get(),
                 ModActivites.LOCATING_FOOD.get(),
                 Activity.IDLE));
-        System.out.println(seacow.getBrain().getActiveNonCoreActivity());
     }
 
     private static boolean canSetWalkTargetFromLookTarget(LivingEntity entityIn) {

@@ -21,7 +21,7 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
     private int stingerAnimationO;
     private int stingerAnimation;
 
-    protected Impaler(EntityType<? extends WaterMonster> entity, Level level) {
+    public Impaler(EntityType<? extends WaterMonster> entity, Level level) {
         super(entity, level);
     }
 

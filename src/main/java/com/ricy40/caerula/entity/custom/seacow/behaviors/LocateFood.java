@@ -30,14 +30,10 @@ public class LocateFood <E extends Seacow> extends Behavior<E> {
     }
 
     protected void start(ServerLevel level, Seacow seacow, long gameTime) {
-        System.out.println("Is Locating Food");
         this.found_food = null;
     }
 
     protected boolean canStillUse(ServerLevel pLevel, E seacow, long pGameTime) {
-        if (seacow.isHungry()) {
-            System.out.println("hungry");
-        }
         return seacow.isHungry();
     }
 
@@ -46,7 +42,6 @@ public class LocateFood <E extends Seacow> extends Behavior<E> {
             if (seacow.isInWaterOrBubble() && !seacow.isInLava()) {
                 Optional<BlockPos> food = findNearestBlock(seacow, seacow.VALID_EDIBLE_BLOCKS, 7);
                 if (food.isPresent()) {
-                    System.out.println("Found food");
                     this.found_food = food.get();
                 }
             }

@@ -3,6 +3,7 @@ package com.ricy40.caerula.entity;
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.custom.Blobfish;
 import com.ricy40.caerula.entity.custom.Lula;
+import com.ricy40.caerula.entity.custom.impaler.Impaler;
 import com.ricy40.caerula.entity.custom.seacow.Mershroom;
 import com.ricy40.caerula.entity.custom.seacow.Seacow;
 import net.minecraft.resources.ResourceLocation;
@@ -34,8 +35,13 @@ public class ModEntityTypes {
 
     public static final RegistryObject<EntityType<Mershroom>> MERSHROOM = ENTITY_TYPES.register("mershroom",
             () -> EntityType.Builder.of(Mershroom::new, MobCategory.WATER_AMBIENT)
-                    .sized(0.4f, 0.2f)
+                    .sized(1f, 0.625f)
                     .build(new ResourceLocation(Caerula.MOD_ID, "mershroom").toString()));
+
+    public static final RegistryObject<EntityType<Impaler>> IMPALER = ENTITY_TYPES.register("impaler",
+            () -> EntityType.Builder.of(Impaler::new, MobCategory.MONSTER)
+                    .sized(1f, 0.6f)
+                    .build(new ResourceLocation(Caerula.MOD_ID, "impaler").toString()));
 
     public static void register(IEventBus bus) {
         ENTITY_TYPES.register(bus);

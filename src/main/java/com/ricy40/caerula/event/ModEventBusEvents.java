@@ -18,5 +18,6 @@ public class ModEventBusEvents {
         event.put(ModEntityTypes.LULA.get(), Lula.createAttributes().build());
         event.put(ModEntityTypes.SEACOW.get(), Seacow.createAttributes().build());
         event.put(ModEntityTypes.MERSHROOM.get(), Seacow.createAttributes().build());
+        event.put(ModEntityTypes.IMPALER.get(), Seacow.createAttributes().build());
     }
 }
