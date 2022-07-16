@@ -73,13 +73,5 @@ public class Caerula {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.DEAD_BUSH_CORAL.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.PURPLE_SEASHROOM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.YELLOW_SEASHROOM.get(), RenderType.cutout());
-
-        /*
-        EntityRenderers.register(ModEntityTypes.BLOBFISH.get(), BlobfishRenderer::new);
-        EntityRenderers.register(ModEntityTypes.LULA.get(), LulaRenderer::new);
-        EntityRenderers.register(ModEntityTypes.SEACOW.get(), SeacowRenderer::new);
-        EntityRenderers.register(ModEntityTypes.MERSHROOM.get(), MershroomRenderer::new);
-
-         */
     }
 }

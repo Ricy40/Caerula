@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.client.model.lula.LulaModel;
-import com.ricy40.caerula.entity.custom.Lula;
+import com.ricy40.caerula.entity.custom.lula.Lula;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

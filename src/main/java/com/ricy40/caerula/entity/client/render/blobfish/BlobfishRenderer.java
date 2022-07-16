@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.ricy40.caerula.Caerula;
 import com.ricy40.caerula.entity.client.model.blobfish.BlobfishModel;
-import com.ricy40.caerula.entity.custom.Blobfish;
+import com.ricy40.caerula.entity.custom.blobfish.Blobfish;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

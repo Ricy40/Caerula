@@ -1,4 +1,4 @@
-package com.ricy40.caerula.entity.custom;
+package com.ricy40.caerula.entity.custom.lula;
 
 import com.ricy40.caerula.item.ModItems;
 import com.ricy40.caerula.util.Vec2ex;

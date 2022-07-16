@@ -1,4 +1,4 @@
-package com.ricy40.caerula.entity.custom;
+package com.ricy40.caerula.entity.custom.blobfish;
 
 import com.ricy40.caerula.item.ModItems;
 import net.minecraft.sounds.SoundEvent;

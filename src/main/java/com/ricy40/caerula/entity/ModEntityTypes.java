@@ -1,8 +1,8 @@
 package com.ricy40.caerula.entity;
 
 import com.ricy40.caerula.Caerula;
-import com.ricy40.caerula.entity.custom.Blobfish;
-import com.ricy40.caerula.entity.custom.Lula;
+import com.ricy40.caerula.entity.custom.blobfish.Blobfish;
+import com.ricy40.caerula.entity.custom.lula.Lula;
 import com.ricy40.caerula.entity.custom.impaler.Impaler;
 import com.ricy40.caerula.entity.custom.seacow.Mershroom;
 import com.ricy40.caerula.entity.custom.seacow.Seacow;

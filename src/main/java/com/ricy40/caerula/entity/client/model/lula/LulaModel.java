@@ -3,7 +3,7 @@ package com.ricy40.caerula.entity.client.model.lula;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.ricy40.caerula.Caerula;
-import com.ricy40.caerula.entity.custom.Lula;
+import com.ricy40.caerula.entity.custom.lula.Lula;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
