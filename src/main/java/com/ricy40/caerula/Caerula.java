@@ -6,10 +6,6 @@ import com.ricy40.caerula.entity.ModActivites;
 import com.ricy40.caerula.entity.ModEntityTypes;
 import com.ricy40.caerula.entity.ModMemoryModuleTypes;
 import com.ricy40.caerula.entity.ModSensorTypes;
-import com.ricy40.caerula.entity.client.render.blobfish.BlobfishRenderer;
-import com.ricy40.caerula.entity.client.render.lula.LulaRenderer;
-import com.ricy40.caerula.entity.client.render.seacow.MershroomRenderer;
-import com.ricy40.caerula.entity.client.render.seacow.SeacowRenderer;
 import com.ricy40.caerula.item.ModItems;
 import com.ricy40.caerula.world.dimension.ModDimensions;
 import com.ricy40.caerula.world.gen.biomes.ModBiomes;
@@ -21,7 +17,6 @@ import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.features.M
 import com.ricy40.caerula.world.gen.placedfeatures.configuredfeatures.ModTreeFeatures;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;

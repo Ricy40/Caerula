@@ -16,7 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModEntityTypes {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(ForgeRegistries.ENTITIES, Caerula.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Caerula.MOD_ID);
 
     public static final RegistryObject<EntityType<Blobfish>> BLOBFISH = ENTITY_TYPES.register("blobfish",
             () -> EntityType.Builder.of(Blobfish::new, MobCategory.WATER_AMBIENT)
