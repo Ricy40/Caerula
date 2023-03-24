@@ -121,7 +121,7 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
         this.level.getProfiler().pop();
         super.customServerAiStep();
 
-        if (this.tickCount % 20 == 0) {
+        if (this.tickCount % ANGERMANAGEMENT_TICK_DELAY == 0) {
             this.angerManagement.tick(serverlevel, this::canTargetEntity);
             this.syncClientAngerLevel();
         }
@@ -138,17 +138,7 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
         super.tick();
         if (this.level.isClientSide()) {
 
-            if (this.tendrilAnimationLength > 0) {
-                this.tendrilAnimationState.start(this.tendrilAnimationLength);
-                this.tendrilAnimationLength -= 1F;
-            } else {
-                this.tendrilAnimationState.stop();
-            }
-
         } else {
-            if (!this.isInWaterOrBubble()) {
-                this.setDeltaMovement(0D, 0D, 0D);
-            }
             if (this.getBrain().hasMemoryValue(MemoryModuleType.ROAR_TARGET) || this.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_TARGET)) {
                 if (this.getTarget() instanceof Player){
                     applyDarkness(this.getTarget());
@@ -222,7 +212,6 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
             this.attackAnimationState.start(this.tickCount);
         } else if (pId == 61) {
             this.tendrilAnimationState.start(this.tickCount);
-            this.tendrilAnimationLength = 22;
         }else if (pId == 62) {
             this.sonicChargeAnimationState.start(this.tickCount);
         } else {
@@ -262,7 +251,7 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
     }
 
     public void increaseAngerAt(@Nullable Entity pEntity) {
-        this.increaseAngerAt(pEntity, 35, true);
+        this.increaseAngerAt(pEntity, DEFAULT_ANGER, true);
     }
     
     public void increaseAngerAt(Entity entity, int amount, boolean listening) {
@@ -298,7 +287,7 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
         boolean flag = super.hurt(pSource, pAmount);
         if (!this.level.isClientSide && !this.isNoAi()) {
             Entity entity = pSource.getEntity();
-            this.increaseAngerAt(entity, AngerLevel.ANGRY.getMinimumAnger() + 20, false);
+            this.increaseAngerAt(entity, AngerLevel.ANGRY.getMinimumAnger() + ON_HURT_ANGER_BOOST, false);
             if (this.brain.getMemory(MemoryModuleType.ATTACK_TARGET).isEmpty() && entity instanceof LivingEntity) {
                 LivingEntity livingentity = (LivingEntity)entity;
                 if (!(pSource instanceof IndirectEntityDamageSource) || this.closerThan(livingentity, 5.0D)) {
@@ -362,7 +351,7 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
 
                         this.increaseAngerAt(pProjectileOwner);
                     } else {
-                        this.increaseAngerAt(pProjectileOwner, 10, true);
+                        this.increaseAngerAt(pProjectileOwner, PROJECTILE_ANGER, true);
                     }
                 }
 
@@ -395,6 +384,4 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
     protected PathNavigation createNavigation(Level level) {
         return new WaterBoundPathNavigation(this, level);
     }
-
-
 }

@@ -19,10 +19,10 @@ import net.minecraft.world.phys.Vec3;
 
 public class SonicCharge extends Behavior<Impaler> {
 
-    private static final int DISTANCE_XZ = 15;
-    private static final int DISTANCE_Y = 15;
+    private static final int DISTANCE_XZ = 16;
+    private static final int DISTANCE_Y = 16;
     private static final double KNOCKBACK_VERTICAL = 0.5D;
-    private static final double KNOCKBACK_HORIZONTAL = 2.5D;
+    private static final double KNOCKBACK_HORIZONTAL = 1.7D;
     public static final int COOLDOWN = 15;
     private static final int TICKS_BEFORE_PLAYING_SOUND = Mth.ceil(34.0D);
     private static final int DURATION = Mth.ceil(60.0F);
@@ -59,7 +59,7 @@ public class SonicCharge extends Behavior<Impaler> {
             Vec3 o = new Vec3(vec31.x(), 0, vec31.z());
             Vec3 a = new Vec3(0, vec31.y(), 0);
 
-            float angle = (float) Math.atan(o.length() / a.length()) * Mth.RAD_TO_DEG;
+            float angle = (float) Math.atan(o.length() / a.length());
 
             impaler.setXRot(impaler.getXRot() + angle);
         });

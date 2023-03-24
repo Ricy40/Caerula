@@ -20,9 +20,9 @@ public class LulaRenderer extends MobRenderer<Lula, LulaModel<Lula>> {
 
     protected void setupRotations(Lula pEntityLiving, PoseStack pMatrixStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pMatrixStack, pAgeInTicks, pRotationYaw, pPartialTicks);
-        float f = 0.1f * Mth.sin(pAgeInTicks * 0.7f) + 0.15f;
 
         if (!pEntityLiving.isInWater() && pEntityLiving.isAlive()) {
+            float f = 0.1f * Mth.sin(pAgeInTicks * 0.7f) + 0.15f;
             pMatrixStack.translate((double)0.0F, (double)f, -0.05F);
             pMatrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
         }

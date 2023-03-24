@@ -118,7 +118,6 @@ public class ImpalerModel<E extends Impaler> extends HierarchicalModel<E> {
 
     public void setupAnim(E impaler, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
-        float f = ageInTicks - (float)impaler.tickCount;
 
         this.animate(impaler.tendrilAnimationState, ImpalerAnimations.IMPALER_TENDRILS, ageInTicks);
         //this.animate(impaler.sonicChargeAnimationState, ImpalerAnimations.SONIC_CHARGE, ageInTicks);
