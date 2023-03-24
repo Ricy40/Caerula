@@ -26,7 +26,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.behavior.StartAttacking;
 import net.minecraft.world.entity.ai.behavior.warden.SonicBoom;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.monster.warden.AngerLevel;
@@ -72,8 +75,9 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
 
     public Impaler(EntityType<? extends WaterMonster> entity, Level level) {
         super(entity, level);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 1F, 0F, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 20);
         this.dynamicGameEventListener = new DynamicGameEventListener<>(new VibrationListener(new EntityPositionSource(this, this.getEyeHeight()), 16, this, (VibrationListener.ReceivingEvent)null, 0.0F, 0));
-
     }
     
     public static AttributeSupplier.Builder createAttributes() {
@@ -82,7 +86,8 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
                 .add(Attributes.MOVEMENT_SPEED, (double)0.3F)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.5D)
-                .add(Attributes.ATTACK_DAMAGE, 30.0D);
+                .add(Attributes.ATTACK_DAMAGE, 30.0D)
+                .add(Attributes.FOLLOW_RANGE, 15D);
     }
 
     protected void defineSynchedData() {
@@ -122,7 +127,6 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
         }
         
         ImpalerAi.updateActivity(this);
-        LOGGER.debug("Current activity: " + this.getBrain().getActiveActivities() + " Current Behaviour: " + this.getBrain().getRunningBehaviors());
     }
 
     public void tick() {
@@ -142,8 +146,13 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
             }
 
         } else {
-            if (this.isEyeInFluidType(Fluids.WATER.getFluidType())) {
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
+            if (!this.isInWaterOrBubble()) {
+                this.setDeltaMovement(0D, 0D, 0D);
+            }
+            if (this.getBrain().hasMemoryValue(MemoryModuleType.ROAR_TARGET) || this.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_TARGET)) {
+                if (this.getTarget() instanceof Player){
+                    applyDarkness(this.getTarget());
+                }
             }
         }
     }
@@ -234,7 +243,7 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
     
     public boolean canTargetEntity(Entity entity) {
         if (entity instanceof LivingEntity livingentity) {
-            return this.level == entity.level && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity) && !this.isAlliedTo(entity) && livingentity.getType() != EntityType.ARMOR_STAND && livingentity.getType() != ModEntityTypes.IMPALER.get() && !livingentity.isInvulnerable() && !livingentity.isDeadOrDying() && this.level.getWorldBorder().isWithinBounds(livingentity.getBoundingBox());
+            return this.level == entity.level && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity) && !this.isAlliedTo(entity) && livingentity.getType() != EntityType.ARMOR_STAND && livingentity.getType() != ModEntityTypes.IMPALER.get() && !livingentity.isInvulnerable() && !livingentity.isDeadOrDying() && this.level.getWorldBorder().isWithinBounds(livingentity.getBoundingBox()) && entity.isInWaterOrBubble();
         }
 
         return false;
@@ -332,16 +341,13 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
                     return false;
                 }
             }
-            LOGGER.debug("Impaler is listening");
             return true;
         } else {
-            LOGGER.debug("Impaler is not listening");
             return false;
         }
     }
 
     public void onSignalReceive(ServerLevel pLevel, GameEventListener pListener, BlockPos pSourcePos, GameEvent pGameEvent, @Nullable Entity pSourceEntity, @Nullable Entity pProjectileOwner, float pDistance) {
-        LOGGER.debug("Impaler received signal. Source: " + pSourceEntity + " pos: " + pSourcePos + " Distance: " + pDistance);
         if (!this.isDeadOrDying()) {
             this.brain.setMemoryWithExpiry(MemoryModuleType.VIBRATION_COOLDOWN, Unit.INSTANCE, 40L);
             pLevel.broadcastEntityEvent(this, (byte)61);
@@ -375,7 +381,11 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
     }
 
     public int getMaxHeadXRot() {
-        return 20;
+        return 1;
+    }
+
+    public int getMaxHeadYRot() {
+        return 10;
     }
 
     public AngerManagement getAngerManagement() {
@@ -383,16 +393,8 @@ public class Impaler extends WaterMonster implements VibrationListener.Vibration
     }
 
     protected PathNavigation createNavigation(Level level) {
-        return new WaterBoundPathNavigation(this, level) {
-            protected PathFinder createPathFinder(int distance) {
-                this.nodeEvaluator = new WalkNodeEvaluator();
-                this.nodeEvaluator.setCanPassDoors(true);
-                return new PathFinder(this.nodeEvaluator, distance) {
-                    protected float distance(Node node1, Node node2) {
-                        return node1.distanceToXZ(node2);
-                    }
-                };
-            }
-        };
+        return new WaterBoundPathNavigation(this, level);
     }
+
+
 }

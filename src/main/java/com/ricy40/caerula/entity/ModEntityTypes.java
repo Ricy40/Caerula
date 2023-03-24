@@ -40,7 +40,7 @@ public class ModEntityTypes {
 
     public static final RegistryObject<EntityType<Impaler>> IMPALER = ENTITY_TYPES.register("impaler",
             () -> EntityType.Builder.of(Impaler::new, MobCategory.MONSTER)
-                    .sized(1f, 0.6f)
+                    .sized(0.9f, 0.4f)
                     .build(new ResourceLocation(Caerula.MOD_ID, "impaler").toString()));
 
     public static void register(IEventBus bus) {

@@ -88,7 +88,7 @@ public class ImpalerAi {
                 new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0F), UniformInt.of(30, 60)),
                 new RunOne<>(ImmutableList.of()),
                 new GateBehavior<>(ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), ImmutableSet.of(), GateBehavior.OrderPolicy.ORDERED, GateBehavior.RunningPolicy.TRY_ALL, ImmutableList.of(
-                        Pair.of(new CloseRandomSwim(SPEED_MULTIPLIER_WHEN_IDLING_IN_WATER, 3), 2),
+                        Pair.of(new CloseRandomSwim(SPEED_MULTIPLIER_WHEN_IDLING_IN_WATER, 2), 2),
                         Pair.of(new SetWalkTargetFromLookTarget(ImpalerAi::canSetWalkTargetFromLookTarget, ImpalerAi::getSpeedModifier, 3), 3),
                         Pair.of(new RunIf<>(Entity::isInWaterOrBubble, new DoNothing(30, 60)), 5)))));
     }
@@ -103,11 +103,11 @@ public class ImpalerAi {
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
                 new StopAttackingIfTargetInvalid<>((target) -> {
                         return !impaler.getAngerLevel().isAngry() || !impaler.canTargetEntity(target);
-                    }, ImpalerAi::onTargetInvalid, false),
+                    }, ImpalerAi::onTargetInvalid, true),
                 new SetEntityLookTarget((target) -> {
                     return isTarget(impaler, target);
                     }, (float)impaler.getAttributeValue(Attributes.FOLLOW_RANGE)),
-                new SetWalkTargetFromAttackTargetIfTargetOutOfReach(SPEED_MULTIPLIER_WHEN_FIGHTING),
+                new SetSwimTargetFromAttackTargetIfTargetOutOfReach(SPEED_MULTIPLIER_WHEN_FIGHTING, 6),
                 new SonicCharge()
         ), MemoryModuleType.ATTACK_TARGET);
     }
@@ -150,7 +150,7 @@ public class ImpalerAi {
     private static boolean isTarget(Impaler impaler, LivingEntity target) {
         return impaler.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).filter((targetX) -> {
             return target == targetX;
-        }).isPresent();
+        }).isPresent() && target.isInWater();
     }
     
     private static void onTargetInvalid(Impaler impaler, LivingEntity target) {
