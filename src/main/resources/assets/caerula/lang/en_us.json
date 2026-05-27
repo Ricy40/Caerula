@@ -1,0 +1,13 @@
+{
+  "itemGroup.caerula": "Example Mod Tab",
+  "block.caerula.example_block": "Example Block",
+  "item.caerula.example_item": "Example Item",
+
+  "caerula.configuration.title": "Caerula Configs",
+  "caerula.configuration.section.caerula.common.toml": "Caerula Configs",
+  "caerula.configuration.section.caerula.common.toml.title": "Caerula Configs",
+  "caerula.configuration.items": "Item List",
+  "caerula.configuration.logDirtBlock": "Log Dirt Block",
+  "caerula.configuration.magicNumberIntroduction": "Magic Number Text",
+  "caerula.configuration.magicNumber": "Magic Number"
+}
