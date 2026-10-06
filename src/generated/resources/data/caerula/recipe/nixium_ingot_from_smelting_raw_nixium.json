@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "nixium",
+  "ingredient": "caerula:raw_nixium",
+  "result": {
+    "id": "caerula:nixium_ingot"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "blocks",
+  "cookingtime": 900,
+  "experience": 2.25,
+  "group": "nixium",
+  "ingredient": "caerula:raw_nixium_block",
+  "result": {
+    "id": "caerula:nixium_block"
+  }
+}

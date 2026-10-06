@@ -1,5 +1,8 @@
 package com.ricy.caerula;
 
+import com.ricy.caerula.block.ModBlocks;
+import com.ricy.caerula.creativetab.ModCreativeModeTabs;
+import com.ricy.caerula.item.ModItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -42,6 +45,10 @@ public class Caerula {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        ModCreativeModeTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
 
         NeoForge.EVENT_BUS.register(this);

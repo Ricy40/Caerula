@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "caerula:nixium_ingot"
+  ],
+  "result": {
+    "count": 9,
+    "id": "caerula:nixium_nugget"
+  }
+}
