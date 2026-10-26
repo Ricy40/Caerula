@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "caerula:block/yellow_seashroom_block"
+  }
+}

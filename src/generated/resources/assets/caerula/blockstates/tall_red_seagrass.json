@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "caerula:block/tall_red_seagrass_bottom"
+    },
+    "half=upper": {
+      "model": "caerula:block/tall_red_seagrass_top"
+    }
+  }
+}

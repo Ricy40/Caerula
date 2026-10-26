@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_ocean",
+  "features": [
+    "caerula:ore_nixium_upper",
+    "caerula:ore_nixium_middle",
+    "caerula:ore_nixium_small"
+  ],
+  "step": "underground_ores"
+}

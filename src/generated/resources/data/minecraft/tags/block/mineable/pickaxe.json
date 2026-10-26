@@ -2,7 +2,11 @@
   "values": [
     "caerula:nixium_block",
     "caerula:raw_nixium_block",
+    "caerula:nixium_stairs",
+    "caerula:nixium_slab",
     "caerula:nixium_ore",
-    "caerula:deepslate_nixium_ore"
+    "caerula:deepslate_nixium_ore",
+    "caerula:bush_coral",
+    "caerula:dead_bush_coral"
   ]
 }

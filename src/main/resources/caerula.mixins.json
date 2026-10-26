@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.ricy.caerula.mixin",
+  "package": "dev.ricy.caerula.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [],
   "injectors": {
